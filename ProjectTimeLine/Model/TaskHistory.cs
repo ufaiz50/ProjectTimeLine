@@ -11,9 +11,11 @@ namespace ProjectTimeLine.Model
         public DateTime EndDate { get; set; }
         public int StateBefore { get; set; }
         public int StateAfter { get; set; }
+        public string NIK { get; set; }
+        public int TaskModulId { get; set; }
 
-        public TaskModul TaskModul { get; set; }
+        public virtual TaskModul TaskModul { get; set; }
 
-        public Account Account { get; set; }
+        public virtual Account Account { get; set; }
     }
 }

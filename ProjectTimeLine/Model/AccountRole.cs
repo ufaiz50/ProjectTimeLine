@@ -8,7 +8,6 @@ namespace ProjectTimeLine.Model
 {
     public class AccountRole
     {
-        [Key]
         public string NIK { get; set; }
         public int RoleID { get; set; }
 
