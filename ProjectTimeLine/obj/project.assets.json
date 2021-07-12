@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\user\\source\\repos\\ProjectTimeLine\\ProjectTimeLine\\ProjectTimeLine.csproj",
+      "projectUniqueName": "C:\\Users\\user\\source\\repos\\MCC52ProjectTimeLine\\ProjectTimeLine\\ProjectTimeLine.csproj",
       "projectName": "ProjectTimeLine",
-      "projectPath": "C:\\Users\\user\\source\\repos\\ProjectTimeLine\\ProjectTimeLine\\ProjectTimeLine.csproj",
+      "projectPath": "C:\\Users\\user\\source\\repos\\MCC52ProjectTimeLine\\ProjectTimeLine\\ProjectTimeLine.csproj",
       "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\user\\source\\repos\\ProjectTimeLine\\ProjectTimeLine\\obj\\",
+      "outputPath": "C:\\Users\\user\\source\\repos\\MCC52ProjectTimeLine\\ProjectTimeLine\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
