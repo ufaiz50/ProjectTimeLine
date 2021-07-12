@@ -32,6 +32,13 @@ namespace ProjectTimeLine
             services.AddDbContext<MyContext>(option => option.UseSqlServer(Configuration.GetConnectionString("APIContext")));
 
             services.AddScoped<EmployeeRepository>();
+            services.AddScoped<AccountRepository>();
+            services.AddScoped<AccountRoleRepository>();
+            services.AddScoped<ModulRepository>();
+            services.AddScoped<ProjectRepository>();
+            services.AddScoped<RoleRepository>();
+            services.AddScoped<TaskModulRepository>();
+            services.AddScoped<TaskHistoryRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
