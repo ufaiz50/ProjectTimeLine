@@ -12,7 +12,7 @@ namespace ProjectTimeLine.Model
         public int StateBefore { get; set; }
         public int StateAfter { get; set; }
 
-        public Task Task { get; set; }
+        public TaskModul TaskModul { get; set; }
 
         public Account Account { get; set; }
     }

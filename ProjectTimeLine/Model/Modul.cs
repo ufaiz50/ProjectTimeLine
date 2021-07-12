@@ -13,6 +13,6 @@ namespace ProjectTimeLine.Model
         
         public Project Project { get; set; }
 
-        public IList<Task> Tasks { get; set; }
+        public ICollection<TaskModul> TaskModuls { get; set; }
     }
 }
