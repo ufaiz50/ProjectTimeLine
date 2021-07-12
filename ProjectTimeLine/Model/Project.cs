@@ -12,6 +12,6 @@ namespace ProjectTimeLine.Model
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         
-        public IList<Modul> Moduls { get; set; }
+        public virtual ICollection<Modul> Moduls { get; set; }
     }
 }
