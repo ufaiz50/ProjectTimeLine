@@ -8,8 +8,8 @@ namespace ProjectTimeLine.Model
     public class Modul
     {
         public int ModulId { get; set; }
-        public int ModulName { get; set; }
-        public int Date { get; set; }
+        public string ModulName { get; set; }
+        public DateTime Date { get; set; }
         public int ProjectId { get; set; }
         
         public virtual Project Project { get; set; }
