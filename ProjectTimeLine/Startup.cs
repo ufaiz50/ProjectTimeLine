@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft;
 
 namespace ProjectTimeLine
 {
@@ -37,8 +38,6 @@ namespace ProjectTimeLine
             services.AddControllersWithViews().AddNewtonsoftJson(options =>
             options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             );
-
-
 
             services.AddScoped<EmployeeRepository>();
             services.AddScoped<AccountRepository>();
