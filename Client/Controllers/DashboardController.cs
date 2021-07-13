@@ -12,5 +12,10 @@ namespace Client.Controllers
         {
             return View();
         }
+
+        public IActionResult Userdata()
+        {
+            return View();
+        }
     }
 }
