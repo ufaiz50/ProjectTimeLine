@@ -10,6 +10,10 @@ namespace ProjectTimeLine.ViewModel
 {
     public class UserVM
     {
+        public UserVM()
+        {
+        }
+
         public string NIK { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
@@ -21,6 +25,19 @@ namespace ProjectTimeLine.ViewModel
         public Gender Gender { get; set; }
         public string Password { get; set; }
         public int RoleId { get; set; }
+
+        public UserVM(string nIK, string name, string email, string phoneNumber, DateTime birthDate, string address, Gender gender, string password, int roleId)
+        {
+            NIK = nIK;
+            Name = name;
+            Email = email;
+            PhoneNumber = phoneNumber;
+            BirthDate = birthDate;
+            Address = address;
+            Gender = gender;
+            Password = password;
+            RoleId = roleId;
+        }
     }
 
 

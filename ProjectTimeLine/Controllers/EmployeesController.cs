@@ -98,14 +98,14 @@ namespace ProjectTimeLine.Controllers
 
         [AllowAnonymous]
         [HttpPost("RegisterAdmin")]
-        public ActionResult registerAdmin(UserVM userVM)
+        public ActionResult RegisterAdmin(UserVM userVM)
         {
             try
             {
                 var insert = employeeRepository.InsertUser(userVM);
                 if (insert == 3)
                 {
-                    return Ok(new { status = HttpStatusCode.OK, result = insert, message = "Berhasil Insert" });
+                    return Ok("Berhasil Insert");
                 }
                 else if (insert == 1)
                 {
@@ -123,6 +123,34 @@ namespace ProjectTimeLine.Controllers
             catch (Exception)
             {
                 return BadRequest(new { status = HttpStatusCode.OK, result = 0, message = "Insert gagal" });
+            }
+        }
+
+        [HttpDelete("DeleteAdmin/{NIK}")]
+        public ActionResult DeleteAdmin(string NIK)
+        {
+            var respone = employeeRepository.DeleteUser(NIK);
+            if (respone > 0)
+            {
+                return Ok(new { status = HttpStatusCode.OK, result = respone, message = "Berhasil Delete" });
+            }
+            else
+            {
+                return BadRequest(new { status = HttpStatusCode.BadRequest, result = respone, message = "Delete gagal" });
+            }
+        }
+
+        [HttpPut("UpdateAdmin")]
+        public ActionResult UpdateAdmin(UserVM entity, string NIK)
+        {
+            var response = employeeRepository.UpdateUser(entity, NIK);
+            if (response > 0)
+            {
+                return Ok(new { status = HttpStatusCode.OK, result = response, message = "Berhasil Update" });
+            }
+            else
+            {
+                return BadRequest(new { status = HttpStatusCode.BadRequest, result = response, message = "Update Gagal" });
             }
         }
 

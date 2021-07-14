@@ -56,7 +56,10 @@ $(document).ready(function () {
                 "data": null,
                 "render": function (data, type, full) {
                     return `<button id="${full["nik"]}" type='button' class='btn btn-primary' data-toggle="modal" data-target="#updateModal" onClick="getUserData(this.id)"><i class="fas fa-edit"></i></button>
-                            <button type='button' class='btn btn-danger' data-toggle='modal' data-target='#exampleModal'><i class="fas fa-trash"></i></button>`;
+                            <form method="delete" action="/Dashboard/DeleteEmployee">
+                                <input type="hidden" value="${full["nik"]}" name="NIK"/>
+                                <button class='btn btn-danger' type="submit"><i class="fas fa-trash"></i></button>
+                            </form>`;
                 },
                 orderable: false
             }
@@ -76,12 +79,28 @@ $(document).ready(function () {
         }
     });
 
+    //GetNik
+    var nik = "";
+    $.ajax({
+        url: "https://localhost:44374/Dashboard/GetRegistrasiView"
+    }).done(result => {
+        $.each(result, function (index, val) {
+            nik = val['nik'];
+        })
+        manipulat = nik.slice(-1);
+        result = parseInt(manipulat);
+        result++;
+        result = result.toString();
+        nik = nik.replace(nik.slice(-1), result)
+        document.getElementById('inputNik').value = nik;
+        console.log(nik);
+    }).fail(error => {
+        alert("Data tidak berhasil di dapat");
+    })
+
 })
 
 
-function validation() {
-    var obj = new Object();
-}
 
 function getUserData(id) {
     $.ajax({

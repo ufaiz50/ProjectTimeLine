@@ -49,7 +49,10 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="" method="post">
+                <form action="@Url.Action("InsertEmployee", "Dashboard")" method="post">
+                    <div class="form-group">
+                        <input id="inputNik" class="au-input au-input--full hide" type="text" name="NIK" placeholder="Name" hidden>
+                    </div>
                     <div class="form-group">
                         <label>Name</label>
                         <input class="au-input au-input--full" type="text" name="Name" placeholder="Name">
@@ -60,7 +63,7 @@
                     </div>
                     <div class="form-group">
                         <label>Password</label>
-                        <input class="au-input au-input--full" type="password" name="password" placeholder="Password">
+                        <input class="au-input au-input--full" type="password" name="Password" placeholder="Password">
                     </div>
                     <div class="form-group">
                         <label>Phone Number</label>
@@ -82,12 +85,12 @@
                             <div class="form-check">
                                 <div class="radio">
                                     <label for="radio1" class="form-check-label ">
-                                        <input type="radio" id="radio1" name="radios" value="0" class="form-check-input">Pria
+                                        <input type="radio" id="InputGender" name="Gender" value="0" class="form-check-input">Pria
                                     </label>
                                 </div>
                                 <div class="radio">
                                     <label for="radio2" class="form-check-label ">
-                                        <input type="radio" id="radio2" name="radios" value="1" class="form-check-input">Wanita
+                                        <input type="radio" id="InputGender" name="Gender" value="1" class="form-check-input">Wanita
                                     </label>
                                 </div>
                             </div>
@@ -98,7 +101,7 @@
                             <label for="select" class=" form-control-label">Select</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <select name="select" id="select" class="form-control">
+                            <select name="RoleId" id="InputRoleId" class="form-control">
                                 <option value="0">Please select</option>
                                 <option value="1">Option #1</option>
                                 <option value="2">Option #2</option>
@@ -134,11 +137,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="" method="post">
-                    <div class="form-group">
-                        <label>NIK</label>
-                        <input class="form-control" id="updateNIK" disabled>
-                    </div>
+                <form action="@Url.Action("UpdateEmployee", "Dashboard")" method="post">
+                    <input class="form-control hide" name="NIK" id="updateNIK" hidden>
                     <div class="form-group">
                         <label>Name</label>
                         <input id="updateName" class="au-input au-input--full" type="text" name="Name" placeholder="Name">

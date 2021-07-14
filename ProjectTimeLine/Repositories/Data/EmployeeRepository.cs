@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.EntityFrameworkCore;
 using ProjectTimeLine.Context;
 using ProjectTimeLine.Model;
 using ProjectTimeLine.Util;
@@ -146,5 +147,41 @@ namespace ProjectTimeLine.Repositories.Data
                 return 0;
             }
         }
+
+        public int DeleteUser(string NIK)
+        {
+            var ar = myContext.AccountRoles.FirstOrDefault(x => x.NIK == NIK);
+            if (ar == null) return 1;
+            myContext.AccountRoles.Remove(ar);
+            var a = myContext.Accounts.Find(NIK);
+            myContext.Accounts.Remove(a);
+            var e = myContext.Employees.Find(NIK);
+            myContext.Employees.Remove(e);
+            var delete = myContext.SaveChanges();
+            return delete;
+        }
+
+        public int UpdateUser(UserVM user, string NIK)
+        {
+            var ar = new AccountRole();
+            var e = new Employee();
+            ar.NIK = user.NIK;
+            ar.RoleID = user.RoleId;
+
+
+            e.NIK = user.NIK;
+            e.Name = user.Name;
+            e.Email = user.Email;
+            e.PhoneNumber = user.PhoneNumber;
+            e.Address = user.Address;
+            e.BirthDate = user.BirthDate;
+            e.Gender = (Model.Gender)user.Gender;
+
+            myContext.Entry(ar).State = EntityState.Modified;
+            myContext.Entry(e).State = EntityState.Modified;
+            var update = myContext.SaveChanges();
+            return update;
+        }
+
     }
 }

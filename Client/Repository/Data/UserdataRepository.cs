@@ -44,16 +44,15 @@ namespace Client.Repository.Data
             return entities;
         }
 
-        public async Task<string> InsertEmployee(UserDataVM userDataVM)
+        public async Task<string> InsertEmployee(UserVM userDataVM)
         {
             var message = "";
             StringContent content = new StringContent(JsonConvert.SerializeObject(userDataVM), Encoding.UTF8, "application/json");
-            var result = await httpClient.PostAsync(request + "Register", content);
+            var result = await httpClient.PostAsync(request + "RegisterAdmin", content);
 
             if (result.IsSuccessStatusCode)
             {
                 string apiResponse = await result.Content.ReadAsStringAsync();
-                message = JsonConvert.DeserializeObject<string>(apiResponse);
             }
             return message;
 
@@ -71,14 +70,29 @@ namespace Client.Repository.Data
             return entities;
 
         }
-/*        public async Task<string> UpdateUserData()
+        public async Task<string> UpdateEmployee(UserVM userDataVM)
         {
-            return "";
+            var res = "";
+            StringContent content = new StringContent(JsonConvert.SerializeObject(userDataVM), Encoding.UTF8, "application/json");
+            var result = await httpClient.PutAsync(request + "UpdateAdmin/", content);
+            if (result.IsSuccessStatusCode)
+            {
+                var apiResponse = await result.Content.ReadAsStringAsync();
+                res = apiResponse;
+            }
+            return res;
         }
 
-        public async Task<string> DeleteUserData()
+        public async Task<string> DeleteEmployee(string NIK)
         {
-            return "";
-        }*/
+            var res = "";
+            var result = await httpClient.DeleteAsync(request + "DeleteAdmin/" + NIK);
+            if (result.IsSuccessStatusCode)
+            {
+                string apiResponse = await result.Content.ReadAsStringAsync();
+                res = apiResponse;
+            }
+            return res;
+        }
     }
 }
