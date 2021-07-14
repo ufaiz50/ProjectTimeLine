@@ -1,6 +1,7 @@
 ﻿//=============================================================================================
 //=================================insert new registration=====================================
 //=============================================================================================
+getNik();
 
 function Insert() {
     var obj = new Object();
@@ -30,5 +31,24 @@ function Insert() {
             title: 'Registrasi Gagal',
             text: error.responseJSON.message,
         });
+    })
+}
+
+function getNik() {
+    var nik = "";
+    $.ajax({
+        url: "https://localhost:44356/api/employees"
+    }).done(result => {
+        $.each(result.result, function (index, val) {
+            nik = val['nik'];
+        })
+        manipulat = nik.slice(-2);
+        result = parseInt(manipulat);
+        result++;
+        result = result.toString();
+        nik = nik.replace(nik.slice(-2), result)
+        document.getElementById('inputNik').value = nik;
+    }).fail(error => {
+        alert("Data tidak berhasil di dapat");
     })
 }

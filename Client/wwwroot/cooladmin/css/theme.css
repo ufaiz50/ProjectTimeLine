@@ -276,14 +276,14 @@ section {
 .page-wrapper {
     overflow: hidden;
     background: #e5e5e5;
-    padding-bottom: 8vh;
+    /*padding-bottom: 8vh;*/
 }
 
 @media (max-width: 991px) {
     .page-wrapper {
     overflow: auto;
     background: #e5e5e5;
-    padding-bottom: 12vh;
+    /*padding-bottom: 12vh;*/
 }
 }
 .page-container {
@@ -333,7 +333,7 @@ section {
 
 .page-content--bge5 {
     background: #e5e5e5;
-    height: 100vh;
+    /*height: 100vh;*/
 }
 
 .login-wrap {

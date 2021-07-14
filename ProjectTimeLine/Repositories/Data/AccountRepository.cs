@@ -23,7 +23,7 @@ namespace ProjectTimeLine.Repositories.Data
         {
             var checkNIK = myContext.Accounts.FirstOrDefault(x => x.Employee.Email == login.Email);
             if (checkNIK == null) return 2;
-            var genValidation = Util.Hashing.ValidatePassword(login.password, checkNIK.Password);
+            var genValidation = Util.Hashing.ValidatePassword(login.Password, checkNIK.Password);
             return genValidation ? 1 : 3;
         }
 
