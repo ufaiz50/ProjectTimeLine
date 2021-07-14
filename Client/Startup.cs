@@ -47,6 +47,8 @@ namespace Client
 
             services.AddControllersWithViews();
             services.AddScoped<LoginRepository>();
+
+            services.AddScoped<UserdataRepository>();
             services.AddScoped<Address>();
         }
 

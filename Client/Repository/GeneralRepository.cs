@@ -31,7 +31,7 @@ namespace Client.Repository
                 BaseAddress = new Uri(address.link)
             };
             //JWT
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", _contextAccessor.HttpContext.Session.GetString("JWToken"));
+            //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", _contextAccessor.HttpContext.Session.GetString("JwToken"));
         }
 
         public HttpStatusCode Delete(TId id)

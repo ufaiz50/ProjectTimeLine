@@ -18,14 +18,14 @@ namespace Client.BaseController
             this.repository = repository;
         }
 
-        [HttpGet]
+        [HttpGet("/GetAll")]
         public async Task<JsonResult> GetAll()
         {
             var result = await repository.Get();
             return Json(result);
         }
 
-        [HttpGet]
+        [HttpGet("/{id}")]
         public async Task<JsonResult> Get(TId id)
         {
             var result = await repository.Get(id);
