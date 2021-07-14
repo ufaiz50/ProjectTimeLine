@@ -34,11 +34,11 @@ namespace ProjectTimeLine.Controllers
                 {
                     return Ok(new { status = HttpStatusCode.OK, result = insert, message = "Berhasil Insert" });
                 }
-                else if (insert == 1)
+                else if (insert == 3)
                 {
                     return BadRequest(new { status = HttpStatusCode.BadRequest, result = 0, message = "Email sudah terdafftar" });
                 }
-                else if (insert == 0)
+                else if (insert == 1)
                 {
                     return BadRequest(new { status = HttpStatusCode.BadRequest, result = 0, message = "NIK sudah terdafftar" });
                 }

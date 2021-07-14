@@ -12,11 +12,14 @@ namespace Client.Controllers
     public class LoginController : Controller
     {
         private readonly LoginRepository loginRepository;
+        private readonly UserdataRepository userdata;
 
-        public LoginController(LoginRepository loginRepository)
+        public LoginController(LoginRepository loginRepository, UserdataRepository userdata)
         {
             this.loginRepository = loginRepository;
+            this.userdata = userdata;
         }
+
         public IActionResult Index()
         {
             return View();
@@ -36,6 +39,16 @@ namespace Client.Controllers
             }
             HttpContext.Session.SetString("JWT", jWToken.Token);
             return RedirectToAction("Privacy", "Home");
+        }
+
+        public async Task<IActionResult> EmployeesView(RegisterVM registerVm)
+        {
+            var message = await userdata.EmployeesView(registerVm);
+            if (message == null)
+            {
+                return RedirectToAction("Register");
+            }
+            return RedirectToAction("Index");
         }
     }
 }

@@ -49,8 +49,10 @@
                             </a>
                         </div>
                         <div class="login-form">
-                            <form class="needs-validation" novalidate>
-                                <input type="text" value="" name="NIK" id="inputNik" hidden/>
+                            <form action="/login/EmployeesView" method="post" class="needs-validation" novalidate>
+                                <div class="form-group">
+                                    <input class="au-input au-input--full" type="text" name="NIK" id="inputNik" required hidden>
+                                </div>
                                 <div class="form-group">
                                     <label>Full Name</label>
                                     <input class="au-input au-input--full" type="text" name="Name" placeholder="FullName" required>
@@ -74,11 +76,11 @@
                                 <div class="">
                                     <label for="gender">Gender</label>
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" class="custom-control-input" id="gender" name="gender" value="0" required>
+                                        <input type="radio" class="custom-control-input" id="gender" name="Gender" value="0" required>
                                         <label class="custom-control-label" for="gender">Pria</label>
                                     </div>
                                     <div class="custom-control custom-radio mb-3">
-                                        <input type="radio" class="custom-control-input" id="gender1" name="gender" value="1" required>
+                                        <input type="radio" class="custom-control-input" id="gender1" name="Gender" value="1" required>
                                         <label class="custom-control-label" for="gender1">Wanita</label>
                                         <div class="invalid-feedback">Please choose gender.</div>
                                     </div>

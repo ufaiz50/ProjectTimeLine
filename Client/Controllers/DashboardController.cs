@@ -2,6 +2,7 @@
 using Client.Repository.Data;
 using Microsoft.AspNetCore.Mvc;
 using ProjectTimeLine.Model;
+using ProjectTimeLine.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +13,12 @@ namespace Client.Controllers
     public class DashboardController : BaseController<Employee, UserdataRepository, string>
     {
         private readonly UserdataRepository repository;
+
         public DashboardController(UserdataRepository repository) : base(repository)
         {
             this.repository = repository;
         }
+
         public IActionResult Index()
         {
             return View();
@@ -29,6 +32,12 @@ namespace Client.Controllers
         public async Task<JsonResult> GetRegistrasiView()
         {
             var result = await repository.GetRegistrasiView();
+            return Json(result);
+        }
+
+        public async Task<JsonResult> GetEmployeeView()
+        {
+            var result = await repository.GetEmployeeView();
             return Json(result);
         }
     }

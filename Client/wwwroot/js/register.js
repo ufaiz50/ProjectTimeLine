@@ -37,9 +37,9 @@ function Insert() {
 function getNik() {
     var nik = "";
     $.ajax({
-        url: "https://localhost:44356/api/employees"
+        url: "/dashboard/getEmployeeView"
     }).done(result => {
-        $.each(result.result, function (index, val) {
+        $.each(result, function (index, val) {
             nik = val['nik'];
         })
         manipulat = nik.slice(-2);
@@ -47,7 +47,8 @@ function getNik() {
         result++;
         result = result.toString();
         nik = nik.replace(nik.slice(-2), result)
-        document.getElementById('inputNik').value = nik;
+        console.log(nik);
+        document.getElementById("inputNik").value = nik;
     }).fail(error => {
         alert("Data tidak berhasil di dapat");
     })

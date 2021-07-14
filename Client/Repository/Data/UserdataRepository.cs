@@ -1,5 +1,6 @@
 ﻿using Client.BaseController;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using ProjectTimeLine.Model;
 using ProjectTimeLine.ViewModel;
@@ -8,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Client.Repository.Data
@@ -40,6 +42,30 @@ namespace Client.Repository.Data
                 entities = JsonConvert.DeserializeObject<List<RegisterVM>>(apiResponse);
             }
             return entities;
+        }
+
+        public async Task<List<Employee>> GetEmployeeView()
+        {
+            List<Employee> entities = new List<Employee>();
+
+            using (var response = await httpClient.GetAsync(request + ""))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+                entities = JsonConvert.DeserializeObject<List<Employee>>(apiResponse);
+            }
+            return entities;
+        }
+
+        public async Task<String> EmployeesView(RegisterVM register)
+        {
+            string apiResponse = null;
+            StringContent content = new StringContent(JsonConvert.SerializeObject(register), Encoding.UTF8, "application/json");
+            var result = await httpClient.PostAsync(request + "register", content);
+            if (result.IsSuccessStatusCode)
+            {
+                apiResponse = await result.Content.ReadAsStringAsync();
+            }
+            return apiResponse;
         }
     }
 }

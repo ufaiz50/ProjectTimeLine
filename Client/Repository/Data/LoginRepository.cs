@@ -46,5 +46,6 @@ namespace Client.Repository.Data
 
             return token;
         }
+
     }
 }
