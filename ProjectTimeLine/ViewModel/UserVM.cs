@@ -6,9 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Client.Models
+namespace ProjectTimeLine.ViewModel
 {
-    public class UserDataVM
+    public class UserVM
     {
         public string NIK { get; set; }
         public string Name { get; set; }
@@ -20,12 +20,8 @@ namespace Client.Models
         [JsonConverter(typeof(StringEnumConverter))]
         public Gender Gender { get; set; }
         public string Password { get; set; }
-        public string RoleName { get; set; }
+        public int RoleId { get; set; }
     }
 
-    public enum Gender
-    {
-        Pria,
-        Wanita
-    }
+
 }

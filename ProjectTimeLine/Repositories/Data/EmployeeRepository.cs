@@ -1,4 +1,5 @@
-﻿using ProjectTimeLine.Context;
+﻿
+using ProjectTimeLine.Context;
 using ProjectTimeLine.Model;
 using ProjectTimeLine.Util;
 using ProjectTimeLine.ViewModel;
@@ -77,5 +78,73 @@ namespace ProjectTimeLine.Repositories.Data
             return data;
         }
 
+        //Faiz
+
+        public ICollection ViewRegistrasiNIK(string NIK)
+        {
+            var data = (from em in myContext.Employees
+                        join ac in myContext.Accounts on em.NIK equals ac.NIK
+                        join ar in myContext.AccountRoles on ac.NIK equals ar.NIK
+                        join rl in myContext.Roles on ar.RoleID equals rl.Id
+                        where em.NIK == NIK
+                        select new
+                        {
+                            em.NIK,
+                            em.Name,
+                            em.Email,
+                            em.Gender,
+                            em.BirthDate,
+                            em.Address,
+                            em.PhoneNumber,
+                            RoleName = rl.Name
+                        }).ToList();
+            return data;
+        }
+
+        public int InsertUser(UserVM registerVM)
+        {
+            var employee = new Employee();
+            var account = new Account();
+            var accountRole = new AccountRole();
+
+            var cekNIK = myContext.Employees.Find(registerVM.NIK);
+            if (cekNIK == null)
+            {
+                var cekEmail = myContext.Employees.FirstOrDefault(a => a.Email == registerVM.Email);
+                if (cekEmail == null)
+                {
+                    employee.NIK = registerVM.NIK;
+                    employee.Name = registerVM.Name;
+                    employee.Email = registerVM.Email;
+                    employee.BirthDate = registerVM.BirthDate;
+                    employee.PhoneNumber = registerVM.PhoneNumber;
+                    employee.Gender = (Model.Gender)registerVM.Gender;
+                    employee.Address = registerVM.Address;
+
+                    account.NIK = registerVM.NIK;
+                    account.Password = Hashing.HashPassword(registerVM.Password);
+
+                    accountRole.NIK = registerVM.NIK;
+                    accountRole.RoleID = registerVM.RoleId;
+
+                    
+
+                    myContext.Employees.Add(employee);
+                    myContext.Accounts.Add(account);
+                    myContext.AccountRoles.Add(accountRole);
+
+                    var insert = myContext.SaveChanges();
+                    return insert;
+                }
+                else
+                {
+                    return 1;
+                }
+            }
+            else
+            {
+                return 0;
+            }
+        }
     }
 }

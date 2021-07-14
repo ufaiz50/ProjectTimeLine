@@ -3,6 +3,8 @@
 
 // Write your JavaScript code.
 $(document).ready(function () {
+
+    // Data table to show user/employe
     $('#userdata').DataTable({
         dom: 'Bfrtip',
         "ajax": {
@@ -52,8 +54,8 @@ $(document).ready(function () {
             },
             {
                 "data": null,
-                "render": function () {
-                    return `<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#exampleModal'><i class="fas fa-edit"></i></button>
+                "render": function (data, type, full) {
+                    return `<button id="${full["nik"]}" type='button' class='btn btn-primary' data-toggle="modal" data-target="#updateModal" onClick="getUserData(this.id)"><i class="fas fa-edit"></i></button>
                             <button type='button' class='btn btn-danger' data-toggle='modal' data-target='#exampleModal'><i class="fas fa-trash"></i></button>`;
                 },
                 orderable: false
@@ -73,4 +75,30 @@ $(document).ready(function () {
             ],
         }
     });
+
 })
+
+
+function validation() {
+    var obj = new Object();
+}
+
+function getUserData(id) {
+    $.ajax({
+        url: 'https://localhost:44374/Dashboard/GetUserDataView',
+        dataType: "json",
+        dataSrc: "",
+        data: { NIK: id }
+    }).done(result => {
+        document.getElementById('updateNIK').value = result.nik;
+        document.getElementById('updateName').value = result.name;
+        document.getElementById('updateEmail').value = result.email;
+        document.getElementById('updatePhoneNumber').value = result.phoneNumber;
+        document.getElementById('updateBirthDate').value = result.birthDate;
+        result.gender == 0 ? document.getElementById("pria").checked = true : document.getElementById("wanita").checked = true ;
+        document.getElementById('updateAddress').value = result.address;
+        console.log(result);
+    }).fail(error => {
+        console.log(error);
+    })
+}

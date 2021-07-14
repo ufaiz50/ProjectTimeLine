@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Client.Repository.Data
@@ -42,5 +43,42 @@ namespace Client.Repository.Data
             }
             return entities;
         }
+
+        public async Task<string> InsertEmployee(UserDataVM userDataVM)
+        {
+            var message = "";
+            StringContent content = new StringContent(JsonConvert.SerializeObject(userDataVM), Encoding.UTF8, "application/json");
+            var result = await httpClient.PostAsync(request + "Register", content);
+
+            if (result.IsSuccessStatusCode)
+            {
+                string apiResponse = await result.Content.ReadAsStringAsync();
+                message = JsonConvert.DeserializeObject<string>(apiResponse);
+            }
+            return message;
+
+        }
+
+        public async Task<UserDataVM> GetUserDataView(string NIK)
+        {
+            UserDataVM entities = new UserDataVM();
+
+            using (var response = await httpClient.GetAsync(request + NIK))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+                entities = JsonConvert.DeserializeObject<UserDataVM>(apiResponse);
+            }
+            return entities;
+
+        }
+/*        public async Task<string> UpdateUserData()
+        {
+            return "";
+        }
+
+        public async Task<string> DeleteUserData()
+        {
+            return "";
+        }*/
     }
 }

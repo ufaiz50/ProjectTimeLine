@@ -31,5 +31,11 @@ namespace Client.Controllers
             var result = await repository.GetRegistrasiView();
             return Json(result);
         }
+
+        public async Task<JsonResult> GetUserDataView(string NIK)
+        {
+            var result = await repository.GetUserDataView(NIK);
+            return Json(result);
+        }
     }
 }
