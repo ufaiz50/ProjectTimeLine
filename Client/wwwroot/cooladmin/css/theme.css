@@ -336,6 +336,11 @@ section {
     /*height: 100vh;*/
 }
 
+.page-content--bge6 {
+    background: #e5e5e5;
+    height: 100vh;
+}
+
 .login-wrap {
     max-width: 540px;
     padding-top: 8vh;
