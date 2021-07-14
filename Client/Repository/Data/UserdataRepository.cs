@@ -1,4 +1,5 @@
 ﻿using Client.BaseController;
+using Client.Models;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using ProjectTimeLine.Model;
@@ -30,14 +31,14 @@ namespace Client.Repository.Data
             //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _contextAccessor.HttpContext.Session.GetString("JwToken"));
         }
 
-        public async Task<List<RegisterVM>> GetRegistrasiView()
+        public async Task<List<UserDataVM>> GetRegistrasiView()
         {
-            List<RegisterVM> entities = new List<RegisterVM>();
+            List<UserDataVM> entities = new List<UserDataVM>();
 
             using (var response = await httpClient.GetAsync(request + "ViewRegistrasi/"))
             {
                 string apiResponse = await response.Content.ReadAsStringAsync();
-                entities = JsonConvert.DeserializeObject<List<RegisterVM>>(apiResponse);
+                entities = JsonConvert.DeserializeObject<List<UserDataVM>>(apiResponse);
             }
             return entities;
         }

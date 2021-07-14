@@ -14,181 +14,23 @@
                     <i class="zmdi zmdi-account-calendar"></i>user data
                 </h3>
                 <div class="filters m-b-45">
-                    <div class="rs-select2--dark rs-select2--md m-r-10 rs-select2--border">
-                        <select class="js-select2" name="property">
-                            <option selected="selected">All Properties</option>
-                            <option value="">Products</option>
-                            <option value="">Services</option>
-                        </select>
-                        <div class="dropDownSelect2"></div>
-                    </div>
-                    <div class="rs-select2--dark rs-select2--sm rs-select2--border">
-                        <select class="js-select2 au-select-dark" name="time">
-                            <option selected="selected">All Time</option>
-                            <option value="">By Month</option>
-                            <option value="">By Day</option>
-                        </select>
-                        <div class="dropDownSelect2"></div>
-                    </div>
+                    <button type="button" class="btn btn-secondary mb-1" data-toggle="modal" data-target="#largeModal">Insert</button>
                 </div>
                 <div class="table-responsive table-data">
-                    <table class="table">
+                    <table class="table" id="userdata">
                         <thead>
                             <tr>
-                                <td>
-                                    <label class="au-checkbox">
-                                        <input type="checkbox">
-                                        <span class="au-checkmark"></span>
-                                    </label>
-                                </td>
-                                <td>name</td>
-                                <td>role</td>
-                                <td>type</td>
-                                <td></td>
+                                <td>NIK</td>
+                                <td>Name</td>
+                                <td>Phone Number</td>
+                                <td>Birth Date</td>
+                                <td>Address</td>
+                                <td>Gender</td>
+                                <td>Role</td>
+                                <td>Action</td>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <label class="au-checkbox">
-                                        <input type="checkbox">
-                                        <span class="au-checkmark"></span>
-                                    </label>
-                                </td>
-                                <td>
-                                    <div class="table-data__info">
-                                        <h6>lori lynch</h6>
-                                        <span>
-                                            <a href="#">johndoe@gmail.com</a>
-                                        </span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <span class="role admin">admin</span>
-                                </td>
-                                <td>
-                                    <div class="rs-select2--trans rs-select2--sm">
-                                        <select class="js-select2" name="property">
-                                            <option selected="selected">Full Control</option>
-                                            <option value="">Post</option>
-                                            <option value="">Watch</option>
-                                        </select>
-                                        <div class="dropDownSelect2"></div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <span class="more">
-                                        <i class="zmdi zmdi-more"></i>
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label class="au-checkbox">
-                                        <input type="checkbox" checked="checked">
-                                        <span class="au-checkmark"></span>
-                                    </label>
-                                </td>
-                                <td>
-                                    <div class="table-data__info">
-                                        <h6>lori lynch</h6>
-                                        <span>
-                                            <a href="#">johndoe@gmail.com</a>
-                                        </span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <span class="role user">user</span>
-                                </td>
-                                <td>
-                                    <div class="rs-select2--trans rs-select2--sm">
-                                        <select class="js-select2" name="property">
-                                            <option value="">Full Control</option>
-                                            <option value="" selected="selected">Post</option>
-                                            <option value="">Watch</option>
-                                        </select>
-                                        <div class="dropDownSelect2"></div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <span class="more">
-                                        <i class="zmdi zmdi-more"></i>
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label class="au-checkbox">
-                                        <input type="checkbox">
-                                        <span class="au-checkmark"></span>
-                                    </label>
-                                </td>
-                                <td>
-                                    <div class="table-data__info">
-                                        <h6>lori lynch</h6>
-                                        <span>
-                                            <a href="#">johndoe@gmail.com</a>
-                                        </span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <span class="role user">user</span>
-                                </td>
-                                <td>
-                                    <div class="rs-select2--trans rs-select2--sm">
-                                        <select class="js-select2" name="property">
-                                            <option value="">Full Control</option>
-                                            <option value="" selected="selected">Post</option>
-                                            <option value="">Watch</option>
-                                        </select>
-                                        <div class="dropDownSelect2"></div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <span class="more">
-                                        <i class="zmdi zmdi-more"></i>
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label class="au-checkbox">
-                                        <input type="checkbox">
-                                        <span class="au-checkmark"></span>
-                                    </label>
-                                </td>
-                                <td>
-                                    <div class="table-data__info">
-                                        <h6>lori lynch</h6>
-                                        <span>
-                                            <a href="#">johndoe@gmail.com</a>
-                                        </span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <span class="role member">member</span>
-                                </td>
-                                <td>
-                                    <div class="rs-select2--trans rs-select2--sm">
-                                        <select class="js-select2" name="property">
-                                            <option selected="selected">Full Control</option>
-                                            <option value="">Post</option>
-                                            <option value="">Watch</option>
-                                        </select>
-                                        <div class="dropDownSelect2"></div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <span class="more">
-                                        <i class="zmdi zmdi-more"></i>
-                                    </span>
-                                </td>
-                            </tr>
-                        </tbody>
                     </table>
-                </div>
-                <div class="user-data__footer">
-                    <button class="au-btn au-btn-load">load more</button>
                 </div>
             </div>
             <!-- END USER DATA-->
@@ -196,8 +38,34 @@
     </div>
 </div>
 <!-- END MAIN CONTENT-->
-            
-        
+<!-- modal large -->
+<div class="modal fade" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="largeModalLabel">Large Modal</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    There are three species of zebras: the plains zebra, the mountain zebra and the Grévy's zebra. The plains zebra and the mountain
+                    zebra belong to the subgenus Hippotigris, but Grévy's zebra is the sole species of subgenus Dolichohippus. The latter
+                    resembles an ass, to which it is closely related, while the former two are more horse-like. All three belong to the
+                    genus Equus, along with other living equids.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end modal large -->
 
-    
 
+@section Scripts {
+    <script type="text/javascript" src="~/js/userdata.js"></script>
+}
