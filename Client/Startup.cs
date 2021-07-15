@@ -49,6 +49,8 @@ namespace Client
             services.AddScoped<LoginRepository>();
 
             services.AddScoped<UserdataRepository>();
+
+            services.AddScoped<AsignProjectRepository>();
             services.AddScoped<Address>();
         }
 

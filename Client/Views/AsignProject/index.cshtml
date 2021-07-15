@@ -1,0 +1,103 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    Layout = "_LayoutDashboard";
+}
+
+
+<!-- MAIN CONTENT-->
+<div class="main-content">
+    <div class="section__content section__content--p30">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- MAP DATA-->
+                    <div class="map-data m-b-40">
+                        <h3 class="title-3 m-b-30">
+                            <i class="zmdi zmdi-map"></i>List Project 
+                        </h3>
+                        <div id="listProject" class="map-wrap m-t-45 m-b-20">
+                        </div>
+                    </div>
+                    <!-- END MAP DATA-->
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="copyright">
+                        <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END MAIN CONTENT-->
+<!-- modal medium -->
+<div class="modal fade" id="mediumModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="mediumModalLabel">Medium Modal</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Project Form</strong>
+                    </div>
+                    <div class="card-body card-block">
+                        <form action="/AsignProject/InsertProject" method="post">
+                            <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label for="text-input" class=" form-control-label">Project Name</label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    <input type="text" id="text-input" name="Name" placeholder="Project Name" class="form-control">
+                                    <small class="form-text text-muted">Please enter the project Name</small>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label for="email-input" class=" form-control-label">Start Date</label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    <input type="date" id="email-input" name="StartDate" placeholder="Enter Email" class="form-control">
+                                    <small class="help-block form-text">leave it blank if you don't want filled</small>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label for="password-input" class=" form-control-label">End Date</label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    <input type="date" id="password-input" name="EndDate" placeholder="Password" class="form-control">
+                                    <small class="help-block form-text">leave it blank if you don't want filled</small>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-sm">
+                                <i class="fa fa-dot-circle-o"></i> Submit
+                            </button>
+                        </form>
+                    </div>
+                    <div class="card-footer">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end modal medium -->
+@section Scripts {
+<script type="text/javascript" src="~/js/asignproject.js"></script>
+}
+
+
+
+
+

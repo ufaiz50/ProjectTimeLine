@@ -83,14 +83,15 @@ namespace Client.Repository.Data
 
         }
 
-        public async Task<UserDataVM> GetUserDataView(string NIK)
+        public async Task<List<UserDataVM>> GetUserDataView(string NIK)
         {
-            UserDataVM entities = new UserDataVM();
+           List<UserDataVM> entities = new List<UserDataVM>();
 
-            using (var response = await httpClient.GetAsync(request + NIK))
+            using (var response = await httpClient.GetAsync(request+ "ViewRegistrasi/" + NIK))
             {
                 string apiResponse = await response.Content.ReadAsStringAsync();
-                entities = JsonConvert.DeserializeObject<UserDataVM>(apiResponse);
+               
+                entities = JsonConvert.DeserializeObject<List<UserDataVM>>(apiResponse);
             }
             return entities;
 
@@ -121,3 +122,4 @@ namespace Client.Repository.Data
         }
     }
 }
+
