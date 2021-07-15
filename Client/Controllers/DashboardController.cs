@@ -40,5 +40,30 @@ namespace Client.Controllers
             var result = await repository.GetEmployeeView();
             return Json(result);
         }
+        public async Task<JsonResult> GetUserDataView(string NIK)
+        {
+            var result = await repository.GetUserDataView(NIK);
+            return Json(result);
+        }
+
+        public async Task<string> InsertEmployee(UserVM userVM)
+        {
+            /*var tahunlahir = Convert.ToDateTime("2020-01-01");
+            var user = new UserVM("E0003", "Iza", "iza@gmail.com", "08123456778", tahunlahir, "Jakarta", 0, "Password", 1);*/
+            var result = await repository.InsertEmployee(userVM);
+            return result;
+        }
+
+        public async Task<string> UpdateEmployee(UserVM userVM)
+        {
+            var result = await repository.UpdateEmployee(userVM);
+            return result;
+        }
+
+        public async Task<string> DeleteEmployee(string NIK)
+        {
+            var result = await repository.DeleteEmployee(NIK);
+            return result;
+        }
     }
 }

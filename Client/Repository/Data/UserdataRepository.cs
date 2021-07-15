@@ -1,4 +1,5 @@
 ﻿using Client.BaseController;
+using Client.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -32,14 +33,14 @@ namespace Client.Repository.Data
             //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _contextAccessor.HttpContext.Session.GetString("JwToken"));
         }
 
-        public async Task<List<RegisterVM>> GetRegistrasiView()
+        public async Task<List<UserDataVM>> GetRegistrasiView()
         {
-            List<RegisterVM> entities = new List<RegisterVM>();
+            List<UserDataVM> entities = new List<UserDataVM>();
 
             using (var response = await httpClient.GetAsync(request + "ViewRegistrasi/"))
             {
                 string apiResponse = await response.Content.ReadAsStringAsync();
-                entities = JsonConvert.DeserializeObject<List<RegisterVM>>(apiResponse);
+                entities = JsonConvert.DeserializeObject<List<UserDataVM>>(apiResponse);
             }
             return entities;
         }
@@ -66,6 +67,57 @@ namespace Client.Repository.Data
                 apiResponse = await result.Content.ReadAsStringAsync();
             }
             return apiResponse;
+        }
+        
+        public async Task<string> InsertEmployee(UserVM userDataVM)
+        {
+            var message = "";
+            StringContent content = new StringContent(JsonConvert.SerializeObject(userDataVM), Encoding.UTF8, "application/json");
+            var result = await httpClient.PostAsync(request + "RegisterAdmin", content);
+
+            if (result.IsSuccessStatusCode)
+            {
+                string apiResponse = await result.Content.ReadAsStringAsync();
+            }
+            return message;
+
+        }
+
+        public async Task<UserDataVM> GetUserDataView(string NIK)
+        {
+            UserDataVM entities = new UserDataVM();
+
+            using (var response = await httpClient.GetAsync(request + NIK))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+                entities = JsonConvert.DeserializeObject<UserDataVM>(apiResponse);
+            }
+            return entities;
+
+        }
+        public async Task<string> UpdateEmployee(UserVM userDataVM)
+        {
+            var res = "";
+            StringContent content = new StringContent(JsonConvert.SerializeObject(userDataVM), Encoding.UTF8, "application/json");
+            var result = await httpClient.PutAsync(request + "UpdateAdmin/", content);
+            if (result.IsSuccessStatusCode)
+            {
+                var apiResponse = await result.Content.ReadAsStringAsync();
+                res = apiResponse;
+            }
+            return res;
+        }
+
+        public async Task<string> DeleteEmployee(string NIK)
+        {
+            var res = "";
+            var result = await httpClient.DeleteAsync(request + "DeleteAdmin/" + NIK);
+            if (result.IsSuccessStatusCode)
+            {
+                string apiResponse = await result.Content.ReadAsStringAsync();
+                res = apiResponse;
+            }
+            return res;
         }
     }
 }
