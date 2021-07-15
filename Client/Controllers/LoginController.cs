@@ -38,7 +38,7 @@ namespace Client.Controllers
                 return RedirectToAction("Index", "Home");
             }
             HttpContext.Session.SetString("JWT", jWToken.Token);
-            return RedirectToAction("Privacy", "Home");
+            return RedirectToAction("Index", "Dashboard");
         }
 
         public async Task<IActionResult> EmployeesView(RegisterVM registerVm)

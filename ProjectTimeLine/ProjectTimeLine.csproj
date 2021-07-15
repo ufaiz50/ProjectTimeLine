@@ -7,7 +7,6 @@
   <ItemGroup>
     <Folder Include="BaseController\" />
     <Folder Include="Context\" />
-    <Folder Include="Model\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -21,6 +21,7 @@ namespace ProjectTimeLine.Context
         public DbSet<Modul> Moduls { get; set; }
         public DbSet<TaskHistory> TaskHistories { get; set; }
         public DbSet<Project> Projects { get; set; }
+        public DbSet<AccountTask> AccountTasks { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -36,11 +37,22 @@ namespace ProjectTimeLine.Context
                 .WithMany(s => s.AccountRoles)
                 .HasForeignKey(sc => sc.NIK);
 
-
             modelBuilder.Entity<AccountRole>()
                 .HasOne<Role>(sc => sc.Role)
                 .WithMany(s => s.AccountRoles)
                 .HasForeignKey(sc => sc.RoleID);
+            
+            modelBuilder.Entity<AccountTask>().HasKey(sc => new { sc.NIK, sc.TaskModulId });
+
+            modelBuilder.Entity<AccountTask>()
+                .HasOne<Account>(sc => sc.Account)
+                .WithMany(s => s.AccountTasks)
+                .HasForeignKey(sc => sc.NIK);
+
+            modelBuilder.Entity<AccountTask>()
+                .HasOne<TaskModul>(sc => sc.TaskModul)
+                .WithMany(s => s.AccountTasks)
+                .HasForeignKey(sc => sc.TaskModulId);
 
             modelBuilder.Entity<Account>()
                 .HasMany(ed => ed.TaskHistories)

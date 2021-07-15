@@ -15,5 +15,6 @@ namespace ProjectTimeLine.Model
         public virtual Employee Employee { get; set; }
         public virtual ICollection<AccountRole> AccountRoles { get; set; }
         public virtual ICollection<TaskHistory> TaskHistories { get; set; }
+        public virtual ICollection<AccountTask> AccountTasks{ get; set; }
     }
 }

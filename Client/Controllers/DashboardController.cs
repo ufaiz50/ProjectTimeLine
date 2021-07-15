@@ -28,6 +28,11 @@ namespace Client.Controllers
         {
             return View();
         }
+        
+        public IActionResult Assigntask()
+        {
+            return View();
+        }
 
         public async Task<JsonResult> GetRegistrasiView()
         {

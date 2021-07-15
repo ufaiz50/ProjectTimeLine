@@ -19,6 +19,7 @@ namespace ProjectTimeLine.Model
 
         public virtual Modul Modul { get; set; }
         public virtual ICollection<TaskHistory> TaskHistories { get; set; }
+        public virtual ICollection<AccountTask> AccountTasks { get; set; }
     }
 
     public enum Status
