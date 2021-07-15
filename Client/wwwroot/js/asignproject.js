@@ -33,7 +33,7 @@ $(document).ready(function () {
 })
 
 function goProject(id) {
-    window.open("https://localhost:44374/"+id);
+    window.open("https://localhost:44374/AsignProject/ViewProject/"+id)
 }
 
 

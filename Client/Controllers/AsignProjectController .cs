@@ -35,5 +35,11 @@ namespace Client.Controllers
             var result = await repository.InsertProject(project);
             return result;
         }
+
+        public string ViewProject(int id)
+        {
+            var result =  "asiap"+id;
+            return result;
+        }
     }
 }
