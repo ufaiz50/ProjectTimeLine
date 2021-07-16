@@ -69,3 +69,51 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+/*Faiz*/
+.kartu {
+    width: 200px;
+    height: 230px;
+    display: inline-block;
+    position: relative;
+    border-radius: 10px;
+    padding: 15px 25px;
+    box-sizing: border-box;
+    cursor: pointer;
+    margin: 10px 15px;
+    background-image: url('../img/blue.jpg');
+    background-position: center;
+    background-size: cover;
+    transition: transform 0.5s ease-in;
+}
+
+.kartu h5{
+    color: #fff;
+    text-shadow: 0 0 5px #999;
+}
+
+.kartu p {
+    color: #fff;
+    text-shadow: 0 0 15px #000;
+}
+
+.kartu:hover{
+    transform: translateY(-10px)
+}
+
+.kartu button{
+
+  width: 100px;
+  height: 50px;
+  /* Center vertically and horizontally */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -25px 0 0 -50px; /* apply negative top and left margins to truly center the element */
+
+}
+
+
+/*End Faiz*/
+
+
