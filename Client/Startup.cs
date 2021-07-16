@@ -52,6 +52,7 @@ namespace Client
 
             services.AddScoped<AsignProjectRepository>();
             services.AddScoped<TaskRepository>();
+            services.AddScoped<GanttChartRepository>();
             services.AddScoped<Address>();
         }
 
