@@ -40,6 +40,5 @@ namespace ProjectTimeLine.Repositories.Data
             return data;
         }
 
-
     }
 }

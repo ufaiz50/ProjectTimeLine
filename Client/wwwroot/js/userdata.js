@@ -1,6 +1,12 @@
 ﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 // for details on configuring this project to bundle and minify static web assets.
 
+/*<form method="delete" action="/Dashboard/DeleteEmployee">
+                                <input type="hidden" value="${full["nik"]}" name="NIK"/>
+                                <button class='btn btn-danger' type="submit"><i class="fas fa-trash"></i></button>
+                            </form>*/
+
+
 // Write your JavaScript code.
 $(document).ready(function () {
 
@@ -8,7 +14,7 @@ $(document).ready(function () {
     $('#userdata').DataTable({
         dom: 'Bfrtip',
         "ajax": {
-            url: "https://localhost:44374/Dashboard/GetRegistrasiView",
+            url: "https://localhost:44374/Dashboard/Userdataview",
             dataType: "json",
             dataSrc: ""
         },
@@ -26,40 +32,27 @@ $(document).ready(function () {
                 }
             },
             { "data": "phoneNumber" },
-            {
-                "data": "birthDate",
-                "render": function (data, type, full) {
-                    tanggal = new Date(data).getDate();
-                    bulan = new Date(data).toLocaleString('default', { month: 'short' })
-                    tahun = new Date(data).getFullYear();
-
-                    return `${tanggal}/${bulan}/${tahun}`;
-                }
-            },
+            
             { "data": "address" },
+            
             {
-                "data": "gender",
+                "data": null,
                 "render": function (data, type, full) {
-                    return data == 0 ? "Pria" : "Wanita";
-                }
-            },
-            {
-                "data": "roleName",
-                "render": function (data, type, full) {
-                    if (data == "Admin") {
-                        return `<span class="role admin">${data}</span>`;
+                    if (full.allRoleName == null) return "No role";
+                    bod = "";
+                    for (var i in full.allRoleName) {
+                        full.allRoleName[i] == "Admin" ? bod += `<span class="role admin">${full.allRoleName[i]}</span>` : bod += `<span class="role user">${full.allRoleName[i]}</span>`;
                     }
-                    return `<span class="role user">${data}</span>`;
+                    return bod;
+                    
                 }
             },
             {
                 "data": null,
                 "render": function (data, type, full) {
-                    return `<button id="${full["nik"]}" type='button' class='btn btn-primary' data-toggle="modal" data-target="#updateModal" onClick="getUserData(this.id)"><i class="fas fa-edit"></i></button>
-                            <form method="delete" action="/Dashboard/DeleteEmployee">
-                                <input type="hidden" value="${full["nik"]}" name="NIK"/>
-                                <button class='btn btn-danger' type="submit"><i class="fas fa-trash"></i></button>
-                            </form>`;
+                    return `<button id="${full["nik"]}" type='button' class='btn btn-primary' data-toggle="modal" data-target="#updateModal" onClick="addRole(this.id)"><i class="fas fa-edit"></i></button>
+                        <button id="${full["nik"]}" type="button" class="btn btn-secondary mb-1" data-toggle="modal" data-target="#smallmodal" onClick="deleteRole(this.id)"><i class="fas fa-trash"></i></button>
+                            `;
                 },
                 orderable: false
             }
@@ -101,23 +94,87 @@ $(document).ready(function () {
 })
 
 
-
-function getUserData(id) {
+// Add role
+function addRole(id) {
+    opsi = `<option>Please select</option>
+            <option id="Admin" value="1">Admin</option>
+            <option id="Manager" value="2">Manager</option>
+            <option id="SA" value="3">SA</option>
+            <option id="BA" value="4">BA</option>
+            <option id="Developer" value="5">Developer</option>`;
+    $('#add').html(opsi)
     $.ajax({
-        url: 'https://localhost:44374/Dashboard/GetUserDataView',
+        url: 'https://localhost:44374/Dashboard/Userdataviewnik',
         dataType: "json",
         dataSrc: "",
-        data: { NIK: id }
+        data: { nik: id }
     }).done(result => {
+        
         document.getElementById('updateNIK').value = result.nik;
-        document.getElementById('updateName').value = result.name;
-        document.getElementById('updateEmail').value = result.email;
-        document.getElementById('updatePhoneNumber').value = result.phoneNumber;
-        document.getElementById('updateBirthDate').value = result.birthDate;
-        result.gender == 0 ? document.getElementById("pria").checked = true : document.getElementById("wanita").checked = true ;
-        document.getElementById('updateAddress').value = result.address;
+        document.getElementById('showNik').value = result.nik;
+        for (var i in result.allRoleName) {
+            if (result.allRoleName[i] == "Admin") $("#Admin").remove();
+            if (result.allRoleName[i] == "Manager") $("#Manager").remove();
+            if (result.allRoleName[i] == "SA") $("#SA").remove();
+            if (result.allRoleName[i] == "BA") $("#BA").remove();
+            if (result.allRoleName[i] == "Developer") $("#Developer").remove();
+        }
+        /*for (var i in result.allRoleName) {
+            if (result.allRoleName[i] == "Admin")  $("#Admin").prop("checked", true);
+            if (result.allRoleName[i] == "Manager") $("#Manager").prop("checked", true);
+            if (result.allRoleName[i] == "BA") $("#BA").prop("checked", true);
+        }*/
+        
         console.log(result);
     }).fail(error => {
         console.log(error);
     })
+}
+
+function deleteRole(id) {
+    opsi = `<option>Please select</option>`;
+    
+    $.ajax({
+        url: 'https://localhost:44374/Dashboard/Userdataviewnik',
+        dataType: "json",
+        dataSrc: "",
+        data: { nik: id }
+    }).done(result => {
+
+        document.getElementById('deleteNIK').value = result.nik;
+        document.getElementById('showNik2').value = result.nik;
+        for (var i in result.allRoleName) {
+            if (result.allRoleName[i] == "Admin") opsi += '<option id="Admin" value="1">Admin</option>';
+            if (result.allRoleName[i] == "Manager") opsi += '<option id="Manager" value="2">Manager</option>';
+            if (result.allRoleName[i] == "SA") opsi += '<option id="SA" value="3">SA</option>';
+            if (result.allRoleName[i] == "BA") opsi += '<option id="BA" value="4">BA</option>';
+            if (result.allRoleName[i] == "Developer") opsi += '<option id="Developer" value="5">Developer</option>';
+        }
+        $('#delete').html(opsi)
+        console.log(result);
+    }).fail(error => {
+        console.log(error);
+    })
+
+}
+
+function gettest() {
+    var arr = [];
+    $.each($("input[name='checkbox']:checked"), function () {
+        arr.push({ NIK: document.getElementById('updateNIK').value, RoleID : $(this).val() });
+    })
+    console.log(arr);
+    for (var i = 0; i < arr.length; i++) {
+
+        $.ajax({
+            url: 'https://localhost:44374/dashboard/UpdateUserData',
+            type: 'post',
+            data: arr[1]
+        }).done(result => {
+            
+        }).fail(error => {
+            alert("Data tidak berhasil disimpan")
+        });
+    }
+
 }

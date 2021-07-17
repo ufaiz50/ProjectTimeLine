@@ -96,7 +96,7 @@ namespace Client.Repository.Data
             return entities;
 
         }
-        public async Task<string> UpdateEmployee(UserVM userDataVM)
+        public async Task<string> UpdateEmployee(UserDataVM userDataVM)
         {
             var res = "";
             StringContent content = new StringContent(JsonConvert.SerializeObject(userDataVM), Encoding.UTF8, "application/json");
@@ -120,6 +120,59 @@ namespace Client.Repository.Data
             }
             return res;
         }
+
+        public async Task<List<UserDataVM>> UserData()
+        {
+            List<UserDataVM> entities = new List<UserDataVM>();
+            var result = await httpClient.GetAsync(request + "userdata/");
+            if (result.IsSuccessStatusCode)
+            {
+                string apiResponse = await result.Content.ReadAsStringAsync();
+                entities = JsonConvert.DeserializeObject<List<UserDataVM>>(apiResponse);
+            }
+            return entities;
+        }
+
+        public async Task<List<UserDataVM>> UserData(string nik)
+        {
+            List<UserDataVM> entities = new List<UserDataVM>();
+            var result = await httpClient.GetAsync(request + "userdata/" + nik);
+            if (result.IsSuccessStatusCode)
+            {
+                string apiResponse = await result.Content.ReadAsStringAsync();
+                entities = JsonConvert.DeserializeObject<List<UserDataVM>>(apiResponse);
+            }
+            return entities;
+        }
+
+
+        public async Task<string> UpdateUserData(AccountRole userDataVM)
+        {
+            var res = "";
+            
+            StringContent content = new StringContent(JsonConvert.SerializeObject(userDataVM), Encoding.UTF8, "application/json");
+            var result = await httpClient.PostAsync("AccountRoles", content);
+            if (result.IsSuccessStatusCode)
+            {
+                var apiResponse = await result.Content.ReadAsStringAsync();
+                res = apiResponse;
+            }
+            return res;
+        }
+
+        public async Task<string> deleteUserData(AccountRole ar)
+        {
+            var res = "";
+
+            var result = await httpClient.DeleteAsync("AccountRoles/userdata/" + ar.NIK + "/" + ar.RoleID);
+            if (result.IsSuccessStatusCode)
+            {
+                var apiResponse = await result.Content.ReadAsStringAsync();
+                res = apiResponse;
+            }
+            return res;
+        }
+
     }
 }
 

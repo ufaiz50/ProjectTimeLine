@@ -154,5 +154,47 @@ namespace ProjectTimeLine.Controllers
             }
         }
 
+        [HttpGet("Userdata")]
+        public ActionResult GetUserData()
+        {
+            try
+            {
+                var view = employeeRepository.GetUserData();
+                if (view != null)
+                {
+                    return Ok(view);
+                }
+                else
+                {
+                    return BadRequest(new { status = HttpStatusCode.BadRequest, result = view, message = "Data Registrasi tidak ditemukan" });
+                }
+            }
+            catch (Exception)
+            {
+                return BadRequest(new { status = HttpStatusCode.OK, result = 0, message = "Data Registrasi tidak ditemukan" });
+            }
+        }
+
+        [HttpGet("Userdata/{nik}")]
+        public ActionResult GetUserData(string nik)
+        {
+            try
+            {
+                var view = employeeRepository.GetUserData(nik);
+                if (view != null)
+                {
+                    return Ok(view);
+                }
+                else
+                {
+                    return BadRequest(new { status = HttpStatusCode.BadRequest, result = view, message = "Data Registrasi tidak ditemukan" });
+                }
+            }
+            catch (Exception)
+            {
+                return BadRequest(new { status = HttpStatusCode.OK, result = 0, message = "Data Registrasi tidak ditemukan" });
+            }
+        }
+
     }
 }
