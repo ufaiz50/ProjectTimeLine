@@ -35,7 +35,7 @@ namespace ProjectTimeLine.Repositories.Data
                        join accrole in myContext.AccountRoles on acc.NIK equals accrole.NIK
                        join role in myContext.Roles on accrole.RoleID equals role.Id
                        where em.Email == login.Email
-                       select new DataLoginVM(em.Name, em.Email, role.Name );
+                       select new DataLoginVM(em.NIK, em.Name, em.Email, role.Name );
             
             return data;
         }

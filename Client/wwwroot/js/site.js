@@ -1,4 +1,21 @@
 ﻿$(document).ready(function () {
+
+    //get decode from JWT
+    $.ajax({
+        url: 'https://localhost:44374/dashboard/getJwt',
+        dataType: "json",
+        dataSrc: ""
+    }).done(result => {
+        $('#name1').text(result['name'])
+        $('#name2').text(result['name'])
+        $('#email').text(result['email'])
+
+    }).fail(error => {
+
+    })
+
+
+
     $('#assigntask').DataTable(
         //{
         //    ajax: {

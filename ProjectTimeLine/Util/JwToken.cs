@@ -34,11 +34,16 @@ namespace ProjectTimeLine.Util
         public string GenerateJWT( IQueryable<DataLoginVM> loginVM)
         {
             var claims = new List<Claim>();
+
+            var index = 0;
             foreach (var item in loginVM)
             {
-                claims.Add(new Claim("Email", item.Email));
-                claims.Add(new Claim("Name", item.Name));
-                claims.Add(new Claim(ClaimTypes.Role, item.Role));
+                if (index == 0) claims.Add(new Claim("NIK", item.NIK));
+                if (index == 0) claims.Add(new Claim("Email", item.Email));
+                if (index == 0) claims.Add(new Claim("Name", item.Name));
+
+                claims.Add(new Claim("Role", item.Role));
+                index++;
             }
                         
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));

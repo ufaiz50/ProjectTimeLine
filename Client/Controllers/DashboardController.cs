@@ -5,7 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 using ProjectTimeLine.Model;
 using ProjectTimeLine.ViewModel;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -124,5 +126,21 @@ namespace Client.Controllers
             var result = await repository.deleteUserData(userVM);
             return result;
         }
+        
+        public async Task<JsonResult> GetJWT()
+        {
+            //var result = await repository.UpdateEmployee(userVM);
+
+            var result = await repository.getJwt();
+            return Json(result);
+        }
+
+        public ActionResult LogOut()
+        {
+            _ = repository.LogOut();
+            return RedirectToAction("Index", "Home");
+        }
+
+        
     }
 }
