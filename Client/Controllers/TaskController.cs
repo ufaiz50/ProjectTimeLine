@@ -1,5 +1,6 @@
 ﻿using Client.BaseController;
 using Client.Repository.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProjectTimeLine.Model;
 using ProjectTimeLine.ViewModel;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace Client.Controllers
 {
+    [Authorize]
     public class TaskController : BaseController<Account, TaskRepository, string>
     {
         private readonly TaskRepository repository;

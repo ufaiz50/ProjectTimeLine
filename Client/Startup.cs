@@ -53,6 +53,7 @@ namespace Client
             services.AddScoped<AsignProjectRepository>();
             services.AddScoped<TaskRepository>();
             services.AddScoped<GanttChartRepository>();
+            services.AddScoped<AccountRepository>();
             services.AddScoped<Address>();
         }
 

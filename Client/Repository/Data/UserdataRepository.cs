@@ -185,7 +185,7 @@ namespace Client.Repository.Data
             content.NIK = result.Claims.First(claim => claim.Type == "NIK").Value;
             content.Name = result.Claims.First(claim => claim.Type == "Name").Value;
             content.Email = result.Claims.First(claim => claim.Type == "Email").Value;
-            var getAllRole = result.Claims.Where(x => x.Type == "Role").Select(data => data.Value);
+            var getAllRole = result.Claims.Where(x => x.Type == "Roles").Select(data => data.Value);
             foreach (var item in getAllRole)
             {
                 content.AllRole.Add(item);

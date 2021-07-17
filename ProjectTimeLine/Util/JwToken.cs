@@ -42,7 +42,7 @@ namespace ProjectTimeLine.Util
                 if (index == 0) claims.Add(new Claim("Email", item.Email));
                 if (index == 0) claims.Add(new Claim("Name", item.Name));
 
-                claims.Add(new Claim("Role", item.Role));
+                claims.Add(new Claim("Roles", item.Role));
                 index++;
             }
                         

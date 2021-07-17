@@ -60,9 +60,9 @@ $(document).ready(function () {
                               </div>`;
         })
         $('#listProject').html(projectList);
-        console.log(projectList);
+        
     }).fail(error => {
-        alert("Data tidak berhasil di dapat");
+        
     })
 
 
