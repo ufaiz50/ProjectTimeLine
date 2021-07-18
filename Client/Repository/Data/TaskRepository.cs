@@ -2,10 +2,13 @@
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using ProjectTimeLine.Model;
+using ProjectTimeLine.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace Client.Repository.Data
@@ -25,7 +28,7 @@ namespace Client.Repository.Data
             {
                 BaseAddress = new Uri(address.link)
             };
-            //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _contextAccessor.HttpContext.Session.GetString("JwToken"));
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _contextAccessor.HttpContext.Session.GetString("JWT"));
         }
 
         public async Task<List<Account>> GetUserDataView(string NIK)
@@ -40,6 +43,24 @@ namespace Client.Repository.Data
             }
             return entities;
 
+        }
+
+        public async Task<DataLoginVM> GetJwt()
+        {
+            var content = new DataLoginVM();
+            var token = _contextAccessor.HttpContext.Session.GetString("JWT");
+            var result = new JwtSecurityTokenHandler().ReadJwtToken(token);
+
+            content.NIK = result.Claims.First(claim => claim.Type == "NIK").Value;
+            content.Name = result.Claims.First(claim => claim.Type == "Name").Value;
+            content.Email = result.Claims.First(claim => claim.Type == "Email").Value;
+            var getAllRole = result.Claims.Where(x => x.Type == "Roles").Select(data => data.Value);
+            foreach (var item in getAllRole)
+            {
+                content.AllRole.Add(item);
+            }
+
+            return content;
         }
 
     }

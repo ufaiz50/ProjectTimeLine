@@ -117,22 +117,18 @@ namespace Client.Controllers
 
         public async Task<string> UpdateUserData(AccountRole userVM)
         {
-            //var result = await repository.UpdateEmployee(userVM);
             var result = await repository.UpdateUserData(userVM);
             return result;
         }
         
         public async Task<string> DeleteUserData(AccountRole userVM)
         {
-            //var result = await repository.UpdateEmployee(userVM);
             var result = await repository.deleteUserData(userVM);
             return result;
         }
         
         public async Task<JsonResult> GetJWT()
         {
-            //var result = await repository.UpdateEmployee(userVM);
-
             var result = await repository.getJwt();
             return Json(result);
         }
