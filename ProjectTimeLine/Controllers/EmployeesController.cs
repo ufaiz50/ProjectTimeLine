@@ -31,11 +31,11 @@ namespace ProjectTimeLine.Controllers
             try
             {
                 var insert = employeeRepository.Register(registerVM);
-                if (insert == 2)
+                if (insert == 3)
                 {
                     return Ok(new { status = HttpStatusCode.OK, result = insert, message = "Berhasil Insert" });
                 }
-                else if (insert == 3)
+                else if (insert == 2)
                 {
                     return BadRequest(new { status = HttpStatusCode.BadRequest, result = 0, message = "Email sudah terdafftar" });
                 }

@@ -40,11 +40,11 @@ namespace ProjectTimeLine.BaseController
             var get = repository.Get(key);
             if (get != null)
             {
-                return Ok(new { status = HttpStatusCode.OK, result = get, message = "Data ditemukan" });
+                return Ok(get);
             }
             else
             {
-                return BadRequest(new { status = HttpStatusCode.BadRequest, result = get, message = "Data tidak ditemukan" });
+                return BadRequest(get);
             }
         }
 

@@ -6,6 +6,7 @@ using ProjectTimeLine.Repositories.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace ProjectTimeLine.Controllers
@@ -14,8 +15,51 @@ namespace ProjectTimeLine.Controllers
     [ApiController]
     public class ModulController : BaseController<Modul, ModulRepository, int>
     {
-        public ModulController(ModulRepository repository) : base(repository)
+        private readonly ModulRepository modulRepository;
+        public ModulController(ModulRepository modulRepository) : base(modulRepository)
         {
+            this.modulRepository = modulRepository;
+        }
+        [HttpGet("ViewModul")]
+        public ActionResult ViewTask()
+        {
+            try
+            {
+                var view = modulRepository.ViewModul();
+                if (view != null)
+                {
+                    return Ok(view);
+                }
+                else
+                {
+                    return BadRequest(new { status = HttpStatusCode.BadRequest, result = view, message = "Data Registrasi tidak ditemukan" });
+                }
+            }
+            catch (Exception)
+            {
+                return BadRequest(new { status = HttpStatusCode.OK, result = 0, message = "Data Registrasi tidak ditemukan" });
+            }
+        }
+
+        [HttpGet("ViewModul/{key}")]
+        public ActionResult ViewTaskNIK(int key)
+        {
+            try
+            {
+                var view = modulRepository.ViewModul(key);
+                if (view != null)
+                {
+                    return Ok(view);
+                }
+                else
+                {
+                    return BadRequest(new { status = HttpStatusCode.BadRequest, result = view, message = "Data Registrasi tidak ditemukan" });
+                }
+            }
+            catch (Exception)
+            {
+                return BadRequest(new { status = HttpStatusCode.OK, result = 0, message = "Data Registrasi tidak ditemukan" });
+            }
         }
     }
 }

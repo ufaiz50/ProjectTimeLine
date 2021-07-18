@@ -24,6 +24,7 @@ namespace ProjectTimeLine.Repositories.Data
         {
             var employee = new Employee();
             var account = new Account();
+            var accRole = new AccountRole();
 
             var cekNIK = myContext.Employees.Find(registerVM.NIK);
             if (cekNIK == null)
@@ -42,15 +43,19 @@ namespace ProjectTimeLine.Repositories.Data
                     account.NIK = registerVM.NIK;
                     account.Password = Hashing.HashPassword(registerVM.Password);
 
+                    accRole.RoleID = 7;
+                    accRole.NIK = registerVM.NIK;
+
                     myContext.Employees.Add(employee);
                     myContext.Accounts.Add(account);
+                    myContext.AccountRoles.Add(accRole);
 
                     var insert = myContext.SaveChanges();
                     return insert;
                 }
                 else
                 {
-                    return 3;
+                    return 2;
                 }
             }
             else

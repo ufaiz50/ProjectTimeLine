@@ -6,6 +6,7 @@ using ProjectTimeLine.Repositories.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace ProjectTimeLine.Controllers
@@ -14,8 +15,53 @@ namespace ProjectTimeLine.Controllers
     [ApiController]
     public class TaskModulController : BaseController<TaskModul, TaskModulRepository, int>
     {
-        public TaskModulController(TaskModulRepository repository) : base(repository)
+        private readonly TaskModulRepository taskModulRepository;
+
+        public TaskModulController(TaskModulRepository taskModulRepository) : base(taskModulRepository)
         {
+            this.taskModulRepository = taskModulRepository;
+        }
+
+        [HttpGet("ViewTask")]
+        public ActionResult ViewTask()
+        {
+            try
+            {
+                var view = taskModulRepository.ViewTask();
+                if (view != null)
+                {
+                    return Ok(view);
+                }
+                else
+                {
+                    return BadRequest(new { status = HttpStatusCode.BadRequest, result = view, message = "Data Registrasi tidak ditemukan" });
+                }
+            }
+            catch (Exception)
+            {
+                return BadRequest(new { status = HttpStatusCode.OK, result = 0, message = "Data Registrasi tidak ditemukan" });
+            }
+        }
+
+        [HttpGet("ViewTask/{key}")]
+        public ActionResult ViewTaskNIK(int key)
+        {
+            try
+            {
+                var view = taskModulRepository.ViewTaskId(key);
+                if (view != null)
+                {
+                    return Ok(view);
+                }
+                else
+                {
+                    return BadRequest(new { status = HttpStatusCode.BadRequest, result = view, message = "Data Registrasi tidak ditemukan" });
+                }
+            }
+            catch (Exception)
+            {
+                return BadRequest(new { status = HttpStatusCode.OK, result = 0, message = "Data Registrasi tidak ditemukan" });
+            }
         }
     }
 }

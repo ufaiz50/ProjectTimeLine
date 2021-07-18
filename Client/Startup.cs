@@ -47,9 +47,11 @@ namespace Client
 
             services.AddControllersWithViews();
             services.AddScoped<LoginRepository>();
-
+            services.AddScoped<TaskModulRepository>();
+            services.AddScoped<AccountTaskRepository>();
             services.AddScoped<UserdataRepository>();
             services.AddScoped<Address>();
+            services.AddScoped<ModulRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
