@@ -93,6 +93,6 @@ namespace Client.Repository.Data
             }
             return res;
         }
-
+            
     }
 }
