@@ -43,7 +43,7 @@
 
 $.extend($.fn.dataTable.defaults, {
     responsive: true
-    }
+})
 
 var table = $('#ajaxSW').DataTable({
     ajax: {
