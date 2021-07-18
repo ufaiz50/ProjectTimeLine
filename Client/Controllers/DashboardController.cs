@@ -1,15 +1,20 @@
 ﻿using Client.BaseController;
+using Client.Models;
 using Client.Repository.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProjectTimeLine.Model;
 using ProjectTimeLine.ViewModel;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Client.Controllers
 {
+    [Authorize]
     public class DashboardController : BaseController<Employee, UserdataRepository, string>
     {
         private readonly UserdataRepository repository;
@@ -58,11 +63,12 @@ namespace Client.Controllers
             return result;
         }
 
-        public async Task<string> UpdateEmployee(UserVM userVM)
+        /*public async Task<string> UpdateEmployee(AccountRole userVM)
         {
-            var result = await repository.UpdateEmployee(userVM);
-            return result;
-        }
+            //var result = await repository.UpdateEmployee(userVM);
+            //var result = await repository.UpdateUserData(userVM);
+            return "asiap";
+        }*/
 
         public async Task<string> DeleteEmployee(string NIK)
         {
@@ -70,5 +76,73 @@ namespace Client.Controllers
             return result;
         }
 
+        public async Task<JsonResult> Userdataview()
+        {
+
+            var result = await repository.UserData();
+            var re = result.OrderBy(x => x.NIK).ToList();
+
+            for (int i = 0; i < re.Count; i++)
+            {
+                for (int j = 0; j < re.Count; j++)
+                {
+                    if( re[i].NIK == re[j].NIK) 
+                    {
+                        re[i].AllRoleName.Add(re[j].RoleName);
+                    }
+                }
+            }
+            var final = re.GroupBy(p => p.NIK).Select(grp => grp.First()).ToArray();
+            return Json(final);
+        }
+
+        public async Task<UserDataVM> Userdataviewnik(string nik)
+        {
+            var result = await repository.UserData(nik);
+            var re = result.OrderBy(x => x.NIK).ToList();
+
+            for (int i = 0; i < re.Count; i++)
+            {
+                for (int j = 0; j < re.Count; j++)
+                {
+                    if (re[i].NIK == re[j].NIK)
+                    {
+                        re[i].AllRoleName.Add(re[j].RoleName);
+                    }
+                }
+            }
+            var final = re.GroupBy(p => p.NIK).Select(grp => grp.First()).ToArray();
+            return final[0];
+        }
+
+        public async Task<string> UpdateUserData(AccountRole userVM)
+        {
+            //var result = await repository.UpdateEmployee(userVM);
+            var result = await repository.UpdateUserData(userVM);
+            return result;
+        }
+        
+        public async Task<string> DeleteUserData(AccountRole userVM)
+        {
+            //var result = await repository.UpdateEmployee(userVM);
+            var result = await repository.deleteUserData(userVM);
+            return result;
+        }
+        
+        public async Task<JsonResult> GetJWT()
+        {
+            //var result = await repository.UpdateEmployee(userVM);
+
+            var result = await repository.getJwt();
+            return Json(result);
+        }
+
+        public ActionResult LogOut()
+        {
+            _ = repository.LogOut();
+            return RedirectToAction("Index", "Home");
+        }
+
+        
     }
 }

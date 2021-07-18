@@ -12,11 +12,11 @@ using System.Threading.Tasks;
 namespace Client.Controllers
 {
     [Authorize]
-    public class TaskController : BaseController<Account, TaskRepository, string>
+    public class GanttChartController : BaseController<Account, TaskRepository, string>
     {
         private readonly TaskRepository repository;
 
-        public TaskController(TaskRepository repository) : base(repository)
+        public GanttChartController(TaskRepository repository) : base(repository)
         {
             this.repository = repository;
         }
@@ -25,17 +25,5 @@ namespace Client.Controllers
         {
             return View();
         }
-
-        public IActionResult Baview()
-        {
-            return View();
-        }
-
-        public async Task<JsonResult> GetProjectView()
-        {
-            var result = await repository.Get("E0001");
-            return Json(result);
-        }
-
     }
 }
