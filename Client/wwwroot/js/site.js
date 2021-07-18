@@ -1,5 +1,7 @@
-﻿addmodul();
-﻿$(document).ready(function () {
+addmodul();
+
+$(document).ready(function () {
+
     //get decode from JWT
     $.ajax({
         url: 'https://localhost:44374/dashboard/getJwt',
