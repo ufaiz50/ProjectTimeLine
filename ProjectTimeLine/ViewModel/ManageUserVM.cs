@@ -6,13 +6,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Client.Models
+namespace ProjectTimeLine.ViewModel
 {
-    public class UserDataVM
+    public class ManageUserVM
     {
-        public UserDataVM()
+        public ManageUserVM()
         {
-            AllRoleName = new List<string>();
         }
 
         public string NIK { get; set; }
@@ -24,16 +23,21 @@ namespace Client.Models
 
         [JsonConverter(typeof(StringEnumConverter))]
         public Gender Gender { get; set; }
-        public string RoleName { get; set; }
+        public string Password { get; set; }
+        public ICollection<string> RoleName { get; set; }
 
-        public IList<string> AllRoleName { get; set; }
-
-        
+        public ManageUserVM(string nIK, string name, string email, string phoneNumber, DateTime birthDate, string address, Gender gender, string password)
+        {
+            NIK = nIK;
+            Name = name;
+            Email = email;
+            PhoneNumber = phoneNumber;
+            BirthDate = birthDate;
+            Address = address;
+            Gender = gender;
+            Password = password;
+        }
     }
 
-    public enum Gender
-    {
-        Pria,
-        Wanita
-    }
+
 }

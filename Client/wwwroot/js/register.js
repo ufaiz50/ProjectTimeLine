@@ -19,6 +19,6 @@ function getNik() {
         console.log(nik);
         document.getElementById("inputNik").value = nik;
     }).fail(error => {
-        alert("Data tidak berhasil di dapat");
+        //alert("Data tidak berhasil di dapat");
     })
 }

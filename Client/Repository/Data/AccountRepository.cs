@@ -9,17 +9,18 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Client.Repository.Data
 {
-    public class TaskRepository : GeneralRepository<Account, string>
+    public class AccountRepository : GeneralRepository<Employee, string>
     {
         private readonly Address address;
         private readonly string request;
         private readonly IHttpContextAccessor _contextAccessor;
         private readonly HttpClient httpClient;
-        public TaskRepository(Address address, string request = "Accounts/") : base(address, request)
+        public AccountRepository(Address address, string request = "Employees/") : base(address, request)
         {
             this.address = address;
             this.request = request;
@@ -28,24 +29,10 @@ namespace Client.Repository.Data
             {
                 BaseAddress = new Uri(address.link)
             };
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _contextAccessor.HttpContext.Session.GetString("JWT"));
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _contextAccessor.HttpContext.Session.GetString("JwT"));
         }
 
-        public async Task<List<Account>> GetUserDataView(string NIK)
-        {
-            List<Account> entities = new List<Account>();
-
-            using (var response = await httpClient.GetAsync(request + NIK))
-            {
-                string apiResponse = await response.Content.ReadAsStringAsync();
-
-                entities = JsonConvert.DeserializeObject<List<Account>>(apiResponse);
-            }
-            return entities;
-
-        }
-
-        public async Task<DataLoginVM> GetJwt()
+        public async Task<DataLoginVM> GetJWTNIK()
         {
             var content = new DataLoginVM();
             var token = _contextAccessor.HttpContext.Session.GetString("JWT");
@@ -61,6 +48,20 @@ namespace Client.Repository.Data
             }
 
             return content;
+        }
+
+        public async Task<string> UpdateEmployee(Employee employee)
+        {
+            var res = "";
+
+            StringContent content = new StringContent(JsonConvert.SerializeObject(employee), Encoding.UTF8, "application/json");
+            var result = await httpClient.PutAsync(request, content);
+            if (result.IsSuccessStatusCode)
+            {
+                var apiResponse = await result.Content.ReadAsStringAsync();
+                res = apiResponse;
+            }
+            return res;
         }
 
     }

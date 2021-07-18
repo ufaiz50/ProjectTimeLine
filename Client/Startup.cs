@@ -53,6 +53,8 @@ namespace Client
 
             services.AddScoped<AsignProjectRepository>();
             services.AddScoped<TaskRepository>();
+            services.AddScoped<GanttChartRepository>();
+            services.AddScoped<AccountRepository>();
             services.AddScoped<Address>();
             services.AddScoped<ModulRepository>();
         }
@@ -78,7 +80,7 @@ namespace Client
             //Add JWToken to all incoming HTTP Request Header
             app.Use(async (context, next) =>
             {
-                var JWToken = context.Session.GetString("JWToken");
+                var JWToken = context.Session.GetString("JWT");
                 if (!string.IsNullOrEmpty(JWToken))
                 {
                     context.Request.Headers.Add("Authorization", "Bearer " + JWToken);

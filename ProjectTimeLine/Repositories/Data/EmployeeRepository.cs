@@ -188,5 +188,46 @@ namespace ProjectTimeLine.Repositories.Data
             return update;
         }
 
+        public ICollection GetUserData()
+        {
+            var data = (from em in myContext.Employees
+                        join ac in myContext.Accounts on em.NIK equals ac.NIK
+                        join ar in myContext.AccountRoles on ac.NIK equals ar.NIK
+                        join rl in myContext.Roles on ar.RoleID equals rl.Id
+                        select new
+                        {
+                            em.NIK,
+                            em.Name,
+                            em.Email,
+                            em.Gender,
+                            em.BirthDate,
+                            em.Address,
+                            em.PhoneNumber,
+                            RoleName = rl.Name,
+                        }).ToList();
+            return data;
+        }
+        public ICollection GetUserData(string nik)
+        {
+            var data = (from em in myContext.Employees
+                        join ac in myContext.Accounts on em.NIK equals ac.NIK
+                        join ar in myContext.AccountRoles on ac.NIK equals ar.NIK
+                        join rl in myContext.Roles on ar.RoleID equals rl.Id
+                        where em.NIK == nik
+                        select new
+                        {
+                            em.NIK,
+                            em.Name,
+                            em.Email,
+                            em.Gender,
+                            em.BirthDate,
+                            em.Address,
+                            em.PhoneNumber,
+                            RoleName = rl.Name,
+                        }).ToList();
+            return data;
+        }
+
+
     }
 }

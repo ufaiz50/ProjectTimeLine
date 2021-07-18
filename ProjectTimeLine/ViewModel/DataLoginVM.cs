@@ -9,19 +9,23 @@ namespace ProjectTimeLine.ViewModel
     {
         public DataLoginVM()
         {
+            AllRole = new List<string>();
         }
 
-        public DataLoginVM(string name, string email, string role)
+        public DataLoginVM(string nIK,string name, string email, string role)
         {
+            NIK = nIK;
             Name = name;
             Email = email;
             Role = role;
         }
 
+        public string NIK { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
         public string Role { get; set; }
-
+        public IList<string> AllRole { get; set; }
+        
 
     }
 

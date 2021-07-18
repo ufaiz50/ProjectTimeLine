@@ -72,8 +72,8 @@ body {
 
 /*Faiz*/
 .kartu {
-    width: 200px;
-    height: 230px;
+    width: 180px;
+    height: 120px;
     display: inline-block;
     position: relative;
     border-radius: 10px;
@@ -81,13 +81,17 @@ body {
     box-sizing: border-box;
     cursor: pointer;
     margin: 10px 15px;
-    background-image: url('../img/blue.jpg');
     background-position: center;
+    background-color: whitesmoke;
     background-size: cover;
-    transition: transform 0.5s ease-in;
+    transition: transform 0.5s;
 }
 
-.kartu h5{
+.kartu-project {
+    background-image: url('../img/blue.jpg');
+}
+
+.kartu h5 {
     color: #fff;
     text-shadow: 0 0 5px #999;
 }

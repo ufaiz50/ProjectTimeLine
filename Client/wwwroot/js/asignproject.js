@@ -10,7 +10,7 @@ $(document).ready(function () {
         $.each(result, function (index, val) {
             start = new Date(val["startDate"]).toLocaleDateString();
             end = new Date(val["endDate"]).toLocaleDateString();
-            projectList += `<div class="kartu" onclick="goProject(${val['projectId']})">
+            projectList += `<div class="kartu kartu-project" onclick="goProject(${val['projectId']})">
                                     <h5>${val["name"]}</h5>
                                     <p>Start : ${start}</p>
                                     <p>End : ${end}</p>
@@ -24,9 +24,9 @@ $(document).ready(function () {
                             </div>
                         </div>`;
         $('#listProject').html(projectList);
-        console.log(projectList);
+        
     }).fail(error => {
-        alert("Data tidak berhasil di dapat");
+       
     })
 
 
