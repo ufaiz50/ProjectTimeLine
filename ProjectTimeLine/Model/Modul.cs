@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace ProjectTimeLine.Model
@@ -11,9 +12,9 @@ namespace ProjectTimeLine.Model
         public string ModulName { get; set; }
         public DateTime Date { get; set; }
         public int ProjectId { get; set; }
-        
+        [JsonIgnore]
         public virtual Project Project { get; set; }
-        
+        [JsonIgnore]
         public virtual ICollection<TaskModul> TaskModuls { get; set; }
 
     }

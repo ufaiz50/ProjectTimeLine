@@ -42,6 +42,7 @@ namespace ProjectTimeLine
             services.AddScoped<EmployeeRepository>();
             services.AddScoped<AccountRepository>();
             services.AddScoped<AccountRoleRepository>();
+            services.AddScoped<AccountTaskRepository>();
             services.AddScoped<ModulRepository>();
             services.AddScoped<ProjectRepository>();
             services.AddScoped<RoleRepository>();

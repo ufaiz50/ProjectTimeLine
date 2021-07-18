@@ -44,7 +44,7 @@ namespace ProjectTimeLine.BaseController
             }
             else
             {
-                return BadRequest(new { status = HttpStatusCode.BadRequest, result = get, message = "Data tidak ditemukan" });
+                return BadRequest(get);
             }
         }
 

@@ -69,5 +69,6 @@ namespace Client.Controllers
             var result = await repository.DeleteEmployee(NIK);
             return result;
         }
+
     }
 }
