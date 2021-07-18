@@ -10,6 +10,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Client.Repository.Data
@@ -76,6 +77,21 @@ namespace Client.Repository.Data
             }
 
             return content;
+        }
+
+
+        // Update Status
+        public async Task<string> UpdateStatus(TaskModul taskModul)
+        {
+            var res = "";
+            StringContent content = new StringContent(JsonConvert.SerializeObject(taskModul), Encoding.UTF8, "application/json");
+            var result = await httpClient.PutAsync("TaskModul/UpdateStatus", content);
+            if (result.IsSuccessStatusCode)
+            {
+                var apiResponse = await result.Content.ReadAsStringAsync();
+                res = apiResponse;
+            }
+            return res;
         }
 
     }

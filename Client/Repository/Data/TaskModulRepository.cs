@@ -92,5 +92,6 @@ namespace Client.Repository.Data
             }
             return entities;
         }
+
     }
 }

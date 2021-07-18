@@ -52,6 +52,12 @@ namespace Client.Controllers
             var result = await repository.GetJwt ();
             return Json(result);
         }
+
+        public async Task<string> UpdateStatus(TaskModul taskModul)
+        {
+            var result = await repository.UpdateStatus(taskModul);
+            return result;
+        }
     }
 
     class MyComparer : IEqualityComparer<TaskProjectVM>

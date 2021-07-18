@@ -69,7 +69,7 @@
         <div class="board-controls">
 
             <button class="board-title btn">
-                <h2>Web Development</h2>
+                <h2>@Model[0].Name</h2>
             </button>
 
             <button class="star-btn btn" aria-label="Star Board">
@@ -90,63 +90,102 @@
     <section class="lists-container">
 
         <div class="list">
-            <h3 class=" list-title">Tasks to Do</h3>
-            <ul class="list-items container">
+            <h3 class=" list-title">Tasks to-Do</h3>
+            <ul class="list-items container py-5">
                 @foreach (var task in Model)
                 {
-                    <li class="draggable" draggable="true">@task.TaskName</li>
+                    @if (task.Status == Status.ToDo)
+                    {
+                        <li class="draggable list-unstyled" draggable="true">@task.TaskName</li>
+                    }
                 }
             </ul>
-            <button class="add-card-btn btn">Add a card</button>
+            
         </div>
 
         <div class="list">
-            <h3 class="list-title">Completed Tasks</h3>
-            <ul class="list-items container">
-                
-                <li class="draggable" draggable="true">Clear email inbox</li>
-                <li class="draggable" draggable="true">Finalise requirements for client web design</li>
-                <li class="draggable" draggable="true">Begin work on mock-up for client website</li>
+            <h3 class="list-title">Tasks Design</h3>
+            <ul class="list-items container py-5">
+
+                @foreach (var task in Model)
+                {
+                    @if (task.Status == Status.Design)
+                    {
+                        <li class="draggable list-unstyled" draggable="true">@task.TaskName</li>
+                    }
+                }
             </ul>
-            <button class="add-card-btn btn">Add a card</button>
         </div>
 
 
         <div class="list">
 
-            <h3 class="list-title">Topics/Concepts to Learn</h3>
+            <h3 class="list-title">Task Doing</h3>
 
-            <ul class="list-items container">
-                <li class="draggable" draggable="true">HTML 5.2 New Features</li>
-                <li class="draggable" draggable="true">Responsive Images (picture element, srcset/sizes etc.)</li>
-                <li class="draggable" draggable="true">Serverless</li>
-                <li class="draggable" draggable="true">Variable Fonts</li>
-
+            <ul class="list-items container py-5">
+                @foreach (var task in Model)
+                {
+                    @if (task.Status == Status.Doing)
+                    {
+                        <li class="draggable list-unstyled" draggable="true">@task.TaskName</li>
+                    }
+                }
             </ul>
 
-            <button class="add-card-btn btn">Add a card</button>
+            
 
         </div>
 
         <div class="list">
 
-            <h3 class="list-title">Useful Websites for Learning</h3>
+            <h3 class="list-title">Code Review</h3>
 
-            <ul class="list-items container">
-                <li class="draggable" draggable="true">Code Academy</li>
-                <li class="draggable" draggable="true">CodePen</li>
-                <li class="draggable" draggable="true">Codrops</li>
-                <li class="draggable" draggable="true">CSS-Tricks</li>
-                <li class="draggable" draggable="true">Free Code Camp</li>
-
+            <ul class="list-items container py-5">
+                @foreach (var task in Model)
+                {
+                    @if (task.Status == Status.CodeReview)
+                    {
+                        <li class="draggable list-unstyled" draggable="true">@task.TaskName</li>
+                    }
+                }
             </ul>
 
-            <button class="add-card-btn btn">Add a card</button>
+            
 
         </div>
 
+        <div class="list">
 
-        <button class="add-list-btn btn">Add a list</button>
+            <h3 class="list-title">Testing</h3>
+
+            <ul class="list-items container py-5">
+                @foreach (var task in Model)
+                {
+                    @if (task.Status == Status.Testing)
+                    {
+                        <li class="draggable list-unstyled" draggable="true">@task.TaskName</li>
+                    }
+                }
+            </ul>
+
+            @*<button class="add-card-btn btn">Add a card</button>*@
+
+        </div>
+        <div class="list">
+            <h3 class="list-title">Done Task</h3>
+            <ul class="list-items container py-5">
+                @foreach (var task in Model)
+                {
+                    @if (task.Status == Status.Done)
+                    {
+                        <li class="draggable list-unstyled" draggable="true">@task.TaskName</li>
+                    }
+                }
+            </ul>
+        </div>
+
+
+        @*<button class="add-list-btn btn">Add a list</button>*@
 
     </section>
     <!-- End of lists container -->

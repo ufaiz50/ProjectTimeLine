@@ -45,7 +45,10 @@ namespace ProjectTimeLine.Repositories.Data
                        select new
                        {
                            at.NIK,
+                           tm.TaskId,
                            tm.TaskName,
+                           tm.Status,
+                           p.Name
                        };
             return data;
         }
