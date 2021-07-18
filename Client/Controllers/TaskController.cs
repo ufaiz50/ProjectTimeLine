@@ -1,4 +1,5 @@
 ﻿using Client.BaseController;
+using Client.Models;
 using Client.Repository.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -26,14 +27,23 @@ namespace Client.Controllers
             return View();
         }
 
-        public IActionResult Baview()
+        public async Task<IActionResult> Taskview(string NIK, int ModulId)
         {
-            return View();
+            List<TaskModulVM> result = await repository.GetModulTask(NIK, ModulId);
+            return View(result);
         }
 
-        public async Task<JsonResult> GetProjectView()
+        public async Task<JsonResult> GetProjectView(string NIK)
         {
-            var result = await repository.Get("E0001");
+            var result = await repository.GetProjectTask(NIK);
+            var uniq = result.Distinct(new MyComparer());
+           
+            return Json(uniq);
+        }
+
+        public async Task<JsonResult> GetModulView(string NIK, int ModulId)
+        {
+            var result = await repository.GetModulTask(NIK, ModulId);
             return Json(result);
         }
 
@@ -41,6 +51,19 @@ namespace Client.Controllers
         {
             var result = await repository.GetJwt ();
             return Json(result);
+        }
+    }
+
+    class MyComparer : IEqualityComparer<TaskProjectVM>
+    {
+        public bool Equals(TaskProjectVM x, TaskProjectVM y)
+        {
+            return x.ModulName.Equals(y.ModulName);
+        }
+
+        public int GetHashCode(TaskProjectVM obj)
+        {
+            return obj.Name.GetHashCode();
         }
     }
 }

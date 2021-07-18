@@ -1,4 +1,5 @@
 ﻿using Client.BaseController;
+using Client.Models;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using ProjectTimeLine.Model;
@@ -19,7 +20,7 @@ namespace Client.Repository.Data
         private readonly string request;
         private readonly IHttpContextAccessor _contextAccessor;
         private readonly HttpClient httpClient;
-        public TaskRepository(Address address, string request = "Accounts/") : base(address, request)
+        public TaskRepository(Address address, string request = "AccountTasks/") : base(address, request)
         {
             this.address = address;
             this.request = request;
@@ -31,15 +32,29 @@ namespace Client.Repository.Data
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _contextAccessor.HttpContext.Session.GetString("JWT"));
         }
 
-        public async Task<List<Account>> GetUserDataView(string NIK)
+        public async Task<List<TaskProjectVM>> GetProjectTask(string NIK)
         {
-            List<Account> entities = new List<Account>();
+            List<TaskProjectVM> entities = new List<TaskProjectVM>();
 
-            using (var response = await httpClient.GetAsync(request + NIK))
+            using (var response = await httpClient.GetAsync(request + "ProjectTask/" + NIK))
             {
                 string apiResponse = await response.Content.ReadAsStringAsync();
 
-                entities = JsonConvert.DeserializeObject<List<Account>>(apiResponse);
+                entities = JsonConvert.DeserializeObject<List<TaskProjectVM>>(apiResponse);
+            }
+            return entities;
+
+        }
+
+        public async Task<List<TaskModulVM>> GetModulTask(string NIK, int ModulId)
+        {
+            List<TaskModulVM> entities = new List<TaskModulVM>();
+
+            using (var response = await httpClient.GetAsync(request + "ModulTask/" + NIK + "/" + ModulId))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+
+                entities = JsonConvert.DeserializeObject<List<TaskModulVM>>(apiResponse);
             }
             return entities;
 
