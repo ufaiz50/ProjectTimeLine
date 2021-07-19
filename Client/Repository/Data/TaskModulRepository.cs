@@ -81,11 +81,34 @@ namespace Client.Repository.Data
             return res;
         }
 
+        public async Task<string> DeleteMember(int id)
+        {
+            var res = "";
+            var result = await httpClient.DeleteAsync("AccountTasks?key=" + id);
+            if (result.IsSuccessStatusCode)
+            {
+                string apiResponse = await result.Content.ReadAsStringAsync();
+                res = apiResponse;
+            }
+            return res;
+        }
+
         public async Task<List<TaskMemberVM>> GetTaskAccView()
         {
             List<TaskMemberVM> entities = new List<TaskMemberVM>();
 
             using (var response = await httpClient.GetAsync(request + "viewtask"))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+                entities = JsonConvert.DeserializeObject<List<TaskMemberVM>>(apiResponse);
+            }
+            return entities;
+        }
+        public async Task<List<TaskMemberVM>> GetTaskById(int id)
+        {
+            List<TaskMemberVM> entities = new List<TaskMemberVM>();
+
+            using (var response = await httpClient.GetAsync(request + "ViewTaskId/" + id))
             {
                 string apiResponse = await response.Content.ReadAsStringAsync();
                 entities = JsonConvert.DeserializeObject<List<TaskMemberVM>>(apiResponse);

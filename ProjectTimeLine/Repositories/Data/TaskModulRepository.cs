@@ -58,6 +58,7 @@ namespace ProjectTimeLine.Repositories.Data
                             tm.PriorityTask,
                             tm.ModulId,
                             md.ModulName,
+                            ac.NIK,
                             em.Name,
                         }).ToList();
             return data;

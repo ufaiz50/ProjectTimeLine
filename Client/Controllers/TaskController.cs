@@ -42,5 +42,11 @@ namespace Client.Controllers
             var result = await repository.GetJwt ();
             return Json(result);
         }
+
+        public async Task<string> DeleteTaskMember(int id)
+        {
+            var message = await repository.DeleteTaskMember(id);
+            return message;
+        }
     }
 }

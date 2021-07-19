@@ -43,8 +43,8 @@ namespace ProjectTimeLine.Controllers
             }
         }
 
-        [HttpGet("ViewTask/{key}")]
-        public ActionResult ViewTaskNIK(int key)
+        [HttpGet("ViewTaskId/{key}")]
+        public ActionResult ViewTaskId(int key)
         {
             try
             {

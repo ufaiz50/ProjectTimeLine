@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -61,6 +62,18 @@ namespace Client.Repository.Data
             }
 
             return content;
+        }
+
+        public async Task<string> DeleteTaskMember(int id)
+        {
+            var res = "";
+            var result = await httpClient.DeleteAsync("AccountTasks/DeleteTaskMember/" + id);
+            if (result.IsSuccessStatusCode)
+            {
+                string apiResponse = await result.Content.ReadAsStringAsync();
+                res = apiResponse;
+            }
+            return res;
         }
 
     }

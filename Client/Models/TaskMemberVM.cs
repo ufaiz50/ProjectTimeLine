@@ -12,6 +12,7 @@ namespace Client.Models
         public TaskMemberVM()
         {
             Member = new List<string>();
+            NIKMember = new List<string>();
         }
 
         public int TaskId { get; set; }
@@ -28,7 +29,9 @@ namespace Client.Models
         public int ModulId { get; set; }
         public string ModulName{ get; set; }
         public string Name{ get; set; }
+        public string NIK{ get; set; }
         public IList<string> Member { get; set; }
+        public IList<string> NIKMember { get; set; }
     }
 
     public enum Status
