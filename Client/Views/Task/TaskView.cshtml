@@ -1,0 +1,140 @@
+﻿@using Client.Models
+
+@model List<Client.Models.TaskModulVM>
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "";
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Fontfaces CSS-->
+    <link href="~/cooladmin/css/font-face.css" rel="stylesheet" media="all">
+    <link href="~/cooladmin/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="~/cooladmin/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="~/cooladmin/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/sorttest.css">
+</head>
+
+<body>
+    <!-- Masthead -->
+    <header class="masthead">
+        <div></div>
+        <div class="logo">
+            <h1><i class="fab fa-trello logo-icon" aria-hidden="true"></i>MII</h1>
+        </div>
+        <div></div>
+
+    </header>
+    <!-- End of masthead -->
+    <!-- Board info bar -->
+    <section class="board-info-bar">
+        <div class="board-controls">
+                <h2>@Model[0].Name</h2>
+                <i class="far fa-star" aria-hidden="true"></i>
+        </div>
+    </section>
+    <!-- End of board info bar -->
+    <!-- Lists container -->
+    <section class="lists-container">
+        <div class="list">
+            <h3 class="list-title">Tasks To-Do</h3>
+            <ul id="Todo" class="list-items sortable_list connectedSortable">
+                @foreach (var task in Model)
+                {
+                    @if (task.Status == Status.ToDo)
+                    {
+                        <li id="@task.TaskId">@task.TaskName</li>
+                    }
+                }
+            </ul>
+        </div>
+
+        <div class="list">
+            <h3 class="list-title">Tasks Design</h3>
+            <ul id="Design" class="list-items sortable_list connectedSortable">
+                @foreach (var task in Model)
+                {
+                    @if (task.Status == Status.Design)
+                    {
+                        <li id="@task.TaskId">@task.TaskName</li>
+                    }
+                }
+            </ul>
+        </div>
+
+        <div class="list">
+            <h3 class="list-title">Doing Tasks</h3>
+            <ul id="Doing" class="list-items sortable_list connectedSortable">
+                @foreach (var task in Model)
+                {
+                    @if (task.Status == Status.Doing)
+                    {
+                        <li id="@task.TaskId">@task.TaskName</li>
+                    }
+                }
+            </ul>
+        </div>
+
+        <div class="list">
+            <h3 class="list-title">Code Review Task</h3>
+            <ul id="CodeReview" class="list-items sortable_list connectedSortable">
+                @foreach (var task in Model)
+                {
+                    @if (task.Status == Status.CodeReview)
+                    {
+                        <li id="@task.TaskId">@task.TaskName</li>
+                    }
+                }
+            </ul>
+        </div>
+
+        <div class="list">
+            <h3 class="list-title">Testing</h3>
+            <ul id="Testing" class="list-items sortable_list connectedSortable">
+                @foreach (var task in Model)
+                {
+                    @if (task.Status == Status.Testing)
+                    {
+                        <li id="@task.TaskId">@task.TaskName</li>
+                    }
+                }
+            </ul>
+        </div>
+
+        <div class="list">
+            <h3 class="list-title">Done</h3>
+            <ul id="Done" class="list-items sortable_list connectedSortable">
+                @foreach (var task in Model)
+                {
+                    @if (task.Status == Status.Done)
+                    {
+                        <li id="@task.TaskId">@task.TaskName</li>
+                    }
+                }
+            </ul>
+        </div>
+
+    </section>
+    <!-- End of lists container -->
+
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+    <script src="~/js/sorttest.js"></script>
+</body>
+
+</html>
+
+
+
+
+

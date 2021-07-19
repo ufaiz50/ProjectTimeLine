@@ -63,5 +63,16 @@ namespace ProjectTimeLine.Repositories.Data
                         }).ToList();
             return data;
         }
+
+        // Update Status
+        public int UpdateStatus(TaskModul taskModul)
+        {
+            var result = myContext.TaskModuls.Find(taskModul.TaskId);
+            if (result == null) return 0;
+
+            result.Status = taskModul.Status;
+            var done = myContext.SaveChanges();
+            return done;
+        }
     }
 }

@@ -30,5 +30,44 @@ namespace ProjectTimeLine.Repositories.Data
                 return 0;
             }
         }
+
+        public IQueryable GetProjectTask(string NIK)
+        {
+
+            var data = from at in myContext.AccountTasks
+                       join tm in myContext.TaskModuls on at.TaskModulId equals tm.TaskId
+                       join m in myContext.Moduls on tm.ModulId equals m.ModulId
+                       join p in myContext.Projects on m.ProjectId equals p.ProjectId
+                       where at.NIK == NIK
+                       select new {
+                           at.NIK,
+                           p.Name,
+                           m.ModulId,
+                           m.ModulName,
+                           p.StartDate,
+                           p.EndDate
+                       };
+            return data;
+        }
+
+        public IQueryable GetModulTask(string NIK, int modulId)
+        {
+
+            var data = from at in myContext.AccountTasks
+                       join tm in myContext.TaskModuls on at.TaskModulId equals tm.TaskId
+                       join m in myContext.Moduls on tm.ModulId equals m.ModulId
+                       join p in myContext.Projects on m.ProjectId equals p.ProjectId
+                       where at.NIK == NIK && m.ModulId == modulId
+                       select new
+                       {
+                           at.NIK,
+                           tm.TaskId,
+                           tm.TaskName,
+                           tm.Status,
+                           p.Name
+                       };
+            return data;
+        }
+
     }
 }

@@ -12,6 +12,7 @@ $(document).ready(function () {
             end = new Date(val["endDate"]).toLocaleDateString();
             projectList += `<div class="kartu kartu-project" onclick="goProject(${val['projectId']})">
                                     <h5>${val["name"]}</h5>
+                                    <br/>
                                     <p>Start : ${start}</p>
                                     <p>End : ${end}</p>
                               </div>`;
