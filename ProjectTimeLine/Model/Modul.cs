@@ -10,6 +10,7 @@ namespace ProjectTimeLine.Model
     {
         public int ModulId { get; set; }
         public string ModulName { get; set; }
+        public DateTime StartDate { get; set; }
         public DateTime Date { get; set; }
         public int ProjectId { get; set; }
         [JsonIgnore]
