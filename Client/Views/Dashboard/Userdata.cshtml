@@ -16,14 +16,13 @@
                 @*<div class="filters m-b-45">
                         <button type="button" class="btn btn-secondary mb-1" data-toggle="modal" data-target="#insertModal">Insert</button>
                     </div>*@
-                <div class="table-responsive table-data">
+                <div class="table-wrap table-responsive table-data">
                     <table class="table" id="userdata">
                         <thead>
                             <tr>
                                 <td>NIK</td>
                                 <td>Name</td>
                                 <td>Phone Number</td>
-                                <td>Address</td>
                                 <td>Role</td>
                                 <td>Action</td>
                             </tr>
@@ -125,7 +124,7 @@
 <!-- end modal insert -->
 <!-- Modal Add Role -->
 <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="largeModalLabel">Update</h5>
@@ -134,8 +133,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="formUpdate" action="@Url.Action("UpdateUserData", "Dashboard")" method="post">
-                    <input class="form-control hide" name="NIK" id="updateNIK" hidden>
+                <form id="formUpdate">
+                    <input class="form-control hide" id="updateNIK" hidden>
                     <input class="form-control hide" id="showNik" disabled>
                     @* <div class="row form-group mt-5">
                             <div class="col col-md-3">
@@ -166,13 +165,13 @@
                             <label for="select" class=" form-control-label">Select</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <select name="RoleId" id="add" class="form-control">
+                            <select id="add" class="form-control">
                             </select>
                         </div>
                     </div>
                     <div class="modal-footer align-content-center">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Confirm</button>
+                        <button type="button" onclick="AddRoles()" class="btn btn-primary" data-dismiss="modal">Confirm</button>
                     </div>
                 </form>
             </div>
@@ -182,7 +181,7 @@
 </div>
 <!-- end modal update -->
 
-<!-- modal small -->
+<!-- modal delete role -->
 <div class="modal fade" id="smallmodal" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
@@ -193,21 +192,21 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="formUpdate" action="@Url.Action("DeleteUserData", "Dashboard")" method="post">
-                    <input class="form-control hide" name="NIK" id="deleteNIK" hidden>
+                <form id="formUpdate">
+                    <input class="form-control hide" id="deleteNIK" hidden>
                     <input class="form-control hide" id="showNik2" disabled>
                     <div class="row form-group mt-5">
                         <div class="col col-md-3">
                             <label for="select" class=" form-control-label">Select</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <select name="RoleId" id="delete" class="form-control">
+                            <select  id="delete" class="form-control">
                             </select>
                         </div>
                     </div>
                     <div class="modal-footer align-content-center">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Confirm</button>
+                        <button onclick="DeleteRoles()" type="button" class="btn btn-primary" data-dismiss="modal">Confirm</button>
                     </div>
                 </form>
             </div>
