@@ -18,7 +18,7 @@ namespace ProjectTimeLine.Repositories.Data
         public int Userdata(string NIK, int id)
         {
             var ar = myContext.AccountRoles.FirstOrDefault(x => x.NIK == NIK && x.RoleID == id);
-            if (ar == null) return 1;
+            if (ar == null) return 0;
             myContext.AccountRoles.Remove(ar);
             var delete = myContext.SaveChanges();
             return delete;

@@ -10,20 +10,20 @@ $(document).ready(function () {
         $.each(result, function (index, val) {
             start = new Date(val["startDate"]).toLocaleDateString();
             end = new Date(val["endDate"]).toLocaleDateString();
-            projectList += `<div class="kartu kartu-project" onclick="goProject(${val['projectId']})">
-                                    <h5>${val["name"]}</h5>
+            projectList += `<div class="col-3 kartu kartu-project" onclick="goProject(${val['projectId']})">
+                                    <h5 class="text-center">${val["name"]}</h5>
                                     <br/>
-                                    <p>Start : ${start}</p>
-                                    <p>End : ${end}</p>
+                                    <p  class="text-center">Start : ${start}</p>
+                                    <p  class="text-center">End : ${end}</p>
                               </div>`;
         })
-        projectList += `<div>
-                            <div class="kartu">
-                                <button type="button" class="btn btn-secondary mb-1" data-toggle="modal" data-target="#mediumModal">
-                                    <i class="fas fa-plus"></i>
-                                </button>
-                            </div>
-                        </div>`;
+        projectList += `
+                        <div class="col-3 kartu">
+                            <button type="button" class="btn btn-secondary mb-1" data-toggle="modal" data-target="#mediumModal">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        `;
         $('#listProject').html(projectList);
         
     }).fail(error => {

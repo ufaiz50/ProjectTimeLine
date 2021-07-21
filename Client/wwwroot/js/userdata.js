@@ -1,6 +1,8 @@
 ﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 // for details on configuring this project to bundle and minify static web assets.
 
+//const { post } = require("jquery");
+
 /*<form method="delete" action="/Dashboard/DeleteEmployee">
                                 <input type="hidden" value="${full["nik"]}" name="NIK"/>
                                 <button class='btn btn-danger' type="submit"><i class="fas fa-trash"></i></button>
@@ -12,6 +14,9 @@ $(document).ready(function () {
 
     // Data table to show user/employe
     $('#userdata').DataTable({
+        "bFilter": false,
+        "bPaginate": false,
+        "bInfo": false,
         dom: 'Bfrtip',
         "ajax": {
             url: "https://localhost:44374/Dashboard/Userdataview",
@@ -21,20 +26,17 @@ $(document).ready(function () {
         "columns": [
             { "data": "nik" },
             {
+                className: "d-flex",
                 "data": "name",
                 "render": function (data, type, full) {
-                    return `<div class="table-data__info">
-                                <h6>${data}</h6>
-                                <span>
-                                    <a href="#">${full["email"]}</a>
-                                </span>
-                            </div>`
+                    return `<div class="gambar" style="background-image: url('../img/usercartoon.png');"></div>
+                            <div class="pl-3 email">
+						      	<span>${data}</span>
+						      	<span>${full["email"]}</span>
+						    </div>`
                 }
             },
             { "data": "phoneNumber" },
-            
-            { "data": "address" },
-            
             {
                 "data": null,
                 "render": function (data, type, full) {
@@ -51,7 +53,7 @@ $(document).ready(function () {
                 "data": null,
                 "render": function (data, type, full) {
                     return `<button id="${full["nik"]}" type='button' class='btn btn-primary' data-toggle="modal" data-target="#updateModal" onClick="addRole(this.id)"><i class="fas fa-edit"></i></button>
-                        <button id="${full["nik"]}" type="button" class="btn btn-secondary mb-1" data-toggle="modal" data-target="#smallmodal" onClick="deleteRole(this.id)"><i class="fas fa-trash"></i></button>
+                        <button id="${full["nik"]}" type="button" class="btn btn-danger" data-toggle="modal" data-target="#smallmodal" onClick="deleteRole(this.id)"><i class="fas fa-trash"></i></button>
                             `;
                 },
                 orderable: false
@@ -86,15 +88,16 @@ $(document).ready(function () {
         result = result.toString();
         nik = nik.replace(nik.slice(-1), result)
         document.getElementById('inputNik').value = nik;
-        console.log(nik);
+        
     }).fail(error => {
         alert("Data tidak berhasil di dapat");
     })
 
+    $('#userdata').DataTable().ajax.reload();
 })
 
 
-// Add role
+// Add List Role In Modal
 function addRole(id) {
     opsi = `<option>Please select</option>
             <option id="Admin" value="1">Admin</option>
@@ -124,13 +127,39 @@ function addRole(id) {
             if (result.allRoleName[i] == "Manager") $("#Manager").prop("checked", true);
             if (result.allRoleName[i] == "BA") $("#BA").prop("checked", true);
         }*/
-        
-        console.log(result);
+
     }).fail(error => {
-        console.log(error);
+        
     })
 }
 
+// Add Role
+function AddRoles() {
+    
+    NIK = $('#updateNIK').val();
+    RoleID =  $('#add').val()
+    $.ajax({
+        url: "https://localhost:44374/Dashboard/UpdateUserData",
+        method: 'POST',
+        dataType: "JSON",
+        data: {"NIK" : NIK, "RoleID" : RoleID}
+    }).done(result => {
+        console.log(result);
+        Swal.fire(
+            'Good job!',
+            'Role Has Been Added',
+            'success'
+        )
+    }).fail(error => {
+        Swal.fire(
+            'Error!',
+            'Role Failed to add',
+            'error'
+        )
+    })
+}
+
+// Delete List Role in Modal
 function deleteRole(id) {
     opsi = `<option>Please select</option>`;
     
@@ -158,23 +187,28 @@ function deleteRole(id) {
 
 }
 
-function gettest() {
-    var arr = [];
-    $.each($("input[name='checkbox']:checked"), function () {
-        arr.push({ NIK: document.getElementById('updateNIK').value, RoleID : $(this).val() });
+function DeleteRoles() {
+    NIK = $('#deleteNIK').val()
+    RoleID = $('#delete').val()
+    $.ajax({
+        url: "https://localhost:44374/Dashboard/DeleteUserData",
+        method: 'POST',
+        dataType: "JSON",
+        data: { "NIK": NIK, "RoleID": RoleID }
+    }).done(result => {
+        Swal.fire(
+            'Good job!',
+            'Role Has Been Deleted',
+            'success'
+        )
+        table.ajax.reload(null, false);
+    }).fail(error => {
+        Swal.fire(
+            'Error!',
+            'Role Failed to Deleted',
+            'error'
+        )
     })
-    console.log(arr);
-    for (var i = 0; i < arr.length; i++) {
-
-        $.ajax({
-            url: 'https://localhost:44374/dashboard/UpdateUserData',
-            type: 'post',
-            data: arr[1]
-        }).done(result => {
-            
-        }).fail(error => {
-            alert("Data tidak berhasil disimpan")
-        });
-    }
-
 }
+
+

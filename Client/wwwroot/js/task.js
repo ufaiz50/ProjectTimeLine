@@ -19,11 +19,11 @@ $(document).ready(function () {
             $.each(result, function (index, val) {
                 start = new Date(val["startDate"]).toLocaleDateString();
                 end = new Date(val["endDate"]).toLocaleDateString();
-                projectList += `<div class="kartu kartu-project" onclick="goProject(${val['modulId']})">
-                                        <h5>${val["name"]}</h5>
-                                        <p>${val['modulName']}</p>
-                                        <p>Start : ${start}</p>
-                                        <p>End : ${end}</p>
+                projectList += `<div class="col-3 kartu kartu-project" onclick="goProject(${val['modulId']})">
+                                        <h5 class="text-center">${val["name"]}</h5>
+                                        <p class="text-center">[${val['modulName']}]</p>
+                                        <p class="text-center">Start : ${start}</p>
+                                        <p class="text-center">End : ${end}</p>
                                   </div>`;
             })
             $('#listProject').html(projectList);

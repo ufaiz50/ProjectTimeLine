@@ -29,8 +29,8 @@ function UpdateStatus(id, status) {
             Status: status
         }
     }).done(result => {
-        alert("sukses");
+
     }).fail(error => {
-        alert("Gagal");
+
     })
 }

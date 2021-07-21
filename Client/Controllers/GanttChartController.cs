@@ -1,4 +1,5 @@
 ﻿using Client.BaseController;
+using Client.Models;
 using Client.Repository.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,18 +13,26 @@ using System.Threading.Tasks;
 namespace Client.Controllers
 {
     [Authorize]
-    public class GanttChartController : BaseController<Account, TaskRepository, string>
+    public class GanttChartController : BaseController<Project, GanttChartRepository, int>
     {
-        private readonly TaskRepository repository;
+        private readonly GanttChartRepository repository;
 
-        public GanttChartController(TaskRepository repository) : base(repository)
+        public GanttChartController(GanttChartRepository repository) : base(repository)
         {
             this.repository = repository;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var getProject = await repository.Get();
+            return View(getProject);
         }
+
+        public async Task<List<GanttChartVM>> GanttChartView(int ProjectId)
+        {
+            var result = await repository.GanttChartView(ProjectId);
+            return result;
+        }
+
     }
 }
