@@ -39,6 +39,16 @@ namespace Client.Controllers
             return View();
         }
 
+        public IActionResult Admin()
+        {
+            return View();
+        }
+
+        public IActionResult Manager()
+        {
+            return View();
+        }
+
         public async Task<JsonResult> GetRegistrasiView()
         {
             var result = await repository.GetRegistrasiView();
@@ -50,6 +60,7 @@ namespace Client.Controllers
             var result = await repository.GetEmployeeView();
             return Json(result);
         }
+
         public async Task<JsonResult> GetUserDataView()
         {
 
@@ -115,10 +126,10 @@ namespace Client.Controllers
             return final[0];
         }
 
-        public async Task<string> UpdateUserData(AccountRole userVM)
+        public async Task<IActionResult> UpdateUserData(AccountRole userVM)
         {
             var result = await repository.UpdateUserData(userVM);
-            return result;
+            return RedirectToAction("Userdata", "Dashboard");
         }
         
         public async Task<string> DeleteUserData(AccountRole userVM)

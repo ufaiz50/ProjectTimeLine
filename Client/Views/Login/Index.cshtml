@@ -13,15 +13,22 @@
                     </a>
                 </div>
                 <div class="login-form">
-                    <form action="login/auth" method="post" class="needs-validation" novalidate>
+                    <form action="login/auth" method="post" class="needs-validation login" novalidate>
                         <div class="form-group">
                             <label>Email Address</label>
-                            <input class="au-input au-input--full" type="email" name="Email" placeholder="Email" required>
+                            <input class="form-control" type="email" name="Email" placeholder="Email" required>
+                            <div class="invalid-feedback">
+                                Please input your email.
+                            </div>
                         </div>
                         <div class="form-group">
                             <label>Password</label>
-                            <input class="au-input au-input--full" type="password" name="Password" placeholder="Password" required>
+                            <input class="form-control" type="password" name="Password" placeholder="Password" required>
+                            <div class="invalid-feedback">
+                                Please input your password.
+                            </div>
                         </div>
+                        
                         <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">sign in</button>
 
                     </form>

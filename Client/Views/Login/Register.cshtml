@@ -15,27 +15,21 @@
                 <div class="login-form">
                     <form action="/login/EmployeesView" method="post" class="needs-validation" novalidate>
                         <div class="form-group">
-                            <input class="au-input au-input--full" type="text" name="NIK" id="inputNik" required hidden>
+                            <input class="form-control" type="text" name="NIK" id="inputNik" required hidden>
                         </div>
                         <div class="form-group">
                             <label>Full Name</label>
-                            <input class="au-input au-input--full" type="text" name="Name" placeholder="FullName" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Phone Number</label>
-                            <input class="au-input au-input--full" type="number" name="PhoneNumber" placeholder="Phone Number" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Email</label>
-                            <input class="au-input au-input--full" type="email" name="Email" placeholder="Email" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Address</label>
-                            <input class="au-input au-input--full" type="text" name="Address" placeholder="Address" required>
+                            <input class="form-control" type="text" name="Name" placeholder="FullName" required>
+                            <div class="invalid-feedback">
+                                Please input name here.
+                            </div>
                         </div>
                         <div class="form-group">
                             <label>Birth Date</label>
-                            <input class="au-input au-input--full" type="date" name="BirthDate" placeholder="Birth Date" required>
+                            <input class="form-control" type="date" name="BirthDate" placeholder="Birth Date" required>
+                            <div class="invalid-feedback">
+                                Please input your Birthdate.
+                            </div>
                         </div>
                         <div class="">
                             <label for="gender">Gender</label>
@@ -50,8 +44,32 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label>Phone Number</label>
+                            <input class="form-control" type="number" name="PhoneNumber" placeholder="Phone Number" required>
+                            <div class="invalid-feedback">
+                                Please provide a valid phone number.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Address</label>
+                            <input class="form-control" type="text" name="Address" placeholder="Address" required>
+                            <div class="invalid-feedback">
+                                Please provide a valid Address.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input class="form-control" type="email" name="Email" placeholder="Email" required>
+                            <div class="invalid-feedback">
+                                Please provide a valid phone Email.
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label>Password</label>
-                            <input class="au-input au-input--full" type="password" name="Password" placeholder="Password" required>
+                            <input class="form-control" type="password" name="Password" placeholder="Password" required>
+                            <div class="invalid-feedback">
+                                Please input your password (min 8 character).
+                            </div>
                         </div>
                         <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">Submit</button>
 
@@ -67,3 +85,4 @@
         </div>
     </div>
 </div>
+

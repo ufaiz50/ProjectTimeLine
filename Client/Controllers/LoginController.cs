@@ -35,10 +35,40 @@ namespace Client.Controllers
             var jWToken = await loginRepository.Auth(login);
             if (jWToken == null)
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Login");
             }
             HttpContext.Session.SetString("JWT", jWToken.Token);
-            return RedirectToAction("Index", "Dashboard");
+            HttpContext.Session.SetString("role", loginRepository.JwtRole(jWToken.Token));
+
+            var role = HttpContext.Session.GetString("role");
+            if (role == "Admin")
+            {
+                return RedirectToAction("Admin", "Dashboard");
+            }
+            else if (role == "Manager")
+            {
+                return RedirectToAction("Manager", "Dashboard");
+            }
+            else if (role == "SA")
+            {
+                return RedirectToAction("Index", "Dashboard");
+            }
+            else if (role == "BA")
+            {
+                return RedirectToAction("Index", "Dashboard");
+            }
+            else if (role == "Developer")
+            {
+                return RedirectToAction("Index", "Dashboard");
+            }
+            else if (role == "QA")
+            {
+                return RedirectToAction("Index", "Dashboard");
+            }
+            else
+            {
+                return RedirectToAction("Index", "Dashboard");
+            }
         }
 
         public async Task<IActionResult> EmployeesView(RegisterVM registerVm)
@@ -49,6 +79,12 @@ namespace Client.Controllers
                 return RedirectToAction("Register");
             }
             return RedirectToAction("Index");
+        }
+
+        public async Task<JsonResult> GetEmployeeView()
+        {
+            var result = await userdata.GetEmployeeView();
+            return Json(result);
         }
     }
 }

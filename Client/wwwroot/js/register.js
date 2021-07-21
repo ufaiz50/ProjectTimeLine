@@ -1,12 +1,9 @@
-﻿//=============================================================================================
-//=================================insert new registration=====================================
-//=============================================================================================
-getNik();
+﻿getNik();
 
 function getNik() {
     var nik = "";
     $.ajax({
-        url: "/dashboard/getEmployeeView"
+        url: "/login/getEmployeeView"
     }).done(result => {
         $.each(result, function (index, val) {
             nik = val['nik'];
@@ -16,7 +13,6 @@ function getNik() {
         result++;
         result = result.toString();
         nik = nik.replace(nik.slice(-2), result)
-        console.log(nik);
         document.getElementById("inputNik").value = nik;
     }).fail(error => {
         //alert("Data tidak berhasil di dapat");

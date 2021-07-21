@@ -63,7 +63,47 @@
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
                         <li class="has-sub">
-                            <a class="js-arrow" href="#">
+                            <a class="js-arrow" href="@Url.Action("Manager", "Dashboard")">
+                                <i class="fas fa-tachometer-alt"></i>Dashboard
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index", "GanttChart")">
+                                <i class="fas fa-chart-bar"></i>Gantt Charts
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index", "Task")">
+                                <i class="fas fa-table"></i>Task
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index", "AsignProject")">
+                                <i class="fas fa-map-marker-alt"></i>Asign Project
+                            </a>
+                        </li>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="@Url.Action("AssignTask", "Dashboard")">
+                                <i class="zmdi zmdi-account-calendar"></i>Assign Task
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- END HEADER MOBILE-->
+        <!-- MENU SIDEBAR-->
+        <aside class="menu-sidebar d-none d-lg-block">
+            <div class="logo">
+                <a href="#">
+                    <img src="~/img/1timeline.png" alt="TLM" />
+                </a>
+            </div>
+            <div class="menu-sidebar__content js-scrollbar1">
+                <nav class="navbar-sidebar">
+                    <ul class="list-unstyled navbar__list">
+                        <li class="active has-sub">
+                            <a class="js-arrow" href="@Url.Action("Manager", "Dashboard")">
                                 <i class="fas fa-tachometer-alt"></i>Dashboard
                             </a>
                         </li>
@@ -91,36 +131,6 @@
                         <li class="has-sub">
                             <a class="js-arrow" href="@Url.Action("AssignTask", "Dashboard")">
                                 <i class="zmdi zmdi-account-calendar"></i>Assign Task
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
-        <!-- END HEADER MOBILE-->
-        <!-- MENU SIDEBAR-->
-        <aside class="menu-sidebar d-none d-lg-block">
-            <div class="logo">
-                <a href="#">
-                    <img src="~/img/1timeline.png" alt="TLM" />
-                </a>
-            </div>
-            <div class="menu-sidebar__content js-scrollbar1">
-                <nav class="navbar-sidebar">
-                    <ul class="list-unstyled navbar__list">
-                        <li class="active has-sub">
-                            <a class="js-arrow" href="@Url.Action("Index", "Dashboard")">
-                                <i class="fas fa-tachometer-alt"></i>Dashboard
-                            </a>
-                        </li>
-                        <li>
-                            <a href="@Url.Action("Index", "GanttChart")">
-                                <i class="fas fa-chart-bar"></i>Gantt Charts
-                            </a>
-                        </li>
-                        <li>
-                            <a href="@Url.Action("Index", "Task")">
-                                <i class="fas fa-table"></i>Task
                             </a>
                         </li>
                     </ul>

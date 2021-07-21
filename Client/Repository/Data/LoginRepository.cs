@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using ProjectTimeLine.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -47,5 +48,12 @@ namespace Client.Repository.Data
             return token;
         }
 
+        public string JwtRole(string token)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            JwtSecurityToken result = tokenHandler.ReadJwtToken(token);
+
+            return result.Claims.FirstOrDefault(claim => claim.Type.Equals("Roles")).Value;
+        }
     }
 }
