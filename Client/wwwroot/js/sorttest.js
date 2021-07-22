@@ -1,4 +1,10 @@
-﻿$(function () {
+﻿function showmodal() {
+    $('#mediumModal').modal('show')
+    console.log("teken")
+}
+
+
+$(function () {
     $(".sortable_list").sortable({
         connectWith: ".connectedSortable",
         /*stop: function(event, ui) {
@@ -34,3 +40,4 @@ function UpdateStatus(id, status) {
 
     })
 }
+

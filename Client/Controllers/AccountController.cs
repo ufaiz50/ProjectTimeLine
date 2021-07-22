@@ -1,5 +1,6 @@
 ﻿using Client.BaseController;
 using Client.Repository.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProjectTimeLine.Model;
 using System;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Client.Controllers
 {
+    [Authorize]
     public class AccountController : BaseController<Employee, AccountRepository, string>
     {
         private readonly AccountRepository repository;
