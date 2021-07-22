@@ -24,6 +24,8 @@ namespace Client.Controllers
 
         public async Task<IActionResult> Index()
         {
+            var Role = await repository.GetJwt();
+            ViewBag.Roles = Role.AllRole;
             var getProject = await repository.Get();
             return View(getProject);
         }

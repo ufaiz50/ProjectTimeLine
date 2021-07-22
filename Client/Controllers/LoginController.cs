@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using ProjectTimeLine.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -38,7 +39,10 @@ namespace Client.Controllers
                 return RedirectToAction("Index", "Login");
             }
             HttpContext.Session.SetString("JWT", jWToken.Token);
-            HttpContext.Session.SetString("role", loginRepository.JwtRole(jWToken.Token));
+            var tokenHandler = new JwtSecurityTokenHandler();
+            JwtSecurityToken result = tokenHandler.ReadJwtToken(jWToken.Token);
+            return RedirectToAction("Index", "Dashboard");
+           /* HttpContext.Session.SetString("role", loginRepository.JwtRole(jWToken.Token));
 
             var role = HttpContext.Session.GetString("role");
             if (role == "Admin")
@@ -68,7 +72,7 @@ namespace Client.Controllers
             else
             {
                 return RedirectToAction("Index", "Dashboard");
-            }
+            }*/
         }
 
         public async Task<IActionResult> EmployeesView(RegisterVM registerVm)

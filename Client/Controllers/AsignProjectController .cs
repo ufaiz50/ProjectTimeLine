@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Client.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Manager")]
     public class AsignProjectController : BaseController<Project, AsignProjectRepository, int>
     {
         private readonly AsignProjectRepository repository;
@@ -21,8 +21,10 @@ namespace Client.Controllers
             this.repository = repository;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            var Role = await repository.GetJwt();
+            ViewBag.Roles = Role.AllRole;
             return View();
         }
 

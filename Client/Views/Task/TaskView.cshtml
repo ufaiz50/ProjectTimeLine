@@ -19,9 +19,24 @@
     <link href="~/cooladmin/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
     <link href="~/cooladmin/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
 
+    <!-- Bootstrap CSS-->
+    <link href="~/cooladmin/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+
+    <!-- Data Tables-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+
+    <!-- Vendor CSS-->
+    <link href="~/cooladmin/vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+    <link href="~/cooladmin/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+    <link href="~/cooladmin/vendor/wow/animate.css" rel="stylesheet" media="all">
+    <link href="~/cooladmin/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+    <link href="~/cooladmin/vendor/slick/slick.css" rel="stylesheet" media="all">
+    <link href="~/cooladmin/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="~/cooladmin/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
 
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />*@
     <link rel="stylesheet" href="~/css/sorttest.css">
 </head>
 
@@ -35,12 +50,39 @@
         <div></div>
 
     </header>
+    <!-- modal -->
+    <div class="modal fade" id="mediumModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="mediumModalLabel">Medium Modal</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        There are three species of zebras: the plains zebra, the mountain zebra and the Grévy's zebra. The plains zebra and the mountain
+                        zebra belong to the subgenus Hippotigris, but Grévy's zebra is the sole species of subgenus Dolichohippus. The latter
+                        resembles an ass, to which it is closely related, while the former two are more horse-like. All three belong to the
+                        genus Equus, along with other living equids.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <!-- End of masthead -->
     <!-- Board info bar -->
     <section class="board-info-bar">
         <div class="board-controls">
-                <h2>@Model[0].Name</h2>
-                <i class="far fa-star" aria-hidden="true"></i>
+            <h2>@Model[0].Name</h2>
+            <i class="far fa-star" aria-hidden="true"></i>
         </div>
     </section>
     <!-- End of board info bar -->
@@ -56,7 +98,9 @@
                 {
                     @if (task.Status == Status.ToDo)
                     {
-                        <li id="@task.TaskId">@task.TaskName</li>
+                        <li id="@task.TaskId">
+                            <a href="#" data-toggle="modal" data-target="#mediumModal">@task.TaskName</a>
+                        </li>
                     }
                 }
             </ul>
@@ -144,6 +188,28 @@
 
     </section>
     <!-- End of lists container -->
+    <!-- Jquery JS-->
+    <script src="~/cooladmin/vendor/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap JS-->
+    <script src="~/cooladmin/vendor/bootstrap-4.1/popper.min.js"></script>
+    <script src="~/cooladmin/vendor/bootstrap-4.1/bootstrap.min.js"></script>
+    <!-- DataTable JS -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+    <!-- Vendor JS -->
+    <script src="~/cooladmin/vendor/slick/slick.min.js">
+    </script>
+    <script src="~/cooladmin/vendor/wow/wow.min.js"></script>
+    <script src="~/cooladmin/vendor/animsition/animsition.min.js"></script>
+    <script src="~/cooladmin/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+    </script>
+    <script src="~/cooladmin/vendor/counter-up/jquery.waypoints.min.js"></script>
+    <script src="~/cooladmin/vendor/counter-up/jquery.counterup.min.js">
+    </script>
+    <script src="~/cooladmin/vendor/circle-progress/circle-progress.min.js"></script>
+    <script src="~/cooladmin/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="~/cooladmin/vendor/chartjs/Chart.bundle.min.js"></script>
+    <script src="~/cooladmin/vendor/select2/select2.min.js">
+    </script>
 
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>

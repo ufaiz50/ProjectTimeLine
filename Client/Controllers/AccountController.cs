@@ -18,8 +18,10 @@ namespace Client.Controllers
             this.repository = repository;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            var Role = await repository.GetJWTNIK();
+            ViewBag.Roles = Role.AllRole;
             return View();
         }
 

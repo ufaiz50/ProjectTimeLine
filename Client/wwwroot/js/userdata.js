@@ -135,16 +135,15 @@ function addRole(id) {
 
 // Add Role
 function AddRoles() {
-    
-    NIK = $('#updateNIK').val();
-    RoleID =  $('#add').val()
+
+    addrole = $('#addRole').serialize()
     $.ajax({
         url: "https://localhost:44374/Dashboard/UpdateUserData",
-        method: 'POST',
+        method: 'post',
         dataType: "JSON",
-        data: {"NIK" : NIK, "RoleID" : RoleID}
+        data: addrole
     }).done(result => {
-        console.log(result);
+        $('#userdata').DataTable().ajax.reload()
         Swal.fire(
             'Good job!',
             'Role Has Been Added',
@@ -180,28 +179,28 @@ function deleteRole(id) {
             if (result.allRoleName[i] == "Developer") opsi += '<option id="Developer" value="5">Developer</option>';
         }
         $('#delete').html(opsi)
-        console.log(result);
+       
     }).fail(error => {
-        console.log(error);
     })
 
 }
 
 function DeleteRoles() {
+    deleterole = $('#deleteRole').serialize()
     NIK = $('#deleteNIK').val()
     RoleID = $('#delete').val()
     $.ajax({
         url: "https://localhost:44374/Dashboard/DeleteUserData",
         method: 'POST',
         dataType: "JSON",
-        data: { "NIK": NIK, "RoleID": RoleID }
+        data: deleterole
     }).done(result => {
+        $('#userdata').DataTable().ajax.reload()
         Swal.fire(
             'Good job!',
             'Role Has Been Deleted',
             'success'
-        )
-        table.ajax.reload(null, false);
+        );
     }).fail(error => {
         Swal.fire(
             'Error!',

@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Client.Controllers
 {
-    [Authorize]
+    [Authorize(Roles ="SA,BA,Developer,QA")]
     public class TaskController : BaseController<Account, TaskRepository, string>
     {
         private readonly TaskRepository repository;
@@ -22,8 +22,10 @@ namespace Client.Controllers
             this.repository = repository;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            var Role = await repository.GetJwt();
+            ViewBag.Roles = Role.AllRole;
             return View();
         }
 

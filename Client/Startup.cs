@@ -37,6 +37,7 @@ namespace Client
                 option.SaveToken = true;
                 option.TokenValidationParameters = new TokenValidationParameters()
                 {
+                    RoleClaimType = "Roles",
                     ValidateIssuer = true,
                     ValidateAudience = true,
                     ValidAudience = Configuration["Jwt:Audience"],

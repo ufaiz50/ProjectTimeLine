@@ -12,6 +12,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -185,6 +186,11 @@ namespace Client.Repository.Data
             content.NIK = result.Claims.First(claim => claim.Type == "NIK").Value;
             content.Name = result.Claims.First(claim => claim.Type == "Name").Value;
             content.Email = result.Claims.First(claim => claim.Type == "Email").Value;
+            var test = result.Claims.Where(claim => claim.Type == ClaimTypes.Role );
+            foreach (var item in test)
+            {
+                content.Role = item.Value;
+            }
             var getAllRole = result.Claims.Where(x => x.Type == "Roles").Select(data => data.Value);
             foreach (var item in getAllRole)
             {

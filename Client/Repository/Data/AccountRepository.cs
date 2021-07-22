@@ -32,6 +32,7 @@ namespace Client.Repository.Data
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _contextAccessor.HttpContext.Session.GetString("JwT"));
         }
 
+        //Get String JWT
         public async Task<DataLoginVM> GetJWTNIK()
         {
             var content = new DataLoginVM();
