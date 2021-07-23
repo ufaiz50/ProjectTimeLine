@@ -10,8 +10,8 @@ namespace ProjectTimeLine.Model
     {
         public int TaskHistoryId { get; set; }
         public DateTime EndDate { get; set; }
-        public int StateBefore { get; set; }
-        public int StateAfter { get; set; }
+        public Status StateBefore { get; set; }
+        public Status StateAfter { get; set; }
         public string NIK { get; set; }
         public int TaskModulId { get; set; }
 

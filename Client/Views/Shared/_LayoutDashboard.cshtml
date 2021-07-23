@@ -72,22 +72,40 @@
                                 <i class="fas fa-chart-bar"></i>Gantt Charts
                             </a>
                         </li>
-                        <li>
-                            <a href="@Url.Action("Index", "Task")">
-                                <i class="fas fa-table"></i>Task
-                            </a>
-                        </li>
-                        <li>
-                            <a href="@Url.Action("Index", "AsignProject")">
-                                <i class="fas fa-map-marker-alt"></i>Asign Project
-                            </a>
-                        </li>
+                        @foreach (var item in ViewBag.Roles)
+                        {
+                            @if (item == "BA" || item == "SA" || item == "Developer" || item == "QA")
+                            {
+                                <li>
+                                    <a href="@Url.Action("Index", "Task")">
+                                        <i class="fas fa-table"></i>Task
+                                    </a>
+                                </li>
+                            }
+                        }
+                        @foreach (var item in ViewBag.Roles)
+                        {
+                            if (item == "Manager")
+                            {
+                                <li>
+                                    <a href="@Url.Action("Index", "AsignProject")">
+                                        <i class="zmdi zmdi-account-calendar"></i>Asign Project
+                                    </a>
+                                </li>
+                            }
+                        }
+                        @foreach (var item in ViewBag.Roles)
+                        {
+                            if (item == "Admin")
+                            {
+                                <li class="has-sub">
+                                    <a class="js-arrow" href="@Url.Action("Userdata", "Dashboard")">
+                                        <i class="zmdi zmdi-account-calendar"></i>User Data
+                                    </a>
+                                </li>
+                            }
 
-                        <li class="has-sub">
-                            <a class="js-arrow" href="@Url.Action("Userdata", "Dashboard")">
-                                <i class="zmdi zmdi-account-calendar"></i>User Data
-                            </a>
-                        </li>
+                        }
                         <li class="has-sub">
                             <a class="js-arrow" href="@Url.Action("AssignTask", "Dashboard")">
                                 <i class="zmdi zmdi-account-calendar"></i>Assign Task
@@ -108,8 +126,8 @@
             <div class="menu-sidebar__content js-scrollbar1">
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
-                        <li class="active has-sub">
-                            <a class="js-arrow" href="@Url.Action("Index", "Dashboard")">
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
                                 <i class="fas fa-tachometer-alt"></i>Dashboard
                             </a>
                         </li>
@@ -118,9 +136,43 @@
                                 <i class="fas fa-chart-bar"></i>Gantt Charts
                             </a>
                         </li>
-                        <li>
-                            <a href="@Url.Action("Index", "Task")">
-                                <i class="fas fa-table"></i>Task
+                        @foreach (var item in ViewBag.Roles)
+                        {
+                            @if (item == "BA" || item == "SA" || item == "Developer" || item == "QA")
+                            {
+                                <li>
+                                    <a href="@Url.Action("Index", "Task")">
+                                        <i class="fas fa-table"></i>Task
+                                    </a>
+                                </li>
+                            }
+                        }
+                        @foreach (var item in ViewBag.Roles)
+                        {
+                            if (item == "Manager")
+                            {
+                                <li>
+                                    <a href="@Url.Action("Index", "AsignProject")">
+                                        <i class="zmdi zmdi-account-calendar"></i>Asign Project
+                                    </a>
+                                </li>
+                            }
+                        }
+                        @foreach (var item in ViewBag.Roles)
+                        {
+                            if (item == "Admin")
+                            {
+                                <li class="has-sub">
+                                    <a class="js-arrow" href="@Url.Action("Userdata", "Dashboard")">
+                                        <i class="zmdi zmdi-account-calendar"></i>User Data
+                                    </a>
+                                </li>
+                            }
+
+                        }
+                        <li class="has-sub">
+                            <a class="js-arrow" href="@Url.Action("AssignTask", "Dashboard")">
+                                <i class="zmdi zmdi-account-calendar"></i>Assign Task
                             </a>
                         </li>
                     </ul>

@@ -24,18 +24,24 @@ namespace Client.Controllers
             this.repository = repository;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            var Role = await repository.getJwt();
+            ViewBag.Roles = Role.AllRole;
             return View();
         }
-
-        public IActionResult Userdata()
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Userdata()
         {
+            var Role = await repository.getJwt();
+            ViewBag.Roles = Role.AllRole;
             return View();
         }
         
-        public IActionResult Assigntask()
+        public async Task<IActionResult> Assigntask()
         {
+            var Role = await repository.getJwt();
+            ViewBag.Roles = Role.AllRole;
             return View();
         }
 
@@ -126,10 +132,10 @@ namespace Client.Controllers
             return final[0];
         }
 
-        public async Task<IActionResult> UpdateUserData(AccountRole userVM)
+        public async Task<string> UpdateUserData(AccountRole userVM)
         {
             var result = await repository.UpdateUserData(userVM);
-            return RedirectToAction("Userdata", "Dashboard");
+            return result;
         }
         
         public async Task<string> DeleteUserData(AccountRole userVM)

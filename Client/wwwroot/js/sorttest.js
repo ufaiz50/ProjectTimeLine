@@ -1,4 +1,10 @@
-﻿$(function () {
+﻿function showmodal() {
+    $('#mediumModal').modal('show')
+    console.log("teken")
+}
+
+
+$(function () {
     $(".sortable_list").sortable({
         connectWith: ".connectedSortable",
         /*stop: function(event, ui) {
@@ -13,6 +19,7 @@
             var id = ui.item[0].getAttribute("id");
             var status = this.id
             UpdateStatus(id, status)
+            addHistory(ui.sender[0].id, this.id)
         }
     }).disableSelection();
 
@@ -34,3 +41,21 @@ function UpdateStatus(id, status) {
 
     })
 }
+
+function addHistory(stateBefore, stateAfter) {
+    var today = new Date();
+    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    var dateTime = date + ' ' + time+".0";
+    var obj = new Object();
+    obj.EndDate = dateTime;
+    obj.StateBefore = stateBefore;
+    obj.StateAfter = stateAfter;
+    $.ajax({
+        url: "https://localhost:44374/Task/AddHistory",
+        method: "post",
+        data: obj
+    }).done(result => {
+    }).fail(error => { })
+}
+

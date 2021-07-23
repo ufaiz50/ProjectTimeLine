@@ -53,7 +53,7 @@ namespace Client.Repository.Data
             var tokenHandler = new JwtSecurityTokenHandler();
             JwtSecurityToken result = tokenHandler.ReadJwtToken(token);
 
-            return result.Claims.FirstOrDefault(claim => claim.Type.Equals("Roles")).Value;
+            return result.Claims.FirstOrDefault(claim => claim.Type.Equals("role")).Value;
         }
     }
 }

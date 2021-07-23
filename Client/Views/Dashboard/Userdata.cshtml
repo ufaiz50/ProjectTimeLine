@@ -1,6 +1,6 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
-    Layout = "_LayoutAdmin";
+    Layout = "_LayoutDashboard";
     var data = ViewBag.Message;
 }
 
@@ -133,8 +133,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="formUpdate">
-                    <input class="form-control hide" id="updateNIK" hidden>
+                <form id="addRole">
+                    <input class="form-control hide" name="NIK" id="updateNIK" hidden>
                     <input class="form-control hide" id="showNik" disabled>
                     @* <div class="row form-group mt-5">
                             <div class="col col-md-3">
@@ -165,7 +165,7 @@
                             <label for="select" class=" form-control-label">Select</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <select id="add" class="form-control">
+                            <select id="add" name="RoleId" class="form-control">
                             </select>
                         </div>
                     </div>
@@ -192,15 +192,15 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="formUpdate">
-                    <input class="form-control hide" id="deleteNIK" hidden>
+                <form id="deleteRole">
+                    <input class="form-control hide" name="NIK" id="deleteNIK" hidden>
                     <input class="form-control hide" id="showNik2" disabled>
                     <div class="row form-group mt-5">
                         <div class="col col-md-3">
                             <label for="select" class=" form-control-label">Select</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <select  id="delete" class="form-control">
+                            <select name="RoleId"  id="delete" class="form-control">
                             </select>
                         </div>
                     </div>

@@ -12,18 +12,22 @@ using System.Threading.Tasks;
 
 namespace Client.Controllers
 {
-    [Authorize]
+    [Authorize(Roles ="SA,BA,Developer,QA")]
     public class TaskController : BaseController<Account, TaskRepository, string>
     {
         private readonly TaskRepository repository;
+        private readonly TaskHistoryRepository historyRepository;
 
-        public TaskController(TaskRepository repository) : base(repository)
+        public TaskController(TaskRepository repository, TaskHistoryRepository repository1) : base(repository)
         {
             this.repository = repository;
+            historyRepository = repository1;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            var Role = await repository.GetJwt();
+            ViewBag.Roles = Role.AllRole;
             return View();
         }
 
@@ -63,6 +67,14 @@ namespace Client.Controllers
         {
             var result = await repository.UpdateStatus(taskModul);
             return result;
+        }
+
+        public async Task<JsonResult> AddHistory(TaskHistory taskHistory)
+        {
+            taskHistory.NIK = "E0003";
+            taskHistory.TaskModulId = 1;
+            var result = await repository.AddHistory(taskHistory);
+            return Json(result);
         }
     }
 
