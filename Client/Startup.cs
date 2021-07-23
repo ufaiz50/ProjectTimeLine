@@ -37,7 +37,7 @@ namespace Client
                 option.SaveToken = true;
                 option.TokenValidationParameters = new TokenValidationParameters()
                 {
-                    RoleClaimType = "Roles",
+                    /*RoleClaimType = "Role",*/
                     ValidateIssuer = true,
                     ValidateAudience = true,
                     ValidAudience = Configuration["Jwt:Audience"],
@@ -58,6 +58,7 @@ namespace Client
             services.AddScoped<AccountRepository>();
             services.AddScoped<Address>();
             services.AddScoped<ModulRepository>();
+            services.AddScoped<TaskHistoryRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

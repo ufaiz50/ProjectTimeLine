@@ -191,7 +191,7 @@ namespace Client.Repository.Data
             {
                 content.Role = item.Value;
             }
-            var getAllRole = result.Claims.Where(x => x.Type == "Roles").Select(data => data.Value);
+            var getAllRole = result.Claims.Where(x => x.Type == "role").Select(data => data.Value);
             foreach (var item in getAllRole)
             {
                 content.AllRole.Add(item);

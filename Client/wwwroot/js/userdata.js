@@ -104,7 +104,8 @@ function addRole(id) {
             <option id="Manager" value="2">Manager</option>
             <option id="SA" value="3">SA</option>
             <option id="BA" value="4">BA</option>
-            <option id="Developer" value="5">Developer</option>`;
+            <option id="Developer" value="5">Developer</option>
+            <option id="QA" value="6">QA</option>`;
     $('#add').html(opsi)
     $.ajax({
         url: 'https://localhost:44374/Dashboard/Userdataviewnik',
@@ -121,6 +122,7 @@ function addRole(id) {
             if (result.allRoleName[i] == "SA") $("#SA").remove();
             if (result.allRoleName[i] == "BA") $("#BA").remove();
             if (result.allRoleName[i] == "Developer") $("#Developer").remove();
+            if (result.allRoleName[i] == "QA") $("#QA").remove();
         }
         /*for (var i in result.allRoleName) {
             if (result.allRoleName[i] == "Admin")  $("#Admin").prop("checked", true);
@@ -177,6 +179,7 @@ function deleteRole(id) {
             if (result.allRoleName[i] == "SA") opsi += '<option id="SA" value="3">SA</option>';
             if (result.allRoleName[i] == "BA") opsi += '<option id="BA" value="4">BA</option>';
             if (result.allRoleName[i] == "Developer") opsi += '<option id="Developer" value="5">Developer</option>';
+            if (result.allRoleName[i] == "QA") opsi += '<option id="QA" value="6">QA</option>';
         }
         $('#delete').html(opsi)
        

@@ -21,10 +21,11 @@ namespace ProjectTimeLine.Model
         public Status Status { get; set; }
         public PriorityTask PriorityTask { get; set; }
         public int ModulId { get; set; }
-
+        [JsonIgnore]
         public virtual Modul Modul { get; set; }
         [JsonIgnore]
         public virtual ICollection<TaskHistory> TaskHistories { get; set; }
+        [JsonIgnore]
         public virtual ICollection<AccountTask> AccountTasks { get; set; }
     }
 

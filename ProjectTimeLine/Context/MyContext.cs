@@ -58,7 +58,7 @@ namespace ProjectTimeLine.Context
                 .HasMany(ed => ed.TaskHistories)
                 .WithOne(u => u.Account);
 
-            modelBuilder.Entity<TaskHistory>().HasKey(sc => new { sc.NIK, sc.TaskHistoryId });
+            //modelBuilder.Entity<TaskHistory>().HasKey(sc => new { sc.NIK, sc.TaskHistoryId });
 
             modelBuilder.Entity<TaskModul>()
                 .HasMany(ed => ed.TaskHistories)

@@ -71,7 +71,7 @@ namespace Client.Repository.Data
             content.NIK = result.Claims.First(claim => claim.Type == "NIK").Value;
             content.Name = result.Claims.First(claim => claim.Type == "Name").Value;
             content.Email = result.Claims.First(claim => claim.Type == "Email").Value;
-            var getAllRole = result.Claims.Where(x => x.Type == "Roles").Select(data => data.Value);
+            var getAllRole = result.Claims.Where(x => x.Type == "role").Select(data => data.Value);
             foreach (var item in getAllRole)
             {
                 content.AllRole.Add(item);
@@ -106,6 +106,20 @@ namespace Client.Repository.Data
             return res;
         }
 
-            
+        //Add History Log
+        public async Task<string> AddHistory(TaskHistory taskHistory)
+        {
+            var res = "";
+
+            StringContent content = new StringContent(JsonConvert.SerializeObject(taskHistory), Encoding.UTF8, "application/json");
+            var result = await httpClient.PostAsync("TaskHistory", content);
+            if (result.IsSuccessStatusCode)
+            {
+                var apiResponse = await result.Content.ReadAsStringAsync();
+                res = apiResponse;
+            }
+            return res;
+        }
+
     }
 }

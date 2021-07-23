@@ -55,7 +55,7 @@ namespace ProjectTimeLine
                 options.SaveToken = true;
                 options.TokenValidationParameters = new TokenValidationParameters()
                 {
-                    RoleClaimType = "Roles",
+                    /*RoleClaimType = "Role",*/
                     ValidateIssuer = true,
                     ValidateAudience = true,
                     ValidAudience = Configuration["Jwt:Audience"],
