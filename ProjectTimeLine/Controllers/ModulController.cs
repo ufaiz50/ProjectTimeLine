@@ -61,5 +61,26 @@ namespace ProjectTimeLine.Controllers
                 return BadRequest(new { status = HttpStatusCode.OK, result = 0, message = "Data Registrasi tidak ditemukan" });
             }
         }
+        
+        [HttpGet("ViewProjectModul/{key}")]
+        public ActionResult ViewProjectModul(int key)
+        {
+            try
+            {
+                var view = modulRepository.ViewProjectModul(key);
+                if (view != null)
+                {
+                    return Ok(view);
+                }
+                else
+                {
+                    return BadRequest(new { status = HttpStatusCode.BadRequest, result = view, message = "Data Registrasi tidak ditemukan" });
+                }
+            }
+            catch (Exception)
+            {
+                return BadRequest(new { status = HttpStatusCode.OK, result = 0, message = "Data Registrasi tidak ditemukan" });
+            }
+        }
     }
 }

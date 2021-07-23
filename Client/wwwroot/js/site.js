@@ -21,83 +21,174 @@ $.extend($.fn.dataTable.defaults, {
     responsive: true
 })
 
-var table = $('#ajaxSW').DataTable({
-    ajax: {
-        url: '/modul/GetTaskAccView',
-        dataSrc: ''
-    },
-    columns: [
-        { data: 'taskName' },
-        {
-            data: 'date',
-            render: function (data, type, row) {
-                return data.split('T')[0];
-            }
-        },
-        { data: 'description' },
-        { data: 'modulName' },
+//=========================
+var url = window.location.href.split('?')[0];
+var id = url.substring(url.lastIndexOf('/') + 1);
 
-        { data: 'member' },
-        {
-            data: 'priorityTask',
-            render: function (data, type, row) {
-                if (data === 0) {
-                    return "Priority";
-                }
-                else if (data === 1) {
-                    return "Medium";
-                }
-                else {
-                    return "Normal";
-                }
-            }
+console.log(url);
+console.log(id);
+
+if (id == "") {
+
+    var table = $('#ajaxSW').DataTable({
+        ajax: {
+            url: '/modul/GetTaskAccView',
+            dataSrc: ''
         },
-        {
-            data: 'status',
-            render: function (data, type, row) {
-                if (data == 0) {
-                    return "To Do";
+        columns: [
+            { data: 'taskName' },
+            {
+                data: 'date',
+                render: function (data, type, row) {
+                    return data.split('T')[0];
                 }
-                else {
-                    return "Design";
+            },
+            { data: 'description' },
+            { data: 'modulName' },
+
+            { data: 'member' },
+            {
+                data: 'priorityTask',
+                render: function (data, type, row) {
+                    if (data === 0) {
+                        return "Priority";
+                    }
+                    else if (data === 1) {
+                        return "Medium";
+                    }
+                    else {
+                        return "Normal";
+                    }
                 }
-            }
-        },
-        {
-            data: 'taskId',
-            targets: 'no-sort', orderable: false,
-            render: function (data, type, row) {
-                return `<button value="${data}" onclick="getUpdateTask(this.value)" class="btn btn-primary" type="button" data-toggle="modal" data-target="#updatetaskmodul">Edit</button> &nbsp
+            },
+            {
+                data: 'status',
+                render: function (data, type, row) {
+                    if (data == 0) {
+                        return "To Do";
+                    }
+                    else {
+                        return "Design";
+                    }
+                }
+            },
+            {
+                data: 'taskId',
+                targets: 'no-sort', orderable: false,
+                render: function (data, type, row) {
+                    return `<button value="${data}" onclick="getUpdateTask(this.value)" class="btn btn-primary" type="button" data-toggle="modal" data-target="#updatetaskmodul">Edit</button> &nbsp
                         <button value="${data}" onclick="delTask(this.value)" class="btn btn-danger">Delete</button> `;
+                }
             }
-        }
-    ]
-});
+        ]
+    });
 
-var tableModul = $('#modulTable').DataTable({
-    ajax: {
-        url: '/modul/Getmodultable',
-        dataSrc: ''
-    },
-    columns: [
-        { data: 'modulName' },
-        {
-            data: 'date',
-            render: function (data, type, row) {
-                return data.split('T')[0];
-            }
+    var tableModul = $('#modulTable').DataTable({
+        ajax: {
+            url: '/modul/Getmodultable',
+            dataSrc: ''
         },
-        { data: 'name' },
-        {
-            data: 'modulId',
-            targets: 'no-sort', orderable: false,
-            render: function (data, type, row) {
-                return `<button value="${data}" onclick="getModul(this.value)" class="btn btn-primary" type="button" data-toggle="modal" data-target="#updateModal" >Edit</button> &nbsp
+        columns: [
+            { data: 'modulName' },
+            {
+                data: 'date',
+                render: function (data, type, row) {
+                    return data.split('T')[0];
+                }
+            },
+            { data: 'name' },
+            {
+                data: 'modulId',
+                targets: 'no-sort', orderable: false,
+                render: function (data, type, row) {
+                    return `<button value="${data}" onclick="getModul(this.value)" class="btn btn-primary" type="button" data-toggle="modal" data-target="#updateModal" >Edit</button> &nbsp
                         <button value="${data}" onclick="delModul(this.value)" class="btn btn-danger">Delete</button> `;
+                }
             }
-        }
-    ]
-});
+        ]
+    });
+
+} else {
+
+    var table = $('#ajaxSW').DataTable({
+        ajax: {
+            url: '/modul/ViewModulTask/' + id,
+            dataSrc: ''
+        },
+        columns: [
+            { data: 'taskName' },
+            {
+                data: 'date',
+                render: function (data, type, row) {
+                    return data.split('T')[0];
+                }
+            },
+            { data: 'description' },
+            { data: 'modulName' },
+
+            { data: 'member' },
+            {
+                data: 'priorityTask',
+                render: function (data, type, row) {
+                    if (data === 0) {
+                        return "Priority";
+                    }
+                    else if (data === 1) {
+                        return "Medium";
+                    }
+                    else {
+                        return "Normal";
+                    }
+                }
+            },
+            {
+                data: 'status',
+                render: function (data, type, row) {
+                    if (data == 0) {
+                        return "To Do";
+                    }
+                    else {
+                        return "Design";
+                    }
+                }
+            },
+            {
+                data: 'taskId',
+                targets: 'no-sort', orderable: false,
+                render: function (data, type, row) {
+                    return `<button value="${data}" onclick="getUpdateTask(this.value)" class="btn btn-primary" type="button" data-toggle="modal" data-target="#updatetaskmodul">Edit</button> &nbsp
+                        <button value="${data}" onclick="delTask(this.value)" class="btn btn-danger">Delete</button> `;
+                }
+            }
+        ]
+    });
+
+    var tableModul = $('#modulTable').DataTable({
+        ajax: {
+            url: '/modul/ViewProjectModul/' + id,
+            dataSrc: ''
+        },
+        columns: [
+            { data: 'modulName' },
+            {
+                data: 'date',
+                render: function (data, type, row) {
+                    return data.split('T')[0];
+                }
+            },
+            { data: 'name' },
+            {
+                data: 'modulId',
+                targets: 'no-sort', orderable: false,
+                render: function (data, type, row) {
+                    return `<button value="${data}" onclick="getModul(this.value)" class="btn btn-primary" type="button" data-toggle="modal" data-target="#updateModal" >Edit</button> &nbsp
+                        <button value="${data}" onclick="delModul(this.value)" class="btn btn-danger">Delete</button> `;
+                }
+            }
+        ]
+    });
+
+}
 
 //===================add form update modul========================================
 

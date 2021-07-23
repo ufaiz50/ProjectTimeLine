@@ -63,6 +63,53 @@ namespace ProjectTimeLine.Repositories.Data
                         }).ToList();
             return data;
         }
+        
+        public ICollection ViewModulTask(int pId)
+        {
+            var data = (from md in myContext.Moduls
+                        join tm in myContext.TaskModuls on md.ModulId equals tm.ModulId
+                        join at in myContext.AccountTasks on tm.TaskId equals at.TaskModulId
+                        join ac in myContext.Accounts on at.NIK equals ac.NIK
+                        join em in myContext.Employees on ac.NIK equals em.NIK
+                        where md.ProjectId == pId
+                        select new
+                        {
+                            tm.TaskId,
+                            tm.TaskName,
+                            tm.Date,
+                            tm.Description,
+                            tm.Status,
+                            tm.PriorityTask,
+                            tm.ModulId,
+                            md.ModulName,
+                            ac.NIK,
+                            em.Name,
+                        }).ToList();
+            return data;
+        }
+        
+        public ICollection ViewModulTask()
+        {
+            var data = (from md in myContext.Moduls
+                        join tm in myContext.TaskModuls on md.ModulId equals tm.ModulId
+                        join at in myContext.AccountTasks on tm.TaskId equals at.TaskModulId
+                        join ac in myContext.Accounts on at.NIK equals ac.NIK
+                        join em in myContext.Employees on ac.NIK equals em.NIK
+                        select new
+                        {
+                            tm.TaskId,
+                            tm.TaskName,
+                            tm.Date,
+                            tm.Description,
+                            tm.Status,
+                            tm.PriorityTask,
+                            tm.ModulId,
+                            md.ModulName,
+                            ac.NIK,
+                            em.Name,
+                        }).ToList();
+            return data;
+        }
 
         // Update Status
         public int UpdateStatus(TaskModul taskModul)

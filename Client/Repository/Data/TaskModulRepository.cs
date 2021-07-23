@@ -115,6 +115,18 @@ namespace Client.Repository.Data
             }
             return entities;
         }
+        
+        public async Task<List<TaskMemberVM>> ViewModulTask(int id)
+        {
+            List<TaskMemberVM> entities = new List<TaskMemberVM>();
+
+            using (var response = await httpClient.GetAsync(request + "ViewModulTask/" + id))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+                entities = JsonConvert.DeserializeObject<List<TaskMemberVM>>(apiResponse);
+            }
+            return entities;
+        }
 
     }
 }

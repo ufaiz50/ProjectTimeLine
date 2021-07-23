@@ -117,9 +117,34 @@ namespace Client.Controllers
             var message = await modulRepository.GetModulTable();
             return message;
         }
+        
+        public async Task<List<ModulVM>> ViewProjectModul(int id)
+        {
+            var message = await modulRepository.ViewProjectModul(id);
+            return message;
+        }
         public async Task<IEnumerable<TaskMemberVM>> GetTaskById(int id)
         {
             var result = await taskModulRepository.GetTaskById(id);
+            var re = result.OrderBy(x => x.TaskId).ToList();
+            for (int i = 0; i < re.Count; i++)
+            {
+                for (int j = 0; j < re.Count; j++)
+                {
+                    if (re[i].TaskId == re[j].TaskId)
+                    {
+                        re[i].NIKMember.Add(re[j].NIK);
+                        re[i].Member.Add(re[j].Name);
+                    }
+                }
+            }
+            var final = re.GroupBy(p => p.TaskId).Select(grp => grp.First());
+            return final;
+        }
+        
+        public async Task<IEnumerable<TaskMemberVM>> ViewModulTask(int id)
+        {
+            var result = await taskModulRepository.ViewModulTask(id);
             var re = result.OrderBy(x => x.TaskId).ToList();
             for (int i = 0; i < re.Count; i++)
             {
