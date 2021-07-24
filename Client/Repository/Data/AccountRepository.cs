@@ -65,5 +65,18 @@ namespace Client.Repository.Data
             return res;
         }
 
+        public async Task<string> UpdatePassword(UpdatePasswordVM updatePasswordVM)
+        {
+            var res = "";
+
+            StringContent content = new StringContent(JsonConvert.SerializeObject(updatePasswordVM), Encoding.UTF8, "application/json");
+            var result = await httpClient.PutAsync("Accounts/UpdatePassword", content);
+            if (result.IsSuccessStatusCode)
+            {
+                var apiResponse = await result.Content.ReadAsStringAsync();
+                res = apiResponse;
+            }
+            return res;
+        }
     }
 }

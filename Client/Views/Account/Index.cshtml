@@ -7,71 +7,207 @@
 <div class="main-content">
     <div class="section__content section__content--p30">
         <div class="container-fluid">
-            <div class="row">
-                <div class="col">
-                    <!-- MAP DATA-->
-                    <div class="map-data m-b-250">
-                        <h3 class="title-3 m-b-30">
-                            <i class="zmdi zmdi-map"></i>Account Info
-                        </h3>
-                        @*action="@Url.Action("UpdateEmployee", "Account")" method="post"*@
-                        <form id="UpdateEmployee">
-                            <div class="form-group">
-                                <input id="inputNik" class="au-input au-input--full hide" type="text" name="NIK" placeholder="Name" hidden>
-                            </div>
-                            <div class="form-group">
-                                <input id="showNik" class="au-input au-input--full hide" type="text" name="showNIK" placeholder="Name" disabled>
-                            </div>
-                            <div class="form-group">
-                                <label>Name</label>
-                                <input id="inputName" class="au-input au-input--full" type="text" name="Name" placeholder="Name">
-                            </div>
-                            <div class="form-group">
-                                <label>Email Address</label>
-                                <input id="inputEmail" class="au-input au-input--full" type="email" name="Email" placeholder="Email">
-                            </div>
-                            <div class="form-group">
-                                <label>Phone Number</label>
-                                <input id="inputPhoneNumber" class="au-input au-input--full" type="number" name="PhoneNumber" placeholder="Phone Number">
-                            </div>
-                            <div class="form-group">
-                                <label>Birth Date</label>
-                                <input id="inputBirthDate" class="au-input au-input--full" type="date" name="BirthDate" placeholder="Birth Date">
-                            </div>
-                            <div class="form-group">
-                                <label>Address</label>
-                                <input id="inputAddress" class="au-input au-input--full" type="text" name="Address" placeholder="Address">
-                            </div>
-                            <div class="row form-group">
-                                <div class="col col-md-3">
-                                    <label class=" form-control-label">Gender</label>
-                                </div>
-                                <div class="col col-md-9">
-                                    <div class="form-check">
-                                        <div class="radio">
-                                            <label for="radio1" class="form-check-label ">
-                                                <input type="radio" id="pria" name="Gender" value="0" class="form-check-input">Male
-                                            </label>
-                                        </div>
-                                        <div class="radio">
-                                            <label for="radio2" class="form-check-label ">
-                                                <input type="radio" id="wanita" name="Gender" value="1" class="form-check-input">Female
-                                            </label>
-                                        </div>
-                                    </div>
+            <div class="row gutters-sm">
+                <div class="col-md-5 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex flex-column align-items-center text-center">
+                                <img src="~/img/usercartoon.png" alt="Admin" class="rounded-circle" width="150">
+                                <div class="mt-3">
+                                    <h4 id="name">John Doe</h4>
+                                    <p id="birthdate">2020</p>
+                                    <p id="address" class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
+                                    <button class="btn btn-primary" data-toggle="modal" data-target="#mediumModal">Update</button>
+                                    <button class="btn btn-outline-primary" data-toggle="modal" data-target="#smallmodal">Change Password</button>
                                 </div>
                             </div>
-                            <button onclick="UpdateEmployee()" class="au-btn au-btn--block au-btn--blue m-b-20" type="button">Submit</button>
-                        </form>
+                        </div>
                     </div>
-                    <!-- END MAP DATA-->
+                </div>
+                <div class="col-md-7">
+                    <div class="card mb-3">
+                        <div class="card-body py-4">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Full Name</h6>
+                                </div>
+                                <div id="name" class="col-sm-9 text-secondary">
+                                    Kenneth Valdez
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Email</h6>
+                                </div>
+                                <div id="email" class="col-sm-9 text-secondary">
+                                    fip@jukmuh.al
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Phone</h6>
+                                </div>
+                                <div id="phonenumber" class="col-sm-9 text-secondary">
+                                    (239) 816-9029
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Address</h6>
+                                </div>
+                                <div id="address" class="col-sm-9 text-secondary">
+                                    Bay Area, San Francisco, CA
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- END MAIN CONTENT-->
+
+<!-- modal medium -->
+<div class="modal fade" id="mediumModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="mediummodalLabel">Update</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-body">
+                        <form id="UpdateEmployee">
+                            <div class="row mb-3">
+                                <input id="inputNik" class="au-input au-input--full hide" type="text" name="NIK" placeholder="Name" hidden>
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Full Name</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input id="inputName" class="au-input au-input--full" type="text" name="Name" placeholder="Name">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Email</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input id="inputEmail" class="au-input au-input--full" type="email" name="Email" placeholder="Email">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Phone</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input id="inputPhoneNumber" class="au-input au-input--full" type="number" name="PhoneNumber" placeholder="Phone Number">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Birth Date</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input id="inputBirthDate" class="au-input au-input--full" type="date" name="BirthDate" placeholder="Birth Date">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Address</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input id="inputAddress" class="au-input au-input--full" type="text" name="Address" placeholder="Address">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Gender</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary form-check">
+                                    <div class="col-sm-9 text-secondary radio">
+                                        <label for="radio1" class="form-check-label ">
+                                            <input type="radio" id="pria" name="Gender" value="0" class="form-check-input">Male
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary radio">
+                                        <label for="radio2" class="form-check-label ">
+                                            <input type="radio" id="wanita" name="Gender" value="1" class="form-check-input">Female
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-3"></div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input onclick="UpdateEmployee()" type="button" class="btn btn-primary px-4" data-dismiss="modal" value="Save Changes">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end modal medium -->
+<!-- Change Password -->
+<div class="modal fade" id="smallmodal" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="smallmodalLabel">Small Modal</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-body">
+                        <form id="ChangePassword">
+                            <div class="row mb-3">
+                                <input id="inputNik" class="au-input au-input--full hide" type="text" name="NIK" placeholder="Name" hidden>
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Old Password</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input id="inputName" class="au-input au-input--full" type="password" name="OldPassword" placeholder="Old Password">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">New Password</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input id="inputEmail" class="au-input au-input--full" type="password" name="NewPassword" placeholder="New Password">
+                                </div>
+                            </div>
+                            
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-3"></div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input onclick="UpdatePassword()" type="button" class="btn btn-primary px-4" data-dismiss="modal" value="Save Changes">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end modal small -->
+
 
 @section Scripts {
     <script type="text/javascript" src="~/js/account.js"></script>

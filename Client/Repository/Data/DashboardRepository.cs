@@ -12,13 +12,13 @@ using System.Threading.Tasks;
 
 namespace Client.Repository.Data
 {
-    public class TaskHistoryRepository : GeneralRepository<TaskHistory, int>
+    public class DashboardRepository : GeneralRepository<Project, int>
     {
         private readonly Address address;
         private readonly string request;
         private readonly IHttpContextAccessor _contextAccessor;
         private readonly HttpClient httpClient;
-        public TaskHistoryRepository(Address address, string request = "TaskHistory/") : base(address, request)
+        public DashboardRepository(Address address, string request = "Project/") : base(address, request)
         {
             this.address = address;
             this.request = request;
@@ -30,16 +30,17 @@ namespace Client.Repository.Data
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _contextAccessor.HttpContext.Session.GetString("JWT"));
         }
 
-        public async Task<List<LogStatusVM>> LogStatus(int id)
+        public async Task<List<GanttChartVM>> GanttChartView(int ProjectId)
         {
-            List<LogStatusVM> entities = new List<LogStatusVM>();
+            List<GanttChartVM> entities = new List<GanttChartVM>();
 
-            using (var response = await httpClient.GetAsync(request + "LogStatus/" + id))
+            using (var response = await httpClient.GetAsync(request + "GanttChart/"+ProjectId))
             {
                 string apiResponse = await response.Content.ReadAsStringAsync();
-                entities = JsonConvert.DeserializeObject<List<LogStatusVM>>(apiResponse);
+                entities = JsonConvert.DeserializeObject<List<GanttChartVM>>(apiResponse);
             }
             return entities;
         }
+
     }
 }

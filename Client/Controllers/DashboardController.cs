@@ -18,10 +18,12 @@ namespace Client.Controllers
     public class DashboardController : BaseController<Employee, UserdataRepository, string>
     {
         private readonly UserdataRepository repository;
+        private readonly DashboardRepository dashboardRepository;
 
-        public DashboardController(UserdataRepository repository) : base(repository)
+        public DashboardController(UserdataRepository repository, DashboardRepository dashboardRepository) : base(repository)
         {
             this.repository = repository;
+            this.dashboardRepository = dashboardRepository;
         }
 
         public async Task<IActionResult> Index()
@@ -156,6 +158,13 @@ namespace Client.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        
+
+        /* DashBoard*/
+        public async Task<List<GanttChartVM>> GanttChartView(int ProjectId)
+        {
+            var result = await dashboardRepository.GanttChartView(ProjectId);
+            return result;
+        }
+
     }
 }

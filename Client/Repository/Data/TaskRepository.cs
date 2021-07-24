@@ -6,6 +6,7 @@ using ProjectTimeLine.Model;
 using ProjectTimeLine.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net;
@@ -121,5 +122,29 @@ namespace Client.Repository.Data
             return res;
         }
 
+        // Get Log Status View
+        public async Task<List<LogStatusVM>> LogStatus(int id)
+        {
+            List<LogStatusVM> entities = new List<LogStatusVM>();
+
+            using (var response = await httpClient.GetAsync("TaskHistory/LogStatus/" + id))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+                entities = JsonConvert.DeserializeObject<List<LogStatusVM>>(apiResponse);
+            }
+            return entities;
+        }
+
+        public async Task<TaskModul> DetailTask(int id)
+        {
+            TaskModul entities = new TaskModul();
+
+            using (var response = await httpClient.GetAsync("TaskModul/" + id))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+                entities = JsonConvert.DeserializeObject<TaskModul>(apiResponse);
+            }
+            return entities;
+        }
     }
 }

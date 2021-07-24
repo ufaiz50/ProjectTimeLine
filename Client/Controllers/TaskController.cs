@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Client.Controllers
 {
-    [Authorize(Roles ="SA,BA,Developer,QA")]
+    //[Authorize(Roles ="SA,BA,Developer,QA")]
     public class TaskController : BaseController<Account, TaskRepository, string>
     {
         private readonly TaskRepository repository;
@@ -71,9 +71,19 @@ namespace Client.Controllers
 
         public async Task<JsonResult> AddHistory(TaskHistory taskHistory)
         {
-            taskHistory.NIK = "E0003";
-            taskHistory.TaskModulId = 1;
             var result = await repository.AddHistory(taskHistory);
+            return Json(result);
+        }
+
+        public async Task<JsonResult> LogStatus(int id)
+        {
+            var result = await repository.LogStatus(id);
+            return Json(result);
+        }
+
+        public async Task<JsonResult> DetailTask(int id)
+        {
+            var result = await repository.DetailTask(id);
             return Json(result);
         }
     }

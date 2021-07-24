@@ -77,5 +77,28 @@ namespace ProjectTimeLine.Controllers
             }
 
         }*/
+
+        [HttpPut("UpdatePassword")]
+        public ActionResult UpdatePassword(UpdatePasswordVM updatePassword)
+        {
+            try
+            {
+                var update = repository.UpdatePassword(updatePassword);
+
+                switch (update)
+                {
+                    case 1:
+                        return Ok(new { status = HttpStatusCode.OK, result = update, message = "Data Tersebut Berhasil di Update" });
+                    case 2:
+                        return BadRequest(new { status = HttpStatusCode.BadRequest, result = update, message = "Kata sandi lama tidak sesuai database" });
+                    default:
+                        return NotFound(new { status = HttpStatusCode.NotFound, result = 0, message = "Data dengan NIK/Email tersebut tidak ada di Database" });
+                }
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { status = HttpStatusCode.InternalServerError, result = e.Message, message = "terjadi exception" });
+            }
+        }
     }
 }

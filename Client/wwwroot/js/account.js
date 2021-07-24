@@ -1,19 +1,18 @@
-﻿$(document).ready(function () {
+﻿Triggerdata()
 
-    //get decode from JWT
+// JWT
+function Triggerdata() {
     $.ajax({
         url: 'https://localhost:44374/Account/GetJWTNIK',
         dataType: "json",
         dataSrc: ""
     }).done(result => {
         GetData(result.nik);
-        
+
     }).fail(error => {
 
     })
-
-
-});
+}
 
 function GetData(id) {
     $.ajax({
@@ -23,7 +22,14 @@ function GetData(id) {
         data: { nik: id }
     }).done(result => {
         tgl = new Date(result.birthDate).toLocaleDateString('en-CA');
-        $('#inputNik').val(result.nik);
+        $('[id="name"]').text(result.name);
+        $('[id="email"]').text(result.email);
+        $('[id="phonenumber"]').text(result.phoneNumber);
+        $('[id="address"]').text(result.address);
+        $('[id="birthdate"]').text(tgl);
+
+        tgl = new Date(result.birthDate).toLocaleDateString('en-CA');
+        $('[id="inputNik"]').val(result.nik);
         $('#showNik').val(result.nik);
         $('#inputName').val(result.name);
         $('#inputEmail').val(result.email);
@@ -31,8 +37,6 @@ function GetData(id) {
         $('#inputBirthDate').val(tgl);
         $('#inputAddress').val(result.address);
         result.gender == 0 ? $("#pria").prop("checked", true) : $("#wanita").prop("checked", true);
-
-        console.log(tgl, result.birthDate)
         
     }).fail(error => {
 
@@ -47,11 +51,37 @@ function UpdateEmployee() {
         dataType: "JSON",
         data: obj
     }).done(result => {
-        console.log(result);
         Swal.fire(
             'Good job!',
             'Employee Has Been Update',
             'success'
         )
     }).fail(error => { })
+    Triggerdata();
+}
+
+function UpdatePassword() {
+    update = $('#ChangePassword').serialize();
+    $.ajax({
+        url: "https://localhost:44374/Account/UpdatePassword",
+        method: "POST",
+        dataType: "JSON",
+        data: update
+    }).done(result => {
+        Swal.fire(
+            'Good job!',
+            'Password Updated',
+            'success'
+        )
+    }).fail(error => {
+        console.log(error)
+        Swal.fire(
+            'Error!',
+            'Wrong Password',
+            'error'
+        )
+    })
+
+    $('#ChangePassword').trigger("reset");
+    Triggerdata();
 }

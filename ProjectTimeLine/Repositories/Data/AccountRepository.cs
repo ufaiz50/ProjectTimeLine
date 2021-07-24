@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 using ProjectTimeLine.Context;
 using ProjectTimeLine.Model;
 using ProjectTimeLine.ViewModel;
@@ -40,5 +41,22 @@ namespace ProjectTimeLine.Repositories.Data
             return data;
         }
 
+        public int UpdatePassword(UpdatePasswordVM updatePassword)
+        {
+            var acc = myContext.Accounts.SingleOrDefault(a => a.NIK == updatePassword.NIK);
+            if (acc == null) return 0;
+
+            var checkPassword = Util.Hashing.ValidatePassword(updatePassword.OldPassword, acc.Password);
+            if (!checkPassword) return 2;
+
+            var getPassword = Util.Hashing.HashPassword(updatePassword.NewPassword);
+
+            acc.Password = getPassword;
+
+
+            myContext.Entry(acc).State = EntityState.Modified;
+            var update = myContext.SaveChanges();
+            return update;
+        }
     }
 }

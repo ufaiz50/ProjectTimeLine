@@ -3,6 +3,7 @@ using Client.Repository.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProjectTimeLine.Model;
+using ProjectTimeLine.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,6 +49,12 @@ namespace Client.Controllers
             //var result = await repository.UpdateEmployee(userVM);
 
             var result = await repository.UpdateEmployee(employee);
+            return result;
+        }
+
+        public async Task<string> UpdatePassword(UpdatePasswordVM updatePasswordVM)
+        {
+            var result = await repository.UpdatePassword(updatePasswordVM);
             return result;
         }
     }

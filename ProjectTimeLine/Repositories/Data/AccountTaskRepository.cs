@@ -61,9 +61,13 @@ namespace ProjectTimeLine.Repositories.Data
                        select new
                        {
                            at.NIK,
+                           m.ModulId,
+                           m.ModulName,
                            tm.TaskId,
                            tm.TaskName,
                            tm.Status,
+                           tm.StartDate,
+                           tm.Date,
                            p.Name
                        };
             return data;

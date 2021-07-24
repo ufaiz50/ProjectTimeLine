@@ -59,6 +59,7 @@ namespace Client
             services.AddScoped<Address>();
             services.AddScoped<ModulRepository>();
             services.AddScoped<TaskHistoryRepository>();
+            services.AddScoped<DashboardRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
