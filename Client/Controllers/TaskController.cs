@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Client.Controllers
 {
-    //[Authorize(Roles ="SA,BA,Developer,QA")]
+    [Authorize(Roles ="SA,BA,Developer,QA")]
     public class TaskController : BaseController<Account, TaskRepository, string>
     {
         private readonly TaskRepository repository;
@@ -31,9 +31,9 @@ namespace Client.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Taskview(string NIK, int ModulId)
+        public async Task<IActionResult> Taskview(string NIK, int ProjectId)
         {
-            List<TaskModulVM> result = await repository.GetModulTask(NIK, ModulId);
+            List<TaskModulVM> result = await repository.GetModulTask(NIK, ProjectId);
             return View(result);
         }
 
@@ -45,6 +45,7 @@ namespace Client.Controllers
             return Json(uniq);
         }
 
+        [HttpGet("/{NIK}/{ModulId}")]
         public async Task<JsonResult> GetModulView(string NIK, int ModulId)
         {
             var result = await repository.GetModulTask(NIK, ModulId);
@@ -92,7 +93,7 @@ namespace Client.Controllers
     {
         public bool Equals(TaskProjectVM x, TaskProjectVM y)
         {
-            return x.ModulName.Equals(y.ModulName);
+            return x.Name.Equals(y.Name);
         }
 
         public int GetHashCode(TaskProjectVM obj)

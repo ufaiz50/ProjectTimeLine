@@ -45,19 +45,20 @@ namespace ProjectTimeLine.Repositories.Data
                            m.ModulId,
                            m.ModulName,
                            p.StartDate,
-                           p.EndDate
+                           p.EndDate,
+                           p.ProjectId
                        };
             return data;
         }
 
-        public IQueryable GetModulTask(string NIK, int modulId)
+        public IQueryable GetModulTask(string NIK, int ProjectId)
         {
 
             var data = from at in myContext.AccountTasks
                        join tm in myContext.TaskModuls on at.TaskModulId equals tm.TaskId
                        join m in myContext.Moduls on tm.ModulId equals m.ModulId
                        join p in myContext.Projects on m.ProjectId equals p.ProjectId
-                       where at.NIK == NIK && m.ModulId == modulId
+                       where at.NIK == NIK && p.ProjectId == ProjectId
                        select new
                        {
                            at.NIK,
@@ -68,6 +69,26 @@ namespace ProjectTimeLine.Repositories.Data
                            tm.Status,
                            tm.StartDate,
                            tm.Date,
+                           p.Name,
+                           p.ProjectId
+                       };
+            return data;
+        }
+
+        public IQueryable GetTask(string NIK)
+        {
+
+            var data = from at in myContext.AccountTasks
+                       join tm in myContext.TaskModuls on at.TaskModulId equals tm.TaskId
+                       join m in myContext.Moduls on tm.ModulId equals m.ModulId
+                       join p in myContext.Projects on m.ProjectId equals p.ProjectId
+                       where at.NIK == NIK
+                       select new
+                       {
+                           at.NIK,
+                           tm.TaskId,
+                           tm.TaskName,
+                           tm.StartDate,
                            p.Name,
                            p.ProjectId
                        };

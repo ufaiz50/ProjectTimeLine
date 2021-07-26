@@ -15,6 +15,10 @@ $(document).ready(function () {
     }).fail(error => {
 
     })
+
+    LatestTask()
+    LastActivity()
+    RecentProject()
 });
 
 $.extend($.fn.dataTable.defaults, {
@@ -629,4 +633,148 @@ function updateTask() {
     }).fail((error) => {
         console.log(error)
     })
+}
+
+
+/*Faiz*/
+// Get Lats Task For Employee
+function LatestTask() {
+    var TaskList = ""
+    $.ajax({
+        url: "https://localhost:44374/Task/GetJWT"
+    }).done(res => {
+        $.ajax({
+            url: "https://localhost:44374/Dashboard/GetTask/",
+            data: { NIK: res.nik }
+        }).done(result => {
+            result.sort(function (a, b) {
+                return new Date(b.startDate) - new Date(a.startDate);
+            });
+            $.each(result, function (index, val) {
+                if (index < 5) {
+                    start = new Date(val["startDate"]).toLocaleDateString();
+                    TaskList += `<tr>
+                                <td><i class="fa fa-tasks"></i></td>
+                                <td>${val.name}</td>
+                                <td>${val.taskName}</td>
+                                <td>${start}</td>
+                                <td>
+                                    <a href="/Task/Taskview/?NIK=${val.nik}&ProjectId=${val.projectId}" target=”_blank”>
+                                    <i class="fa fa-share" aria-hidden="true"></i></a>
+                                </td>
+                            </tr>`;
+                }
+            })
+            $('#LatesTask').html(TaskList);
+
+        }).fail(error => {
+
+        })
+    }).fail(err => { })
+}
+
+// Get LastActivity For Employee
+function LastActivity() {
+    activity = "";
+    $.ajax({
+        url: "https://localhost:44374/Task/GetJWT"
+    }).done(res => {
+        $.ajax({
+            url: "https://localhost:44374/Dashboard/LastActivity/",
+            data: { NIK: res.nik }
+        }).done(result => {
+            result.sort(function (a, b) {
+                return new Date(b.endDate) - new Date(a.endDate);
+            });
+            $.each(result, function (index, val) {
+                if (index < 3) {
+                    date = new Date(val.endDate).toLocaleDateString();
+                    status = enumStatus(val.stateAfter)
+                    activity += `<div class="timeline-list">
+                            <p>${date}</p>
+                            <p>Move ${val.taskName} to ${status}</p>
+                        </div>`;
+                    
+                }
+            })
+            
+            $('#LastActivity').html(activity);
+
+        }).fail(error => {
+
+        })
+    }).fail(err => { })
+}
+
+// Get Recent Project For Manager
+function RecentProject() {
+    var project = "";
+    $.ajax({
+        url: "https://localhost:44374/AsignProject/GetProjectView"
+    }).done(result => {
+        var options = {
+            weekday: "short",
+            year: "numeric",
+            month: "2-digit",
+            day: "numeric"
+        };
+        result.sort(function (a, b) {
+            return new Date(b.projectId) - new Date(a.projectId);
+        });
+        $.each(result, function (index, val) {
+            if (index < 5) {
+                start = new Date(val["startDate"]).toLocaleDateString("en", options);
+                end = new Date(val["endDate"]).toLocaleDateString("en", options);
+                project += `<tr>
+                                    <td><i class="fa fa-tasks"></i></td>
+                                    <td>${val.name}</td>
+                                    <td>${start}</td>
+                                    <td>${end}</td>
+                                    <td><a href="/Dashboard/AssignTask/${val.projectId}"><i class="fa fa-share" aria-hidden="true"></i></a></td>
+                                </tr>`;
+            }
+        })
+        $('#RecentProject').html(project);
+
+    }).fail(error => {
+
+    })
+}
+
+// Enum Status
+function enumStatus(status) {
+    switch (status) {
+        case 1:
+            return "Design";
+            break;
+        case 2:
+            return "Doing"
+            break;
+        case 3:
+            return "CodeReview"
+            break;
+        case 4:
+            return "Testing"
+            break;
+        case 5:
+            return "Done"
+            break;
+        default:
+            return "To-Do"
+    }
+}
+
+// Format DateTime
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2)
+        month = '0' + month;
+    if (day.length < 2)
+        day = '0' + day;
+
+    return [day, month, year].join('/');
 }

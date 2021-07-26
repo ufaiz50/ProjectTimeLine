@@ -166,5 +166,16 @@ namespace Client.Controllers
             return result;
         }
 
+        public async Task<JsonResult> GetTask(string NIK)
+        {
+            var result = await dashboardRepository.GetTask(NIK);
+            return Json(result);
+        }
+
+        public async Task<JsonResult> LastActivity(string NIK)
+        {
+            var result = await dashboardRepository.LastActivity(NIK);
+            return Json(result);
+        }
     }
 }

@@ -11,10 +11,10 @@ $(document).ready(function () {
             start = new Date(val["startDate"]).toLocaleDateString();
             end = new Date(val["endDate"]).toLocaleDateString();
             projectList += `<div class="col-3 kartu kartu-project" onclick="goProject(${val['projectId']})">
-                                    <h5 class="text-center">${val["name"]}</h5>
-                                    <br/>
-                                    <p  class="text-center">Start : ${start}</p>
-                                    <p  class="text-center">End : ${end}</p>
+                                    <h5 class="text-center text-truncate">${val["name"]}</h5>
+                                    <br />
+                                    <p class="text-center text-truncate">Start : ${start}</p>
+                                    <p class="text-center text-truncate">End : ${end}</p>
                               </div>`;
         })
         projectList += `

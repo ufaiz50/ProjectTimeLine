@@ -56,12 +56,33 @@ namespace ProjectTimeLine.Controllers
             }
         }
 
-        [HttpGet("ModulTask/{NIK}/{modulId}")]
-        public ActionResult GetModulTask(string NIK, int modulId)
+        [HttpGet("ModulTask/{NIK}/{ProjectId}")]
+        public ActionResult GetModulTask(string NIK, int ProjectId)
         {
             try
             {
-                var view = repository.GetModulTask(NIK, modulId);
+                var view = repository.GetModulTask(NIK, ProjectId);
+                if (view != null)
+                {
+                    return Ok(view);
+                }
+                else
+                {
+                    return BadRequest(new { status = HttpStatusCode.BadRequest, result = view, message = "Data Registrasi tidak ditemukan" });
+                }
+            }
+            catch (Exception)
+            {
+                return BadRequest(new { status = HttpStatusCode.OK, result = 0, message = "Data Registrasi tidak ditemukan" });
+            }
+        }
+
+        [HttpGet("Task/{NIK}")]
+        public ActionResult GetTask(string NIK)
+        {
+            try
+            {
+                var view = repository.GetTask(NIK);
                 if (view != null)
                 {
                     return Ok(view);

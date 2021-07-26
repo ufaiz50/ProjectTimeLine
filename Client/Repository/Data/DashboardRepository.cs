@@ -42,5 +42,32 @@ namespace Client.Repository.Data
             return entities;
         }
 
+        public async Task<List<LatesTaskVM>> GetTask(string NIK)
+        {
+            List<LatesTaskVM> entities = new List<LatesTaskVM>();
+
+            using (var response = await httpClient.GetAsync("AccountTasks/Task/" + NIK))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+
+                entities = JsonConvert.DeserializeObject<List<LatesTaskVM>>(apiResponse);
+            }
+            return entities;
+
+        }
+
+        public async Task<List<LogStatusVM>> LastActivity(string NIK)
+        {
+            List<LogStatusVM> entities = new List<LogStatusVM>();
+
+            using (var response = await httpClient.GetAsync("TaskHistory/LastActivity/" + NIK))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+
+                entities = JsonConvert.DeserializeObject<List<LogStatusVM>>(apiResponse);
+            }
+            return entities;
+
+        }
     }
 }

@@ -19,11 +19,11 @@ $(document).ready(function () {
             $.each(result, function (index, val) {
                 start = new Date(val["startDate"]).toLocaleDateString();
                 end = new Date(val["endDate"]).toLocaleDateString();
-                projectList += `<div class="col-3 kartu kartu-project" onclick="goProject(${val['modulId']})">
-                                        <h5 class="text-center">${val["name"]}</h5>
-                                        <p class="text-center">[${val['modulName']}]</p>
-                                        <p class="text-center">Start : ${start}</p>
-                                        <p class="text-center">End : ${end}</p>
+                projectList += `<div class="col-3 kartu kartu-project" onclick="goProject(${val['projectId']})">
+                                        <h5 class="text-center text-truncate">${val["name"]}</h5>
+                                        <br />
+                                        <p class="text-center text-truncate">Start : ${start}</p>
+                                        <p class="text-center text-truncate">End : ${end}</p>
                                   </div>`;
             })
             $('#listProject').html(projectList);
@@ -39,7 +39,7 @@ function goProject(id) {
     $.ajax({
         url: "https://localhost:44374/Task/GetJWT"
     }).done(result => {
-        window.open("https://localhost:44374/Task/TaskView/?"+ "NIK="+ result.nik +"&ModulId=" + id)
+        window.open("https://localhost:44374/Task/TaskView/?NIK="+ result.nik +"&ProjectId=" + id)
     }).fail(error => {})
 
 }

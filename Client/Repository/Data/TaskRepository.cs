@@ -49,11 +49,11 @@ namespace Client.Repository.Data
 
         }
 
-        public async Task<List<TaskModulVM>> GetModulTask(string NIK, int ModulId)
+        public async Task<List<TaskModulVM>> GetModulTask(string NIK, int ProjectId)
         {
             List<TaskModulVM> entities = new List<TaskModulVM>();
 
-            using (var response = await httpClient.GetAsync(request + "ModulTask/" + NIK + "/" + ModulId))
+            using (var response = await httpClient.GetAsync(request + "ModulTask/" + NIK + "/" + ProjectId))
             {
                 string apiResponse = await response.Content.ReadAsStringAsync();
 

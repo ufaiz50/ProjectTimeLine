@@ -75,7 +75,7 @@ function showLogTask(id) {
             return new Date(b.endDate) - new Date(a.endDate);
         });
         $.each(result, function (key, val) {
-            status = enumStatus(val.status);
+            status = enumStatus(val.stateAfter);
             
             var today = new Date(val.endDate);
             var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
