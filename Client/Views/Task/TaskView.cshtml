@@ -42,6 +42,7 @@
 
 <body>
     <!-- Masthead -->
+
     <header class="masthead">
 
         <div class="boards-menu">
@@ -85,8 +86,6 @@
             </div>
         </div>
     </div>
-
-
     <!-- End of masthead -->
     <!-- Board info bar -->
     <section class="board-info-bar">
@@ -99,6 +98,7 @@
             <i class="far fa-star" aria-hidden="true"></i>
         </div>
         <div id="NIK" hidden>@Model[0].NIK</div>
+        <div id="ProjectId" hidden>@Model[0].ProjectId</div>
     </section>
     <!-- End of board info bar -->
     <!-- Lists container -->
@@ -225,32 +225,39 @@
 
     </section>
     <!-- End of lists container -->
+    <!-- Gantt TimeLine -->
+    <div class="m-5 p-3 bg-white">
+        <div id="ganttchart"></div>
+    </div>
+    <!-- END Gantt TimeLine -->
     <!-- Jquery JS-->
     <script src="~/cooladmin/vendor/jquery-3.2.1.min.js"></script>
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+
     <!-- Bootstrap JS-->
     <script src="~/cooladmin/vendor/bootstrap-4.1/popper.min.js"></script>
     <script src="~/cooladmin/vendor/bootstrap-4.1/bootstrap.min.js"></script>
     <!-- DataTable JS -->
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+
     <!-- Vendor JS -->
-    <script src="~/cooladmin/vendor/slick/slick.min.js">
-    </script>
+    <script src="~/cooladmin/vendor/slick/slick.min.js"></script>
     <script src="~/cooladmin/vendor/wow/wow.min.js"></script>
     <script src="~/cooladmin/vendor/animsition/animsition.min.js"></script>
-    <script src="~/cooladmin/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
-    </script>
+    <script src="~/cooladmin/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
     <script src="~/cooladmin/vendor/counter-up/jquery.waypoints.min.js"></script>
-    <script src="~/cooladmin/vendor/counter-up/jquery.counterup.min.js">
-    </script>
+    <script src="~/cooladmin/vendor/counter-up/jquery.counterup.min.js"></script>
     <script src="~/cooladmin/vendor/circle-progress/circle-progress.min.js"></script>
     <script src="~/cooladmin/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
     <script src="~/cooladmin/vendor/chartjs/Chart.bundle.min.js"></script>
-    <script src="~/cooladmin/vendor/select2/select2.min.js">
-    </script>
+    <script src="~/cooladmin/vendor/select2/select2.min.js"></script>
+    <!-- Momen JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <!-- Apex Chart -->
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <!-- Google Chart -->
+    @*<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>*@
 
     <script src="~/js/sorttest.js"></script>
 </body>

@@ -14,28 +14,21 @@ $(document).ready(function () {
 
     // Data table to show user/employe
     $('#userdata').DataTable({
-        "bFilter": false,
-        "bPaginate": false,
-        "bInfo": false,
-        dom: 'Bfrtip',
         "ajax": {
             url: "https://localhost:44374/Dashboard/Userdataview",
             dataType: "json",
             dataSrc: ""
         },
         "columns": [
-            { "data": "nik" },
             {
-                className: "d-flex",
-                "data": "name",
-                "render": function (data, type, full) {
-                    return `<div class="gambar" style="background-image: url('../img/usercartoon.png');"></div>
-                            <div class="pl-3 email">
-						      	<span>${data}</span>
-						      	<span>${full["email"]}</span>
-						    </div>`
+                "data": null,
+                "render": function (data, type, row, meta) {
+                    return meta.row + meta.settings._iDisplayStart + 1;
                 }
             },
+            { "data": "nik" },
+            { "data": "name"},
+            { "data": "email"},
             { "data": "phoneNumber" },
             {
                 "data": null,
@@ -59,19 +52,6 @@ $(document).ready(function () {
                 orderable: false
             }
         ],
-        buttons: {
-            buttons: [
-                { extend: 'copy', className: 'btn btn-primary' },
-                { extend: 'excel', className: 'btn btn-primary' },
-                { extend: 'csv', className: 'btn btn-primary' },
-                {
-                    extend: 'pdf',
-                    className: 'btn btn-primary',
-                    orientation: 'landscape'
-                },
-                { extend: 'print', className: 'btn btn-primary' }
-            ],
-        }
     });
 
     //GetNik

@@ -16,5 +16,6 @@ namespace Client.Models
         public DateTime StartDate { get; set; }
         public DateTime Date { get; set; }
         public string Name { get; set; }
+        public int ProjectId { get; set; }
     }
 }

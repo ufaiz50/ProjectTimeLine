@@ -68,7 +68,8 @@ namespace ProjectTimeLine.Repositories.Data
                            tm.Status,
                            tm.StartDate,
                            tm.Date,
-                           p.Name
+                           p.Name,
+                           p.ProjectId
                        };
             return data;
         }

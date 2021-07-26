@@ -138,4 +138,20 @@ body {
 
 /*End Faiz*/
 
+/* User Data Style*/
+.user-data {
+    overflow-x: hidden;
+}
+table{
+    font-size: 14px;
+}
 
+table.dataTable{
+    margin: 0;
+}
+table.dataTable.dtr-inline.collapsed>tbody>tr>td.dtr-control:before, table.dataTable.dtr-inline.collapsed>tbody>tr>th.dtr-control:before{
+    margin-top: -13px;
+}
+.table-data .table td{
+    padding: 12px 12px 12px 30px;
+}
