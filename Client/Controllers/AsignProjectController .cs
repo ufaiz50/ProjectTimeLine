@@ -21,10 +21,13 @@ namespace Client.Controllers
             this.repository = repository;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var Role = await repository.GetJwt();
-            ViewBag.Roles = Role.AllRole;
+            return View();
+        }
+
+        public IActionResult Project()
+        {
             return View();
         }
 
@@ -37,12 +40,6 @@ namespace Client.Controllers
         public async Task<string> InsertProject(Project project)
         {
             var result = await repository.InsertProject(project);
-            return result;
-        }
-
-        public string ViewProject(int id)
-        {
-            var result =  "asiap"+id;
             return result;
         }
     }

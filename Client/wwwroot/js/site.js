@@ -648,7 +648,7 @@ function LatestTask() {
             data: { NIK: res.nik }
         }).done(result => {
             result.sort(function (a, b) {
-                return new Date(b.startDate) - new Date(a.startDate);
+                return new Date(b.taskId) - new Date(a.taskId);
             });
             $.each(result, function (index, val) {
                 if (index < 5) {
@@ -778,3 +778,5 @@ function formatDate(date) {
 
     return [day, month, year].join('/');
 }
+
+/* End Faiz*/
