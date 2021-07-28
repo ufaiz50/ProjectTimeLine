@@ -34,7 +34,7 @@ $(document).ready(function () {
 })
 
 function goProject(id) {
-    window.open("https://localhost:44374/Dashboard/AssignTask/"+id)
+    window.location.href = 'https://localhost:44374/Dashboard/AssignTask/'+id;
 }
 
 

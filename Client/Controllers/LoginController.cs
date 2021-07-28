@@ -21,29 +21,20 @@ namespace Client.Controllers
             this.userdata = userdata;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-        public IActionResult Register()
-        {
-            return View();
-        }
-
         [HttpPost]
         public async Task<IActionResult> Auth(LoginVM login)
         {
             var jWToken = await loginRepository.Auth(login);
             if (jWToken == null)
             {
-                return RedirectToAction("Index", "Login");
+                return RedirectToAction("Index", "Home");
             }
             HttpContext.Session.SetString("JWT", jWToken.Token);
             var tokenHandler = new JwtSecurityTokenHandler();
             JwtSecurityToken result = tokenHandler.ReadJwtToken(jWToken.Token);
             return RedirectToAction("Index", "Dashboard");
-           /* HttpContext.Session.SetString("role", loginRepository.JwtRole(jWToken.Token));
 
+           /* HttpContext.Session.SetString("role", loginRepository.JwtRole(jWToken.Token));
             var role = HttpContext.Session.GetString("role");
             if (role == "Admin")
             {
@@ -80,9 +71,9 @@ namespace Client.Controllers
             var message = await userdata.EmployeesView(registerVm);
             if (message == null)
             {
-                return RedirectToAction("Register");
+                return RedirectToAction("Index", "Home");
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home");
         }
 
         public async Task<JsonResult> GetEmployeeView()

@@ -18,17 +18,22 @@ namespace ProjectTimeLine.Repositories.Data
 
         public int DeleteTaskMember(int id)
         {
-            try 
+            //var query = myContext.AccountTasks.AsEnumerable().Where( x => x.TaskModulId == id);
+
+            var query = (from at in myContext.AccountTasks
+                         where at.TaskModulId == id
+                         select at).ToList();
+
+            foreach (var row in query.ToList())
             {
-                var find = myContext.AccountTasks.Where(x => x.TaskModulId == id);
-                myContext.AccountTasks.RemoveRange(find);
-                var delete = myContext.SaveChanges();
-                return delete;
+                myContext.AccountTasks.Remove(row);
             }
-            catch (ArgumentNullException)
-            {
-                return 0;
-            }
+
+            //var find = myContext.AccountTasks.Where(x => x.TaskModulId == id);
+            //myContext.AccountTasks.RemoveRange(find);
+
+            var delete = myContext.SaveChanges();
+            return delete;
         }
 
         public IQueryable GetProjectTask(string NIK)

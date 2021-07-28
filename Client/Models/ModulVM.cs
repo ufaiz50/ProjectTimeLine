@@ -9,6 +9,7 @@ namespace Client.Models
     {
         public int ModulId { get; set; }
         public string ModulName { get; set; }
+        public DateTime StartDate { get; set; }
         public DateTime Date { get; set; }
         public string Name { get; set; }
     }

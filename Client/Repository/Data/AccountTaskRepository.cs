@@ -67,10 +67,10 @@ namespace Client.Repository.Data
             return res;
         }
 
-        public async Task<string> DeleteAccountTask(string id)
+        public async Task<string> DeleteAccountTask(int id)
         {
             var res = "";
-            var result = await httpClient.DeleteAsync(request + id);
+            var result = await httpClient.DeleteAsync(request + "DeleteTaskMember/" + id);
             if (result.IsSuccessStatusCode)
             {
                 string apiResponse = await result.Content.ReadAsStringAsync();

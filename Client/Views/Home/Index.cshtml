@@ -4,14 +4,14 @@
 }
 
 <!-- ======= Hero Section ======= -->
-<section id="hero" class="d-flex align-items-center">
+<section id="hero" class="d-flex align-items-center vh-100">
     <div class="container">
         <div class="row">
             <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
                 <h1>Solutions For Your Timeline Project</h1>
                 <h2>Create Timeline Project Then You Can Manage Your Project More Easily </h2>
                 <div class="d-lg-flex">
-                    <a href="login" class="btn-get-started scrollto">Login</a>
+                    <a data-toggle="modal" data-target="#login" class="btn-get-started scrollto">Login</a>
                 </div>
             </div>
             <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
@@ -25,41 +25,6 @@
 </section><!-- End Hero -->
 
 <main id="main">
-
-    <!-- ======= Cliens Section ======= -->
-    <section id="cliens" class="cliens section-bg">
-        <div class="container">
-
-            <div class="row" data-aos="zoom-in">
-
-                @*<div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-                    <img src="assets/img/clients/client-1.png" class="img-fluid" alt="">
-                </div>
-
-                <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-                    <img src="assets/img/clients/client-2.png" class="img-fluid" alt="">
-                </div>
-
-                <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-                    <img src="assets/img/clients/client-3.png" class="img-fluid" alt="">
-                </div>
-
-                <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-                    <img src="assets/img/clients/client-4.png" class="img-fluid" alt="">
-                </div>
-
-                <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-                    <img src="assets/img/clients/client-5.png" class="img-fluid" alt="">
-                </div>
-
-                <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-                    <img src="assets/img/clients/client-6.png" class="img-fluid" alt="">
-                </div>*@
-
-            </div>
-
-        </div>
-    </section><!-- End Cliens Section -->
     <!-- ======= About Us Section ======= -->
     <section id="about" class="about">
         <div class="container" data-aos="fade-up">
@@ -71,11 +36,11 @@
             <div class="row content">
                 <div class="col-lg-6">
                     <p>
-                        As stated, software is commonly used by project managers to create their project plan 
-                        timelines. Project timeline software is an integral part of the planning process and 
+                        As stated, software is commonly used by project managers to create their project plan
+                        timelines. Project timeline software is an integral part of the planning process and
                         often includes additional features that help to monitor progress when executing the project.
                     </p>
-                   
+
                 </div>
                 <div class="col-lg-6 pt-4 pt-lg-0 shadow p-3 mb-5 bg-white rounded">
                     <img src="~/img/gantt.png" style="max-width: 100%;" alt="gantt" />
@@ -98,8 +63,9 @@
                     <div class="icon-box">
                         <div class="icon"><i class="bx bxl-dribbble"></i></div>
                         <h4><a href="">Project planning</a></h4>
-                        <p>The visualization with the help of Gantt charts helps to plot all tasks, 
-                        phases, and milestones against the schedule.
+                        <p>
+                            The visualization with the help of Gantt charts helps to plot all tasks,
+                            phases, and milestones against the schedule.
                         </p>
                     </div>
                 </div>
@@ -109,7 +75,7 @@
                         <div class="icon"><i class="bx bx-file"></i></div>
                         <h4><a href=""> Project tracking</a></h4>
                         <p>
-                           The charts assist you in tracking the progression of work items after kickoff, 
+                            The charts assist you in tracking the progression of work items after kickoff,
                             monitoring at-risk tasks and any deviations from the schedule.
                         </p>
                     </div>
@@ -165,7 +131,7 @@
                 <div class="col-lg-6">
                     <div class="member d-flex align-items-start" data-aos="zoom-in" data-aos-delay="100">
                         <div class="pic">
-                            <img src="~/img/Thumbs_up1.jpg" class="img-fluid" alt=""/>
+                            <img src="~/img/Thumbs_up1.jpg" class="img-fluid" alt="" />
                         </div>
                         <div class="member-info">
                             <h4>Umar Faiz</h4>
@@ -184,7 +150,7 @@
                 <div class="col-lg-6 mt-4 mt-lg-0">
                     <div class="member d-flex align-items-start" data-aos="zoom-in" data-aos-delay="200">
                         <div class="pic">
-                            <img src="~/img/18915856.jpg" class="img-fluid" alt=""/>
+                            <img src="~/img/18915856.jpg" class="img-fluid" alt="" />
                         </div>
                         <div class="member-info">
                             <h4>Bonifasius</h4>
@@ -206,10 +172,134 @@
     </section><!-- End Team Section -->
 
 </main><!-- End #main -->
-<!-- ======= Footer ======= -->
-<footer>
-    
-</footer><!-- End Footer -->
 
 <a href="#" class="back-to-top"><i class="ri-arrow-up-line"></i></a>
 <div id="preloader"></div>
+
+<!-- Modal Login-->
+<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="login-logo">
+                    <a href="/Home">
+                        <img src="~/img/1timeline.png">
+                    </a>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="login-form">
+                    <form action="login/auth" method="post" class="needs-validation login" novalidate>
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input class="form-control" type="email" name="Email" placeholder="Email" required>
+                            <div class="invalid-feedback">
+                                Please input your email.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input pattern=".{8,}" class="form-control" type="password" name="Password" placeholder="Password" required>
+                            <div class="invalid-feedback">
+                                Please input your password (min 8 character).
+                            </div>
+                        </div>
+                        <button class="btn btn-primary w-100" type="submit">sign in</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Registration -->
+<div class="modal fade bd-example-modal-lg"id="regis" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="login-logo">
+                    <a href="/Home">
+                        <img src="~/img/1timeline.png">
+                    </a>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="login-form">
+                    <form action="/login/EmployeesView" method="post" class="needs-validation" novalidate>
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="NIK" id="inputNik" required hidden>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Full Name</label>
+                                    <input class="form-control" type="text" name="Name" placeholder="FullName" required>
+                                    <div class="invalid-feedback">
+                                        Please input name here.
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Birth Date</label>
+                                    <input class="form-control" type="date" name="BirthDate" placeholder="Birth Date" required>
+                                    <div class="invalid-feedback">
+                                        Please input your Birthdate.
+                                    </div>
+                                </div>
+                                <div class="">
+                                    <label for="gender">Gender</label>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" class="custom-control-input" id="gender" name="Gender" value="0" required>
+                                        <label class="custom-control-label" for="gender">Pria</label>
+                                    </div>
+                                    <div class="custom-control custom-radio mb-3">
+                                        <input type="radio" class="custom-control-input" id="gender1" name="Gender" value="1" required>
+                                        <label class="custom-control-label" for="gender1">Wanita</label>
+                                        <div class="invalid-feedback">Please choose gender.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Phone Number</label>
+                                    <input class="form-control" type="number" name="PhoneNumber" placeholder="Phone Number" required>
+                                    <div class="invalid-feedback">
+                                        Please provide a valid phone number.
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Address</label>
+                                    <input class="form-control" type="text" name="Address" placeholder="Address" required>
+                                    <div class="invalid-feedback">
+                                        Please provide a valid Address.
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input class="form-control" type="email" name="Email" placeholder="Email" required>
+                                    <div class="invalid-feedback">
+                                        Please provide a valid phone Email.
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input class="form-control" pattern=".{8,}" type="password" name="Password" placeholder="Password" required>
+                                    <div class="invalid-feedback">
+                                        Please input your password (min 8 character).
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary w-100" type="submit">Submit</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

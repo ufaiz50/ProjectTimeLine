@@ -24,6 +24,7 @@ namespace ProjectTimeLine.Repositories.Data
                         {
                             md.ModulId,
                             md.ModulName,
+                            md.StartDate,
                             md.Date,
                             tm.Name
                         }).ToList();
@@ -39,6 +40,7 @@ namespace ProjectTimeLine.Repositories.Data
                         {
                             md.ModulId,
                             md.ModulName,
+                            md.StartDate,
                             md.Date,
                             tm.Name
                         }).ToList();
@@ -54,6 +56,7 @@ namespace ProjectTimeLine.Repositories.Data
                         {
                             md.ModulId,
                             md.ModulName,
+                            md.StartDate,
                             md.Date,
                             tm.Name
                         }).ToList();
@@ -68,6 +71,7 @@ namespace ProjectTimeLine.Repositories.Data
                         {
                             md.ModulId,
                             md.ModulName,
+                            md.StartDate,
                             md.Date,
                             tm.Name
                         }).ToList();

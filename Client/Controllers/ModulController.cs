@@ -111,6 +111,11 @@ namespace Client.Controllers
             var message = await taskModulRepository.DeleteMember(id);
             return message;
         }
+        public async Task<string> DeleteAccountTask (int id)
+        {
+            var message = await accountTaskRepository.DeleteAccountTask(id);
+            return message;
+        }
 
         public async Task<List<ModulVM>> GetModulTable()
         {
@@ -160,5 +165,7 @@ namespace Client.Controllers
             var final = re.GroupBy(p => p.TaskId).Select(grp => grp.First());
             return final;
         }
+
+
     }
 }
