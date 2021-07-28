@@ -27,6 +27,7 @@ namespace ProjectTimeLine.Repositories.Data
                         {
                             tm.TaskId,
                             tm.TaskName,
+                            tm.StartDate,
                             tm.Date,
                             tm.Description,
                             tm.Status,
@@ -52,6 +53,7 @@ namespace ProjectTimeLine.Repositories.Data
                         {
                             tm.TaskId,
                             tm.TaskName,
+                            tm.StartDate,
                             tm.Date,
                             tm.Description,
                             tm.Status,
@@ -76,6 +78,7 @@ namespace ProjectTimeLine.Repositories.Data
                         {
                             tm.TaskId,
                             tm.TaskName,
+                            tm.StartDate,
                             tm.Date,
                             tm.Description,
                             tm.Status,
@@ -99,6 +102,7 @@ namespace ProjectTimeLine.Repositories.Data
                         {
                             tm.TaskId,
                             tm.TaskName,
+                            tm.StartDate,
                             tm.Date,
                             tm.Description,
                             tm.Status,

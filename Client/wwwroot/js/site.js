@@ -29,9 +29,6 @@ $.extend($.fn.dataTable.defaults, {
 var url = window.location.href.split('?')[0];
 var id = url.substring(url.lastIndexOf('/') + 1);
 
-console.log(url);
-console.log(id);
-
 if (id == "") {
 
     var table = $('#ajaxSW').DataTable({
@@ -40,7 +37,19 @@ if (id == "") {
             dataSrc: ''
         },
         columns: [
+            {
+                "data": null,
+                render: function (data, type, row, meta) {
+                    return meta.row + meta.settings._iDisplayStart + 1;
+                }
+            },
             { data: 'taskName' },
+            {
+                data: 'startDate',
+                render: function (data, type, row) {
+                    return data.split('T')[0];
+                }
+            },
             {
                 data: 'date',
                 render: function (data, type, row) {
@@ -49,8 +58,18 @@ if (id == "") {
             },
             { data: 'description' },
             { data: 'modulName' },
+            {
+                "data": 'member',
+                "render": function (data, type, full) {
+                    if (data == null) return "No role";
+                    bod = "";
+                    for (var i in data) {
+                        bod += `<span class="role user">${data[i]}</span> &nbsp`;
+                    }
+                    return bod;
 
-            { data: 'member' },
+                }
+            },
             {
                 data: 'priorityTask',
                 render: function (data, type, row) {
@@ -93,7 +112,19 @@ if (id == "") {
             dataSrc: ''
         },
         columns: [
+            {
+                "data": null,
+                render: function (data, type, row, meta) {
+                    return meta.row + meta.settings._iDisplayStart + 1;
+                }
+            },
             { data: 'modulName' },
+            {
+                data: 'startDate',
+                render: function (data, type, row) {
+                    return data.split('T')[0];
+                }
+            },
             {
                 data: 'date',
                 render: function (data, type, row) {
@@ -120,7 +151,19 @@ if (id == "") {
             dataSrc: ''
         },
         columns: [
+            {
+                "data": null,
+                render: function (data, type, row, meta) {
+                    return meta.row + meta.settings._iDisplayStart + 1;
+                }
+            },
             { data: 'taskName' },
+            {
+                data: 'startDate',
+                render: function (data, type, row) {
+                    return data.split('T')[0];
+                }
+            },
             {
                 data: 'date',
                 render: function (data, type, row) {
@@ -129,8 +172,18 @@ if (id == "") {
             },
             { data: 'description' },
             { data: 'modulName' },
+            {
+                "data": 'member',
+                "render": function (data, type, full) {
+                    if (data == null) return "No role";
+                    bod = "";
+                    for (var i in data) {
+                        bod += `<span class="role user">${data[i]}</span> &nbsp`;
+                    }
+                    return bod;
 
-            { data: 'member' },
+                }
+            },
             {
                 data: 'priorityTask',
                 render: function (data, type, row) {
@@ -173,7 +226,19 @@ if (id == "") {
             dataSrc: ''
         },
         columns: [
+            {
+                "data": null,
+                render: function (data, type, row, meta) {
+                    return meta.row + meta.settings._iDisplayStart + 1;
+                }
+            },
             { data: 'modulName' },
+            {
+                data: 'startDate',
+                render: function (data, type, row) {
+                    return data.split('T')[0];
+                }
+            },
             {
                 data: 'date',
                 render: function (data, type, row) {
@@ -205,6 +270,7 @@ function getModul(id) {
         document.getElementById('ModId').value = result.modulId;
         document.getElementById('ProId').value = result.projectId;
         document.getElementById('ModName').value = result.modulName;
+        document.getElementById('uptSDate').value = result.startDate.split('T')[0];
         document.getElementById('DueDate').value = result.date.split('T')[0];
     }).fail(error => {
         console.log(error);
@@ -236,6 +302,7 @@ function updateModul() {
     var obj = new Object();
     obj.ModulId = $("#ModId").val();
     obj.ModulName = $("#ModName").val();
+    obj.StartDate = $("#uptSDate").val();
     obj.Date = $("#DueDate").val();
     obj.ProjectId = parseInt($("#ProId").val());
     console.log(obj);
@@ -273,23 +340,22 @@ function addmodul() {
 
 $(document).ready(function () {
     $.ajax({
-        url: "/dashboard/getregistrasiview"
+        url: "/Dashboard/Userdataview"
     }).done((result) => {
         let text = "";
         $.each(result, function (key, val) {
-            text += `<option id="t${val.nik}" value="${val.nik}">${val.name}(${val.roleName})</option>`;
+            text += `<option value="${val.nik}">${val.name} (${val.allRoleName})</option>`;
         });
         $("#member").html(text);
-        $('#member').multiselect({
-            nonSelectedText: 'Select Member',
-            enableFiltering: true,
-            enableCaseInsensitiveFiltering: true,
-            buttonWidth: '100%'
-        });
+        $("#memberTask").html(text);
+        $("#member").selectpicker();
+        $("#memberTask").selectpicker();
     }).fail((error) => {
         console.log(error);
     });
 });
+
+
 //=================Add form Validation Modul========================
 
 window.addEventListener('load', () => {
@@ -314,6 +380,7 @@ window.addEventListener('load', () => {
 function Insert() {
     var obj = new Object();
     obj.ModulName = $("#ModulName").val();
+    obj.StartDate = $("#sdate").val();
     obj.Date = $("#Date").val();
     obj.ProjectId = parseInt($("#ProjectId").val());
 
@@ -358,6 +425,7 @@ function InsertTask() {
 
     var obj = new Object();
     obj.TaskName = $("#taskName").val();
+    obj.StartDate = $("#startdate").val();
     obj.Date = $("#datetask").val();
     obj.ModulId = parseInt($("#modultask").val());
     obj.Description = $("#description").val();
@@ -489,6 +557,8 @@ function delModul(del) {
 //=================Add form Value Update Task========================
 
 function getUpdateTask(id) {
+
+    console.log(id);
     $.ajax({
         url: '/modul/gettaskbyid/' + id,
         dataType: "json",
@@ -496,7 +566,6 @@ function getUpdateTask(id) {
     }).done(result => {
 
         var modID = result[0].modulId
-
         $.ajax({
             url: "/modul/getmodulview"
         }).done((res) => {
@@ -517,28 +586,13 @@ function getUpdateTask(id) {
 
         var accNik = result[0].nikMember;
 
-        $.ajax({
-            url: "/dashboard/getregistrasiview"
-        }).done((result) => {
-            let text = "";
-            $.each(result, function (key, val) {
-                if (new RegExp(accNik.join("|")).test(val.nik)) {
-                    text += `<option selected value="${val.nik}">${val.name}(${val.roleName})</option>`;
-                } else {
-                    text += `<option value="${val.nik}">${val.name}(${val.roleName})</option>`;
-                }
-            });
-            console.log(text);
-            $("#memberTask").html(text);
-            $('#memberTask').multiselect({
-                nonSelectedText: 'Select Member',
-                enableFiltering: true,
-                enableCaseInsensitiveFiltering: true,
-                buttonWidth: '100%'
-            });
-        }).fail((error) => {
-            console.log(error);
-        });
+        $("#memberTask option:selected").removeAttr("selected");
+
+        for (var i in accNik) {
+            $("#memberTask option[value='" + accNik[i] + "']").attr("selected", "selected");
+        }
+
+        $('#memberTask').selectpicker('refresh');
 
         var pTask = `p${result[0].priorityTask}`;
         document.getElementById(pTask).selected = 'selected';
@@ -547,6 +601,7 @@ function getUpdateTask(id) {
         document.getElementById('sId').value = result[0].status;
         document.getElementById('tName').value = result[0].taskName;
         document.getElementById('updateDesc').value = result[0].description;
+        document.getElementById('updatesdate').value = result[0].startDate.split('T')[0];
         document.getElementById('updatedatetask').value = result[0].date.split('T')[0];
 
     }).fail(error => {
@@ -571,13 +626,13 @@ window.addEventListener('load', () => {
     }
 });
 
-
 //=========================Update Task==================================
 
 function updateTask() {
     var obj = new Object();
     obj.TaskId = $("#tId").val();
     obj.TaskName = $("#tName").val();
+    obj.StartDate = $("#updatesdate").val();
     obj.Date = $("#updatedatetask").val();
     obj.ModulId = parseInt($("#modtask").val());
     obj.Description = $("#updateDesc").val();
@@ -590,46 +645,54 @@ function updateTask() {
         data: obj
     }).done((result) => {
 
-        //$.ajax({
-        //    url: "/task/DeletetaskMember/" + obj.TaskId
-        //}).done((result) => {
-        //    console.log(result)
-        //}).fail((error) => {
-        //    console.log(error)
-        //})
+        //delete member
 
-        //var values = $('#memberTask').val();
-        //$.each(values, function (key, val) {
-        //    var acctask = new Object();
-        //    let nik = val;
-        //    let taskID = "";
+        $.ajax({
+            url: "/modul/DeleteAccountTask/" + $("#tId").val(),
 
-        //    $.ajax({
-        //        url: "/modul/GetTaskModelView"
-        //    }).done((result) => {
-        //        $.each(result, function (key, val) {
-        //            taskID = val.taskId;
-        //        });
+        }).done((result) => {
 
-        //        acctask.NIK = nik;
-        //        acctask.TaskModulId = taskID;
+            console.log(result);
 
-        //        $.ajax({
-        //            url: "/modul/InsertAccountTask",
-        //            type: "POST",
-        //            data: acctask
-        //        }).done((result) => {
+            var values = $('#memberTask').val();
+
+            $.each(values, function (key, val) {
+                var acctask = new Object();
+                let nik = val;
+                let taskID = $("#tId").val();
+
+                console.log(nik);
+
+                acctask.NIK = nik;
+
+                acctask.TaskModulId = taskID;
+
+                $.ajax({
+                    url: "/modul/InsertAccountTask",
+                    type: "POST",
+                    data: acctask
+                }).done((result) => {
                     console.log(result);
                     table.ajax.reload();
-                    $('#updatetaskmodul').modal('hide');
-                }).fail((error) => {
-        //            console.log(error)
-        //        })
 
-        //    }).fail((error) => {
-        //        console.log(error)
-        //    })
-        //})
+                    $('#memberTask').selectpicker('refresh');
+
+                    $('#updatetaskmodul').modal('hide');
+                    $('#updatetaskmodul').on('hidden.bs.modal', function () {
+                        $('.modal-body').find('input').val('');
+                        $('.modal-body').find('textarea').val('');
+                        $('#priority').find('option:selected').removeAttr('selected');
+                    });
+
+                }).fail((error) => {
+                    console.log(error)
+                })
+            })
+
+        }).fail((error) => {
+            console.log(error)
+        })
+
     }).fail((error) => {
         console.log(error)
     })
@@ -659,7 +722,7 @@ function LatestTask() {
                                 <td>${val.taskName}</td>
                                 <td>${start}</td>
                                 <td>
-                                    <a href="/Task/Taskview/?NIK=${val.nik}&ProjectId=${val.projectId}" target=”_blank”>
+                                    <a href="/Task/Taskview/?NIK=${val.nik}&ProjectId=${val.projectId}" target=ï¿½_blankï¿½>
                                     <i class="fa fa-share" aria-hidden="true"></i></a>
                                 </td>
                             </tr>`;
