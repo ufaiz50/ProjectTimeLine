@@ -125,5 +125,63 @@ namespace ProjectTimeLine.Repositories.Data
             var done = myContext.SaveChanges();
             return done;
         }
+
+        public int UpdateDescription(TaskModul taskModul)
+        {
+            var result = myContext.TaskModuls.Find(taskModul.TaskId);
+            if (result == null) return 0;
+
+            result.Description = taskModul.Description;
+            var done = myContext.SaveChanges();
+            return done;
+        }
+        public int UpdateDate(TaskModul taskModul)
+        {
+            var result = myContext.TaskModuls.Find(taskModul.TaskId);
+            if (result == null) return 0;
+
+            result.StartDate = taskModul.StartDate;
+            result.Date = taskModul.Date;
+            var done = myContext.SaveChanges();
+            return done;
+        }
+
+        public ICollection GetTaskAccount(int id)
+        {
+            var data = (from tm in myContext.TaskModuls 
+                        join at in myContext.AccountTasks on tm.TaskId equals at.TaskModulId
+                        join ac in myContext.Accounts on at.NIK equals ac.NIK
+                        join em in myContext.Employees on ac.NIK equals em.NIK
+                        where tm.TaskId == id
+                        select new
+                        {
+                            tm.TaskId,
+                            tm.TaskName,
+                            tm.StartDate,
+                            tm.Date,
+                            tm.Description,
+                            tm.Status,
+                            tm.PriorityTask,
+                            ac.NIK,
+                            em.Name,
+                        }).ToList();
+            if (data.Count == 0)
+            {
+                var data2 = (from tm in myContext.TaskModuls
+                        where tm.TaskId == id
+                        select new
+                        {
+                            tm.TaskId,
+                            tm.TaskName,
+                            tm.StartDate,
+                            tm.Date,
+                            tm.Description,
+                            tm.Status,
+                            tm.PriorityTask,
+                        }).ToList();
+                return data2;
+            }
+            return data;
+        }
     }
 }

@@ -22,6 +22,9 @@
     <!-- Bootstrap CSS-->
     <link href="~/cooladmin/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
 
+    <!-- DateTimePicker -->
+    <link rel="stylesheet" type="text/css" href="~/build/jquery.datetimepicker.min.css" />
+
     <!-- Data Tables-->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
 
@@ -67,10 +70,33 @@
                 </div>
                 <div class="modal-body bg-white m-3">
                     <div class="row">
-                        <div class="col-8">
-                            <div class=" card-body">
+                        <div class="col-8 shadow bg-white">
+                            <div class="card-body d-flex">
+                                <div class="pr-5">
+                                    <p style="font-size: 14px" class="font-weight-bold mb-0">DueDate</p>
+                                    <p style="font-size: 14px" id="datemodal">01/07/2021 - 30/07/2021</p>
+                                </div>
+                                <div id="membermodal">
+                                    <p style="font-size: 14px" class="font-weight-bold mb-0">Member</p>
+                                    <div class="d-flex">
+                                        <p style="font-size: 14px">Umar Faiz Ubaidillah</p>
+                                        <p class="btn btn-danger ml-3">X</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="card-body">
                                 <h3 class="pb-2"><i class="fa fa-align-left pr-2"></i> Description</h3>
-                                <h4 class="pl-5" id="descriptionTask">Detail Task</h4>
+                                <h4 class="pl-5 add-card-btn btn" id="descriptionTask">Detail Task</h4>
+                                <div class="collapse hide pl-5" id="collapseDescription">
+                                    <form id="insertDescription">
+                                        <input name="TaskId" type="text" id="TaskId" hidden />
+                                        <textarea name="Description" style="font-size: 14px" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter Description Task"></textarea>
+                                        <button onclick="insertDescription()" style="font-size: 14px" type="button" class="btn btn-primary" data-toggle="collapse" data-target="#collapseDescription" aria-expanded="false" aria-controls="collapseExample">
+                                            Save
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
 
                             <div class="card-body">
@@ -90,10 +116,7 @@
     <!-- Board info bar -->
     <section class="board-info-bar">
         <div class="board-controls trello">
-            @*@if (User.IsInRole("SA"))
-                {
-                <h2>developer</h2>
-                }*@
+
             <h2>@Model[0].Name</h2>
             <i class="far fa-star" aria-hidden="true"></i>
         </div>
@@ -123,85 +146,97 @@
             </ul>
         </div>
 
-        <div class="list overflow-auto">
-            <h3 class="list-title">Tasks Design</h3>
-            <div class="kartu kartu-project">
-                <h1 class="text-center">Design &#x1F3A8;</h1>
-            </div>
-            <ul id="Design" class="list-items sortable_list connectedSortable">
-                @foreach (var task in Model)
-                {
-                    @if (task.Status == Status.Design)
+        @if (User.IsInRole("SA") || User.IsInRole("BA"))
+        {
+            <div class="list overflow-auto">
+                <h3 class="list-title">Tasks Design</h3>
+                <div class="kartu kartu-project">
+                    <h1 class="text-center">Design &#x1F3A8;</h1>
+                </div>
+                <ul id="Design" class="list-items sortable_list connectedSortable">
+                    @foreach (var task in Model)
                     {
-                        <li onclick="showmodal(this.id)" id="@task.TaskId">
-                            <span class="text-truncate">@task.ModulName - @task.TaskName</span>
-                            <p><i class="fa fa-tasks"></i> @task.TaskName</p>
-                            <span class="date"><i class="fa fa-hourglass-half" aria-hidden="true"></i> @task.StartDate.ToShortDateString() - @task.Date.ToShortDateString() </span>
-                        </li>
+                        @if (task.Status == Status.Design)
+                        {
+                            <li onclick="showmodal(this.id)" id="@task.TaskId">
+                                <span class="text-truncate">@task.ModulName - @task.TaskName</span>
+                                <p><i class="fa fa-tasks"></i> @task.TaskName</p>
+                                <span class="date"><i class="fa fa-hourglass-half" aria-hidden="true"></i> @task.StartDate.ToShortDateString() - @task.Date.ToShortDateString() </span>
+                            </li>
+                        }
                     }
-                }
-            </ul>
-        </div>
+                </ul>
+            </div>
+        }
 
-        <div class="list overflow-auto">
-            <h3 class="list-title">Doing Tasks </h3>
-            <div class="kartu kartu-project">
-                <h1 class="text-center">Doing &#x1F4BB;</h1>
-            </div>
-            <ul id="Doing" class="list-items sortable_list connectedSortable">
-                @foreach (var task in Model)
-                {
-                    @if (task.Status == Status.Doing)
+        @if (User.IsInRole("SA") || User.IsInRole("BA") || User.IsInRole("Developer"))
+        {
+            <div class="list overflow-auto">
+                <h3 class="list-title">Doing Tasks </h3>
+                <div class="kartu kartu-project">
+                    <h1 class="text-center">Doing &#x1F4BB;</h1>
+                </div>
+                <ul id="Doing" class="list-items sortable_list connectedSortable">
+                    @foreach (var task in Model)
                     {
-                        <li onclick="showmodal(this.id)" id="@task.TaskId">
-                            <span class="text-truncate">@task.ModulName - @task.TaskName</span>
-                            <p><i class="fa fa-tasks"></i> @task.TaskName</p>
-                            <span class="date"><i class="fa fa-hourglass-half" aria-hidden="true"></i> @task.StartDate.ToShortDateString() - @task.Date.ToShortDateString() </span>
-                        </li>
+                        @if (task.Status == Status.Doing)
+                        {
+                            <li onclick="showmodal(this.id)" id="@task.TaskId">
+                                <span class="text-truncate">@task.ModulName - @task.TaskName</span>
+                                <p><i class="fa fa-tasks"></i> @task.TaskName</p>
+                                <span class="date"><i class="fa fa-hourglass-half" aria-hidden="true"></i> @task.StartDate.ToShortDateString() - @task.Date.ToShortDateString() </span>
+                            </li>
+                        }
                     }
-                }
-            </ul>
-        </div>
+                </ul>
+            </div>
+        }
 
-        <div class="list overflow-auto">
-            <h3 class="list-title">Code Review Task</h3>
-            <div class="kartu kartu-project">
-                <h1 class="text-center">Code Review &#x1F575;</h1>
-            </div>
-            <ul id="CodeReview" class="list-items sortable_list connectedSortable">
-                @foreach (var task in Model)
-                {
-                    @if (task.Status == Status.CodeReview)
+        @if (User.IsInRole("Developer"))
+        {
+            <div class="list overflow-auto">
+                <h3 class="list-title">Code Review Task</h3>
+                <div class="kartu kartu-project">
+                    <h1 class="text-center">Code Review &#x1F575;</h1>
+                </div>
+                <ul id="CodeReview" class="list-items sortable_list connectedSortable">
+                    @foreach (var task in Model)
                     {
-                        <li onclick="showmodal(this.id)" id="@task.TaskId">
-                            <span class="text-truncate">@task.ModulName - @task.TaskName</span>
-                            <p><i class="fa fa-tasks"></i> @task.TaskName</p>
-                            <span class="date"><i class="fa fa-hourglass-half" aria-hidden="true"></i> @task.StartDate.ToShortDateString() - @task.Date.ToShortDateString() </span>
-                        </li>
+                        @if (task.Status == Status.CodeReview)
+                        {
+                            <li onclick="showmodal(this.id)" id="@task.TaskId">
+                                <span class="text-truncate">@task.ModulName - @task.TaskName</span>
+                                <p><i class="fa fa-tasks"></i> @task.TaskName</p>
+                                <span class="date"><i class="fa fa-hourglass-half" aria-hidden="true"></i> @task.StartDate.ToShortDateString() - @task.Date.ToShortDateString() </span>
+                            </li>
+                        }
                     }
-                }
-            </ul>
-        </div>
+                </ul>
+            </div>
+        }
 
-        <div class="list overflow-auto">
-            <h3 class="list-title">Testing</h3>
-            <div class="kartu kartu-project">
-                <h1 class="text-center">Testing &#x1F3ED;</h1>
-            </div>
-            <ul id="Testing" class="list-items sortable_list connectedSortable">
-                @foreach (var task in Model)
-                {
-                    @if (task.Status == Status.Testing)
+        @if (User.IsInRole("Developer") || User.IsInRole("QA"))
+        {
+            <div class="list overflow-auto">
+                <h3 class="list-title">Testing</h3>
+                <div class="kartu kartu-project">
+                    <h1 class="text-center">Testing &#x1F3ED;</h1>
+                </div>
+                <ul id="Testing" class="list-items sortable_list connectedSortable">
+                    @foreach (var task in Model)
                     {
-                        <li onclick="showmodal(this.id)" id="@task.TaskId">
-                            <span class="text-truncate">@task.ModulName - @task.TaskName</span>
-                            <p><i class="fa fa-tasks"></i> @task.TaskName</p>
-                            <span class="date"><i class="fa fa-hourglass-half" aria-hidden="true"></i> @task.StartDate.ToShortDateString() - @task.Date.ToShortDateString() </span>
-                        </li>
+                        @if (task.Status == Status.Testing)
+                        {
+                            <li onclick="showmodal(this.id)" id="@task.TaskId">
+                                <span class="text-truncate">@task.ModulName - @task.TaskName</span>
+                                <p><i class="fa fa-tasks"></i> @task.TaskName</p>
+                                <span class="date"><i class="fa fa-hourglass-half" aria-hidden="true"></i> @task.StartDate.ToShortDateString() - @task.Date.ToShortDateString() </span>
+                            </li>
+                        }
                     }
-                }
-            </ul>
-        </div>
+                </ul>
+            </div>
+        }
 
         <div class="list overflow-auto">
             <h3 class="list-title">Done</h3>
@@ -254,12 +289,14 @@
     <script src="~/cooladmin/vendor/select2/select2.min.js"></script>
     <!-- Momen JS-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <!-- DateTime-->
+    <script src="~/build/jquery.datetimepicker.full.min.js"></script>
     <!-- Apex Chart -->
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <!-- Google Chart -->
     @*<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>*@
 
-    <script src="~/js/sorttest.js"></script>
+    <script src="~/js/sorttesttask.js"></script>
 </body>
 
 </html>

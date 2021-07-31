@@ -41,5 +41,26 @@ namespace ProjectTimeLine.Controllers
                 return BadRequest(new { status = HttpStatusCode.OK, result = 0, message = "Data tidak ditemukan" });
             }
         }
+
+        [HttpGet("GetAllTask/{id}")]
+        public ActionResult GetAllTask(int id)
+        {
+            try
+            {
+                var view = repository.GetAllTask(id);
+                if (view != null)
+                {
+                    return Ok(view);
+                }
+                else
+                {
+                    return BadRequest(new { status = HttpStatusCode.BadRequest, result = view, message = "Data Registrasi tidak ditemukan" });
+                }
+            }
+            catch (Exception)
+            {
+                return BadRequest(new { status = HttpStatusCode.OK, result = 0, message = "Data Registrasi tidak ditemukan" });
+            }
+        }
     }
 }

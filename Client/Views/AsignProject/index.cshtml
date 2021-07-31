@@ -41,7 +41,7 @@
                         <strong>Project Form</strong>
                     </div>
                     <div class="card-body card-block">
-                        <form action="/AsignProject/InsertProject" method="post">
+                        <form id="formInsertProject">
                             <div class="row form-group">
                                 <div class="col col-md-3">
                                     <label for="text-input" class=" form-control-label">Project Name</label>
@@ -69,7 +69,7 @@
                                     <small class="help-block form-text">leave it blank if you don't want filled</small>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary btn-sm">
+                            <button onclick="insertProject()" data-dismiss="modal" class="btn btn-primary btn-sm">
                                 <i class="fa fa-dot-circle-o"></i> Submit
                             </button>
                         </form>

@@ -98,5 +98,19 @@ namespace ProjectTimeLine.Controllers
             }
         }
 
+        [HttpDelete("DeleteMember/{NIK}/{TaskModulId}")]
+        public ActionResult DeleteMember(string NIK, int TaskModulId)
+        {
+            var respone = repository.DeleteMember(NIK, TaskModulId);
+            if (respone > 0)
+            {
+                return Ok(new { status = HttpStatusCode.OK, result = respone, message = "Berhasil Delete" });
+            }
+            else
+            {
+                return BadRequest(new { status = HttpStatusCode.BadRequest, result = respone, message = "Delete gagal" });
+            }
+        }
+
     }
 }

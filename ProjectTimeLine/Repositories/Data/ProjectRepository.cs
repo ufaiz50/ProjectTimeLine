@@ -36,5 +36,27 @@ namespace ProjectTimeLine.Repositories.Data
 
             return data;
         }
+
+        public IQueryable GetAllTask(int id)
+        {
+
+            var data = from tm in myContext.TaskModuls
+                       join m in myContext.Moduls on tm.ModulId equals m.ModulId
+                       join p in myContext.Projects on m.ProjectId equals p.ProjectId
+                       where p.ProjectId == id
+                       select new
+                       {
+                           m.ModulId,
+                           m.ModulName,
+                           tm.TaskId,
+                           tm.TaskName,
+                           tm.Status,
+                           tm.StartDate,
+                           tm.Date,
+                           p.Name,
+                           p.ProjectId
+                       };
+            return data;
+        }
     }
 }

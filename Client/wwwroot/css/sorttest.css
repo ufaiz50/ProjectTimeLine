@@ -47,7 +47,7 @@ body{
     background-color: #0079bf;
 }
 
-.btn {
+/*.btn {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -57,7 +57,7 @@ body{
     color: inherit;
     padding: 0;
     cursor: pointer;
-}
+}*/
 
 :focus {
     outline-color: #fa0;
@@ -448,8 +448,6 @@ span{
 /*Faiz*/
 .kartu {
     height: 120px;
-    display: inline-block;
-    position: relative;
     border-radius: 10px;
     padding: 15px 25px;
     box-sizing: border-box;
@@ -495,4 +493,15 @@ ul li p{
     margin: 5px 0;
 }
 
+.topnav {
+    overflow: hidden;
+}
+
+.topnav input[type=text] {
+    padding: 3px;
+    border: 1px solid whitesmoke;
+    margin-top: 8px;
+    margin-right: 0px;
+    font-size: 14px;
+}
 /* Modal */
