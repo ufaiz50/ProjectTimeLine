@@ -2,7 +2,7 @@
 
 @model List<ProjectTimeLine.Model.Project>;
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Gantt";
     Layout = "_LayoutDashboard";
 }
 
@@ -23,7 +23,7 @@
                                 <label for="select" class=" form-control-label">Select Project History</label>
                             </div>
                             <div class="col-12 col-md-9">
-                                <select name="select" id="select" class="form-control">
+                                <select onchange="apexChart(this)" name="select" id="select" class="form-control">
                                     <option disabled selected>Please select</option>
                                     @foreach (var item in Model)
                                     {

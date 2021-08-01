@@ -26,10 +26,10 @@ namespace Client.Controllers
             this.dashboardRepository = dashboardRepository;
         }
 
-        public async Task<IActionResult> Index()
+        [HttpGet("/Dashboard")]
+        public IActionResult Index()
         {
-            var Role = await repository.getJwt();
-            ViewBag.Roles = Role.AllRole;
+            
             return View();
         }
         [Authorize(Roles = "Admin")]
@@ -39,11 +39,11 @@ namespace Client.Controllers
             ViewBag.Roles = Role.AllRole;
             return View();
         }
-        
-        public async Task<IActionResult> Assigntask()
+
+        [HttpGet("/Dashboard/Assigntask/{id}")]
+        public IActionResult Assigntask(int id)
         {
-            var Role = await repository.getJwt();
-            ViewBag.Roles = Role.AllRole;
+            ViewData["ProjectId"] = id;
             return View();
         }
 

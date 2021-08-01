@@ -41,7 +41,7 @@ window.addEventListener('load', () => {
 });
 
 
-//=========================Update Modul==================================
+//=========================Insert Employee==================================
 
 function PostRegis() {
     var obj = new Object();
@@ -59,11 +59,19 @@ function PostRegis() {
         data: obj
     }).done((result) => {
         console.log(result);
-        Swal.fire({
-            icon: 'success',
-            title: result.message,
-        });
-        $('#regis').modal('hide');
+        if (result.result == 2) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Register Failed ',
+                text: "Email has Taken, Use another Email",
+            });
+        } else {
+            Swal.fire({
+                icon: 'success',
+                title: result.message,
+            });
+            $('#regis').modal('hide');
+        }
     }).fail((error) => {
         console.log(error);
         Swal.fire({

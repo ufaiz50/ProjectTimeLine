@@ -78,9 +78,9 @@ namespace ProjectTimeLine.Repositories.Data
 
                 if (insert > 0)
                 {
-                    var fromAddress = new MailAddress("henrisuni05@gmail.com", "From Project Timeline");
+                    var fromAddress = new MailAddress("pandanaran1000@gmail.com", "Project Timeline");
                     var toAddress = new MailAddress(resetPasswordVM.Email, $"To {resetPasswordVM.Email}");
-                    string fromPassword = "*********";
+                    string fromPassword = "!23456Qwerty";
                     string subject = "Reset Password";
                     string body = "Hello " + email.Name + System.Environment.NewLine + "Ini password baru anda : " + emailGuid;
 

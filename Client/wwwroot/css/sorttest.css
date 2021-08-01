@@ -361,7 +361,7 @@ body {
 
 .boards-menu {
     display: grid;
-    grid-template-columns: 9rem 18rem;
+    grid-template-columns: 9rem 14rem 10rem;
     grid-column-gap: 0.8rem;
 }
 

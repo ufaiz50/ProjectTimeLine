@@ -16,7 +16,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>@Name</title>
     <!-- Fontfaces CSS-->
     <link href="~/cooladmin/css/font-face.css" rel="stylesheet" media="all">
     <link href="~/cooladmin/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
@@ -56,8 +56,9 @@
     <header class="masthead">
 
         <div class="boards-menu">
-            <button id="KanbanView" class="boards-btn btn"><i class="fab fa-trello boards-btn-icon"></i>Boards</button>
+            <button id="KanbanView" class="boards-btn btn"><i class="fa fa-window-maximize boards-btn-icon" aria-hidden="true"></i>Boards</button>
             <button id="GanttView" class="boards-btn btn"><i class="fas fa-chart-bar boards-btn-icon"></i>Gantt Chart</button>
+            <a class="boards-btn btn" href="https://localhost:44374/Dashboard/AssignTask/@Project"><i class="fa fa-table boards-btn-icon" aria-hidden="true"></i>Table</a>
         </div>
         <div class="logo trello">
             <h1>MII</h1>
@@ -116,7 +117,7 @@
                             <div class="card-body">
                                 <h3>Add to Task</h3>
                                 <ul>
-                                    <li class="add-card-btn btn" data-toggle="collapse" data-target="#collapseMember" aria-expanded="false" aria-controls="collapseExample">Add Member</li>
+                                    <li class="add-card-btn btn" data-toggle="collapse" data-target="#collapseMember" aria-expanded="false" aria-controls="collapseExample"><i class="zmdi zmdi-account-calendar"></i> Add Member</li>
                                     <li id="collapseMember" class="card card-body collapse hide">
                                         <form id="insertMember">
                                             <input name="TaskId" type="text" id="TaskId" hidden />
@@ -130,7 +131,7 @@
                                             </div>
                                         </form>
                                     </li>
-                                    <li class="add-card-btn btn" data-toggle="collapse" data-target="#collapseDate" aria-expanded="false" aria-controls="collapseExample">Date</li>
+                                    <li class="add-card-btn btn" data-toggle="collapse" data-target="#collapseDate" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-tasks"></i> Date</li>
                                     <li id="collapseDate" class="card card-body collapse hide">
                                         <form id="insertDate">
                                             <input name="TaskId" type="text" id="TaskId" hidden />
@@ -277,7 +278,7 @@
                         <textarea name="TaskName" style="font-size: 14px" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter Task Name"></textarea>
                     </div>
 
-                    <button onclick="AddTaskDesign()" style="font-size: 14px" type="button" class="btn btn-primary" data-toggle="collapse" data-target="#collapseTodo" aria-expanded="false" aria-controls="collapseExample">
+                    <button onclick="AddTaskDesign()" style="font-size: 14px" type="button" class="btn btn-primary" data-toggle="collapse" data-target="#collapseDesign" aria-expanded="false" aria-controls="collapseExample">
                         Add Task
                     </button>
                 </form>
@@ -317,7 +318,7 @@
                         <textarea name="TaskName" style="font-size: 14px" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter Task Name"></textarea>
                     </div>
 
-                    <button onclick="AddTaskDoing()" style="font-size: 14px" type="button" class="btn btn-primary" data-toggle="collapse" data-target="#collapseTodo" aria-expanded="false" aria-controls="collapseExample">
+                    <button onclick="AddTaskDoing()" style="font-size: 14px" type="button" class="btn btn-primary" data-toggle="collapse" data-target="#collapseDoing" aria-expanded="false" aria-controls="collapseExample">
                         Add Task
                     </button>
                 </form>
@@ -357,7 +358,7 @@
                         <textarea name="TaskName" style="font-size: 14px" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter Task Name"></textarea>
                     </div>
 
-                    <button onclick="AddTaskCodeReview()" style="font-size: 14px" type="button" class="btn btn-primary" data-toggle="collapse" data-target="#collapseTodo" aria-expanded="false" aria-controls="collapseExample">
+                    <button onclick="AddTaskCodeReview()" style="font-size: 14px" type="button" class="btn btn-primary" data-toggle="collapse" data-target="#collapseCodeReview" aria-expanded="false" aria-controls="collapseExample">
                         Add Task
                     </button>
                 </form>
@@ -397,7 +398,7 @@
                         <textarea name="TaskName" style="font-size: 14px" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter Task Name"></textarea>
                     </div>
 
-                    <button onclick="AddTaskTesting()" style="font-size: 14px" type="button" class="btn btn-primary" data-toggle="collapse" data-target="#collapseTodo" aria-expanded="false" aria-controls="collapseExample">
+                    <button onclick="AddTaskTesting()" style="font-size: 14px" type="button" class="btn btn-primary" data-toggle="collapse" data-target="#collapseTesting" aria-expanded="false" aria-controls="collapseExample">
                         Add Task
                     </button>
                 </form>
@@ -437,7 +438,7 @@
                         <textarea name="TaskName" style="font-size: 14px" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter Task Name"></textarea>
                     </div>
 
-                    <button onclick="AddTaskDone()" style="font-size: 14px" type="button" class="btn btn-primary" data-toggle="collapse" data-target="#collapseTodo" aria-expanded="false" aria-controls="collapseExample">
+                    <button onclick="AddTaskDone()" style="font-size: 14px" type="button" class="btn btn-primary" data-toggle="collapse" data-target="#collapseDone" aria-expanded="false" aria-controls="collapseExample">
                         Add Task
                     </button>
                 </form>

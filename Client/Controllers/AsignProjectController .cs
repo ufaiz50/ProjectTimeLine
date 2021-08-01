@@ -37,6 +37,7 @@ namespace Client.Controllers
             return View(result);
         }
 
+        [AllowAnonymous]
         public async Task<JsonResult> GetProjectView()
         {
             var result = await repository.GetProjectView();

@@ -1,12 +1,109 @@
-﻿idProject = $('#select').on('change', function () {
-    ganttChart(this.value)
-});
+﻿//$('#select').on('change', function () {
+//    apexChart(this.value)
+//});
 
-function ganttChart(idProject) {
+function apexChart(id) {
+    projectId = id.value;
+    console.log(projectId);
     $.ajax({
         url: "https://localhost:44374/GanttChart/GanttChartView",
         dataType: "Json",
-        data: {"ProjectId": idProject},
+        data: { "ProjectId": projectId }
+    }).done(result => {
+        apexData = [];
+
+        //group by Data
+        project = result.reduce((unique, o) => {
+            if (!unique.some(obj => obj.projectName === o.projectName)) {
+                unique.push(o);
+            }
+            return unique;
+        }, []);
+        modul = result.reduce((unique, o) => {
+            if (!unique.some(obj => obj.modulName === o.modulName)) {
+                unique.push(o);
+            }
+            return unique;
+        }, []);
+        task = result.reduce(function (r, a) {
+            r[a.modulName] = r[a.modulName] || [];
+            r[a.modulName].push(a);
+            return r;
+        }, Object.create(null));
+        //shorting
+        apexData.push({
+            "x": project[0].projectName,
+            "y": [new Date(project[0].startDate).getTime(), new Date(project[0].endDate).getTime()]
+        })
+        for (var i in modul) {
+            //chartData.push(Object.values(modul[i]))
+            apexData.push({
+                "x": modul[i].modulName,
+                "y": [new Date(modul[i].modulStartDate).getTime(), new Date(modul[i].modulEndDate).getTime()]
+            })
+
+
+            nama = modul[i].modulName
+            nama2 = task[nama]
+            for (var i in nama2) {
+                //chartData.push(Object.values(nama2[i]))
+                apexData.push({
+                    "x": nama2[i].taskName,
+                    "y": [new Date(nama2[i].taskStartDate).getTime(), new Date(nama2[i].taskEndDate).getTime()]
+                })
+            }
+        }
+
+
+        var options = {
+            series: [
+                {
+                    data: apexData
+                }
+            ],
+            chart: {
+                id: 'mychart',
+                height: 350,
+                type: 'rangeBar'
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: true
+                }
+            },
+            dataLabels: {
+                enabled: true,
+                formatter: function (val, opts) {
+                    var label = opts.w.globals.labels[opts.dataPointIndex]
+                    var a = moment(val[0])
+                    var b = moment(val[1])
+                    var diff = b.diff(a, 'days')
+                    return label + ': ' + diff + (diff > 1 ? ' days' : ' day')
+                },
+                style: {
+                    colors: ['#f3f4f5', '#fff']
+                }
+            },
+            xaxis: {
+                type: 'datetime'
+            }
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart-container"), options);
+        //chart.destroy();
+        chart.render();
+
+
+
+    }).fail(error => { })
+}
+
+function ganttChart(idProject) {
+    id = idProject.value
+    $.ajax({
+        url: "https://localhost:44374/GanttChart/GanttChartView",
+        dataType: "Json",
+        data: {"ProjectId": id},
     }).done(result => {
 
         var chartLabel = []

@@ -1,5 +1,5 @@
+addProject();
 addmodul();
-addProject()
 
 $(document).ready(function () {
 
@@ -324,12 +324,14 @@ function updateModul() {
 //===================add option modul========================================
 
 function addmodul() {
+    var id = $('#ProjectId').val();
+    
     $.ajax({
-        url: "/modul/Getmodultable"
+        url: "/modul/ViewProjectModul/"+id
     }).done((result) => {
         text = "<option selected disabled value=\"\">Choose...</option>";
         $.each(result, function (key, val) {
-            text += `<option id="m${val.modulId}" value="${val.modulId}">${val.modulName} (Project : ${val.name})</option>`;
+            text += `<option id="m${val.modulId}" value="${val.modulId}">${val.modulName}</option>`;
         });
         $("#modultask").html(text);
     }).fail((error) => {
@@ -360,8 +362,19 @@ $(document).ready(function () {
         url: "/Dashboard/Userdataview"
     }).done((result) => {
         let text = "";
+        
         $.each(result, function (key, val) {
-            text += `<option value="${val.nik}">${val.name} (${val.allRoleName})</option>`;
+            var isExist = false
+            $.each(val.allRoleName, function (index, row) {
+                if (row == "SA" || row == "BA" || row == "Developer" || row == "QA") {
+                    isExist = true
+                } 
+            })
+            if (isExist) {
+                text += `<option value="${val.nik}">${val.name} (${val.allRoleName})</option>`;
+            }
+            
+            
         });
         $("#member").html(text);
         $("#memberTask").html(text);
@@ -653,7 +666,7 @@ function updateTask() {
     obj.Date = $("#updatedatetask").val();
     obj.ModulId = parseInt($("#modtask").val());
     obj.Description = $("#updateDesc").val();
-    obj.Status = $("#tId").val();
+    obj.Status = $("#sId").val();
     obj.PriorityTask = parseInt($("#uptPrio").val());
 
     $.ajax({
@@ -739,7 +752,7 @@ function LatestTask() {
                                 <td>${val.taskName}</td>
                                 <td>${start}</td>
                                 <td>
-                                    <a href="/Task/Taskview/?NIK=${val.nik}&ProjectId=${val.projectId}" target=�_blank�>
+                                    <a href="/Task/Taskview/${val.nik}/?id=${val.projectId}" target=�_blank�>
                                     <i class="fa fa-share" aria-hidden="true"></i></a>
                                 </td>
                             </tr>`;

@@ -5,7 +5,7 @@
     <!-- Required meta tags-->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>@ViewData["Title"] - Client</title>
+    <title>@ViewData["Title"]</title>
 
     <!-- Title Page-->
     <title>Dashboard</title>
@@ -140,7 +140,7 @@
                         {
                             <li>
                                 <a href="@Url.Action("Index", "AsignProject")">
-                                    <i class="zmdi zmdi-account-calendar"></i>Assign Project
+                                    <i class="fa fa-tasks"></i>Assign Project
                                 </a>
                             </li>
                         }
@@ -153,10 +153,10 @@
                             </li>
                         }
                         @*<li class="has-sub">
-                            <a class="js-arrow" href="/Dashboard/AssignTask/">
-                                <i class="zmdi zmdi-account-calendar"></i>Assign Task
-                            </a>
-                        </li>*@
+                                <a class="js-arrow" href="/Dashboard/AssignTask/">
+                                    <i class="zmdi zmdi-account-calendar"></i>Assign Task
+                                </a>
+                            </li>*@
                     </ul>
                 </nav>
             </div>
@@ -279,7 +279,7 @@
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap4.min.js"></script>
-    
+
     <!-- Vendor JS -->
     <script src="~/cooladmin/vendor/slick/slick.min.js">
     </script>
@@ -298,6 +298,12 @@
 
     <!-- Sweet Alert JS-->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Momen JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
+    <!-- Apex Chart -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
     <!-- Fusion ChartJs-->
     <!-- Step 1 - Include the fusioncharts core library -->

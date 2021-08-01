@@ -24,6 +24,7 @@ namespace Client.Controllers
             historyRepository = repository1;
         }
 
+        [HttpGet("/Task")]
         public async Task<IActionResult> Index()
         {
             var Role = await repository.GetJwt();
@@ -31,6 +32,7 @@ namespace Client.Controllers
             return View();
         }
 
+        
         public async Task<IActionResult> Taskview(string NIK, int ProjectId)
         {
             List<TaskModulVM> result = await repository.GetModulTask(NIK, ProjectId);

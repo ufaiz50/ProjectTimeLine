@@ -56,6 +56,7 @@ function UpdateEmployee() {
             'Employee Has Been Update',
             'success'
         )
+        Triggerdata();
     }).fail(error => { })
     Triggerdata();
 }
