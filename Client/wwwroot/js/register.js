@@ -8,11 +8,16 @@ function getNik() {
         $.each(result, function (index, val) {
             nik = val['nik'];
         })
-        manipulat = nik.slice(-2);
+        /*manipulat = nik.slice(-2);
         result = parseInt(manipulat);
         result++;
-        result = result.toString();
-        nik = nik.replace(nik.slice(-2), result)
+        result = result.toString();*/
+        var numberPattern = /\d+/g;
+        res = nik.match(numberPattern)
+        number = parseInt(res);
+        number++;
+        nik = "E" + number
+        console.log(nik, number)
         document.getElementById("inputNik").value = nik;
     }).fail(error => {
         //alert("Data tidak berhasil di dapat");

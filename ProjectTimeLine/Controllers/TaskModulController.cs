@@ -86,7 +86,7 @@ namespace ProjectTimeLine.Controllers
         }
 
         [HttpPut("UpdateStatus")]
-        public ActionResult Update(TaskModul taskModul)
+        public ActionResult UpdateStatus(TaskModul taskModul)
         {
             var response = taskModulRepository.UpdateStatus(taskModul);
             if (response > 0)
@@ -96,6 +96,54 @@ namespace ProjectTimeLine.Controllers
             else
             {
                 return BadRequest(new { status = HttpStatusCode.BadRequest, result = response, message = "Update Gagal" });
+            }
+        }
+        [HttpPut("UpdateDescription")]
+        public ActionResult UpdateDescription(TaskModul taskModul)
+        {
+            var response = taskModulRepository.UpdateDescription(taskModul);
+            if (response > 0)
+            {
+                return Ok(new { status = HttpStatusCode.OK, result = response, message = "Berhasil Update" });
+            }
+            else
+            {
+                return BadRequest(new { status = HttpStatusCode.BadRequest, result = response, message = "Update Gagal" });
+            }
+        }
+
+        [HttpPut("UpdateDate")]
+        public ActionResult UpdateDate(TaskModul taskModul)
+        {
+            var response = taskModulRepository.UpdateDate(taskModul);
+            if (response > 0)
+            {
+                return Ok(new { status = HttpStatusCode.OK, result = response, message = "Berhasil Update" });
+            }
+            else
+            {
+                return BadRequest(new { status = HttpStatusCode.BadRequest, result = response, message = "Update Gagal" });
+            }
+        }
+
+        [HttpGet("GetTaskAccount/{key}")]
+        public ActionResult GetTaskAccount(int key)
+        {
+            try
+            {
+                var view = taskModulRepository.GetTaskAccount(key);
+                if (view != null)
+                {
+                    return Ok(view);
+                }
+                else
+                {
+                    return BadRequest(new { status = HttpStatusCode.BadRequest, result = view, message = "Data Registrasi tidak ditemukan" });
+                }
+            }
+            catch (Exception)
+            {
+                return BadRequest(new { status = HttpStatusCode.OK, result = 0, message = "Data Registrasi tidak ditemukan" });
             }
         }
     }

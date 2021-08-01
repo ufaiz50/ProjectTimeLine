@@ -58,6 +58,132 @@ namespace Client.Repository.Data
             }
             return entities;
         }
+
+        public async Task<List<TaskModulVM>> GetAllTask(int id)
+        {
+            List<TaskModulVM> entities = new List<TaskModulVM>();
+
+            using (var response = await httpClient.GetAsync(request + "GetAllTask/" + id))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+
+                entities = JsonConvert.DeserializeObject<List<TaskModulVM>>(apiResponse);
+            }
+            return entities;
+        }
+
+        public async Task<string> InsertModul(Modul modul)
+        {
+            var entities = "";
+            StringContent content = new StringContent(JsonConvert.SerializeObject(modul), Encoding.UTF8, "application/json");
+            var result = await httpClient.PostAsync("Modul", content);
+
+            if (result.IsSuccessStatusCode)
+            {
+                string apiResponse = await result.Content.ReadAsStringAsync();
+                entities = apiResponse;
+            }
+            return entities;
+        }
+
+        public async Task<List<ModulVM>> GetModul(int id)
+        {
+            List<ModulVM> entities = new List<ModulVM>();
+
+            using (var response = await httpClient.GetAsync("Modul/ViewProjectModul/" + id))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+                entities = JsonConvert.DeserializeObject<List<ModulVM>>(apiResponse);
+            }
+            return entities;
+        }
+
+        public async Task<string> InsertTask(TaskModul task)
+        {
+            var message = "";
+            StringContent content = new StringContent(JsonConvert.SerializeObject(task), Encoding.UTF8, "application/json");
+            var result = await httpClient.PostAsync("TaskModul", content);
+
+            if (result.IsSuccessStatusCode)
+            {
+                message = await result.Content.ReadAsStringAsync();
+            }
+            return message;
+        }
+
+        public async Task<string> UpdateDescription(TaskModul taskModul)
+        {
+            var res = "";
+            StringContent content = new StringContent(JsonConvert.SerializeObject(taskModul), Encoding.UTF8, "application/json");
+            var result = await httpClient.PutAsync("TaskModul/UpdateDescription", content);
+            if (result.IsSuccessStatusCode)
+            {
+                var apiResponse = await result.Content.ReadAsStringAsync();
+                res = apiResponse;
+            }
+            return res;
+        }
+
+        public async Task<string> UpdateDate(TaskModul taskModul)
+        {
+            var res = "";
+            StringContent content = new StringContent(JsonConvert.SerializeObject(taskModul), Encoding.UTF8, "application/json");
+            var result = await httpClient.PutAsync("TaskModul/UpdateDate", content);
+            if (result.IsSuccessStatusCode)
+            {
+                var apiResponse = await result.Content.ReadAsStringAsync();
+                res = apiResponse;
+            }
+            return res;
+        }
+
+        public async Task<List<UserDataVM>> GetAccounts()
+        {
+            List<UserDataVM> entities = new List<UserDataVM>();
+            var result = await httpClient.GetAsync("Employees/userdata/");
+            if (result.IsSuccessStatusCode)
+            {
+                string apiResponse = await result.Content.ReadAsStringAsync();
+                entities = JsonConvert.DeserializeObject<List<UserDataVM>>(apiResponse);
+            }
+            return entities;
+        }
+
+        public async Task<List<TaskAccountVM>> GetTaskAccount(int id)
+        {
+            List<TaskAccountVM> entities = new List<TaskAccountVM>();
+            var result = await httpClient.GetAsync("TaskModul/GetTaskAccount/"+id);
+            if (result.IsSuccessStatusCode)
+            {
+                string apiResponse = await result.Content.ReadAsStringAsync();
+                entities = JsonConvert.DeserializeObject<List<TaskAccountVM>>(apiResponse);
+            }
+            return entities;
+        }
+
+        public async Task<string> InsertMember(AccountTask accountTask)
+        {
+            var message = "";
+            StringContent content = new StringContent(JsonConvert.SerializeObject(accountTask), Encoding.UTF8, "application/json");
+            var result = await httpClient.PostAsync("AccountTasks", content);
+
+            if (result.IsSuccessStatusCode)
+            {
+                message = await result.Content.ReadAsStringAsync();
+            }
+            return message;
+        }
+
+        public async Task<string> DeleteMember(string NIK, int TaskModulId)
+        {
+            var message = "";
+            var result = await httpClient.DeleteAsync("AccountTasks/DeleteMember/"+NIK+"/"+TaskModulId);
+            if (result.IsSuccessStatusCode)
+            {
+                message = await result.Content.ReadAsStringAsync();
+            }
+            return message;
+        }
     }
 }
 

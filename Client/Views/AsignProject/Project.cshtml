@@ -1,5 +1,11 @@
-﻿@{
+﻿@using Client.Models
+
+@model List<Client.Models.TaskModulVM>
+@{
     ViewData["Title"] = "Home Page";
+    var Project = ViewData["id"];
+    var Name = ViewData["name"];
+    var Dates = ViewData["date"];
     Layout = "";
 }
 
@@ -33,8 +39,14 @@
     <link href="~/cooladmin/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
-
+    <!-- Bootstap -->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <!-- DateTimePicker -->
+    <link rel="stylesheet" type="text/css" href="~/build/jquery.datetimepicker.min.css" />
+
+    <!-- Semantic -->
+
     <link rel="stylesheet" href="~/css/sorttest.css">
 </head>
 
@@ -63,12 +75,35 @@
                         <h3 aria-hidden="true">&times;</h3>
                     </button>
                 </div>
-                <div class="modal-body bg-white m-3">
+                <div class="modal-body m-3">
                     <div class="row">
-                        <div class="col-8">
-                            <div class=" card-body">
+                        <div class="col-8 shadow bg-white">
+                            <div class="card-body d-flex">
+                                <div class="pr-5">
+                                    <p style="font-size: 14px" class="font-weight-bold mb-0">DueDate</p>
+                                    <p style="font-size: 14px" id="datemodal">01/07/2021 - 30/07/2021</p>
+                                </div>
+                                <div id="membermodal">
+                                    <p style="font-size: 14px" class="font-weight-bold mb-0">Member</p>
+                                    <div class="d-flex">
+                                        <p style="font-size: 14px">Umar Faiz Ubaidillah</p>
+                                        <p class="btn btn-danger ml-3">X</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="card-body">
                                 <h3 class="pb-2"><i class="fa fa-align-left pr-2"></i> Description</h3>
-                                <h4 class="pl-5" id="descriptionTask">Detail Task</h4>
+                                <h4 class="pl-5 add-card-btn btn" id="descriptionTask" data-toggle="collapse" data-target="#collapseDescription" aria-expanded="false" aria-controls="collapseExample">Detail Task</h4>
+                                <div class="collapse hide pl-5" id="collapseDescription">
+                                    <form id="insertDescription">
+                                        <input name="TaskId" type="text" id="TaskId" hidden />
+                                        <textarea name="Description" style="font-size: 14px" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter Description Task"></textarea>
+                                        <button onclick="insertDescription()" style="font-size: 14px" type="button" class="btn btn-primary" data-toggle="collapse" data-target="#collapseDescription" aria-expanded="false" aria-controls="collapseExample">
+                                            Save
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
 
                             <div class="card-body">
@@ -78,78 +113,336 @@
                             </div>
                         </div>
                         <div class="col-4">
+                            <div class="card-body">
+                                <h3>Add to Task</h3>
+                                <ul>
+                                    <li class="add-card-btn btn" data-toggle="collapse" data-target="#collapseMember" aria-expanded="false" aria-controls="collapseExample">Add Member</li>
+                                    <li id="collapseMember" class="card card-body collapse hide">
+                                        <form id="insertMember">
+                                            <input name="TaskId" type="text" id="TaskId" hidden />
+                                            <div class="topnav">
+                                                <input class="search-member" type="text" placeholder="Member...">
+                                            </div>
+                                            <div class="collapse show-member mt-2">
+                                                <ul class="list-group" id="selectMember">
+                                                    <li class="list-group-item">Cras justo odio</li>
+                                                </ul>
+                                            </div>
+                                        </form>
+                                    </li>
+                                    <li class="add-card-btn btn" data-toggle="collapse" data-target="#collapseDate" aria-expanded="false" aria-controls="collapseExample">Date</li>
+                                    <li id="collapseDate" class="card card-body collapse hide">
+                                        <form id="insertDate">
+                                            <input name="TaskId" type="text" id="TaskId" hidden />
+                                            <h5>Start Date</h5>
+                                            <input style="font-size: 14px" type="text" name="StartDate" id="date_timepicker_start" class="form-control" />
+                                            <h5 class="mt-2">End Date</h5>
+                                            <input style="font-size: 14px" type="text" name="Date" id="date_timepicker_end" class="form-control" />
+
+                                            <button onclick="insertDate()" style="font-size: 14px" type="button" class="btn btn-primary mt-2" data-toggle="collapse" data-target="#collapseDate" aria-expanded="false" aria-controls="collapseExample">
+                                                Save
+                                            </button>
+
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- modal Add Modul medium -->
+    <div class="modal fade" id="AddModulModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 style="font-size: 14px" class="modal-title" id="mediumModalLabel">Add Modul</h5>
+                    <button style="font-size: 14px" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <form id="insertModul" style="font-size: 14px" class="needs-validation modul" novalidate>
+                            <div>
+                                <input type="text" name="ProjectId" class="form-control" value="@Project" hidden />
+                            </div>
+                            <div>
+                                <label style="font-size: 14px">Modul Name</label>
+                                <input style="font-size: 14px" type="text" id="ModulName" name="ModulName" class="form-control" required />
+                            </div>
+                            <div class="form-group">
+                                <label style="font-size: 14px">Start Date</label>
+                                <input style="font-size: 14px" type="date" id="sdate" name="StartDate" class="form-control" required />
+                            </div>
+                            <div>
+                                <label style="font-size: 14px">Due Date</label>
+                                <input style="font-size: 14px" type="date" id="Date" name="Date" class="form-control" required />
+                            </div>
+                            <button style="font-size: 14px" type="button" class="btn btn-secondary mt-3 float-right" data-dismiss="modal">Cancel</button>
+                            <button onclick="AddModul()" style="font-size: 14px" class="btn btn-primary mt-3 float-right mr-3" data-dismiss="modal" type="submit">Save</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end modal medium -->
     <!-- End of masthead -->
     <!-- Board info bar -->
     <section class="board-info-bar">
         <div class="board-controls trello">
-
-            <h2></h2>
+            <h2>@Name</h2>
             <i class="far fa-star" aria-hidden="true"></i>
         </div>
-        <div id="NIK" hidden></div>
-        <div id="ProjectId" hidden></div>
+        <button style="font-size: 14px" type="button" class="btn btn-primary mb-1" data-toggle="modal" data-target="#AddModulModal">
+            Add Modul
+        </button>
+        <div id="ProjectId" hidden>@Project</div>
     </section>
     <!-- End of board info bar -->
     <!-- Lists container -->
     <section id="ListKanban" class="lists-container">
-        <div class="list trello overflow-auto">
-            <h3 class="list-title">Tasks To-Do</h3>
-            <div class="kartu kartu-project">
-                <h1 class="text-center">To-do &#x1F4BB;</h1>
+        <div class="list trello">
+            <div>
+                <h3 class="list-title">Tasks To-Do</h3>
+                <div class="kartu kartu-project">
+                    <h1 class="text-center">To-do &#x1F4BB;</h1>
+                </div>
             </div>
-            <ul id="Todo" class="list-items sortable_list connectedSortable">
+            <ul id="Todo" class="list-items sortable_list connectedSortable ">
+                @foreach (var task in Model)
+                {
+                    @if (task.Status == Status.ToDo)
+                    {
+                        <li class="shadow" onclick="showmodalProject(this.id)" id="@task.TaskId">
+                            <span class="text-truncate">@task.ModulName - @task.TaskName</span>
+                            <p><i class="fa fa-tasks"></i> @task.TaskName</p>
+                            <span class="date"><i class="fa fa-hourglass-half" aria-hidden="true"></i> @task.StartDate.ToShortDateString() - @task.Date.ToShortDateString() </span>
+                        </li>
+                    }
+                }
             </ul>
+            <div class="m-2 collapse hide" id="collapseTodo" style="">
+                <form id="insertTask">
+                    <input type="datetime" name="StartDate" value="@Dates" hidden />
+                    <input type="datetime" name="Date" value="@Dates" hidden/>
+                    <select name="ModulId" style="font-size: 14px" id="selectModul" class="custom-select">
+                    </select>
+
+                    <div class="card shadow form-group">
+                        <textarea name="TaskName" style="font-size: 14px" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter Task Name"></textarea>
+                    </div>
+
+                    <button onclick="AddTask()" style="font-size: 14px" type="button" class="btn btn-primary" data-toggle="collapse" data-target="#collapseTodo" aria-expanded="false" aria-controls="collapseExample">
+                        Add Task
+                    </button>
+                </form>
+            </div>
+            <button class="add-card-btn btn" data-toggle="collapse" data-target="#collapseTodo" aria-expanded="false" aria-controls="collapseExample">Add a card</button>
         </div>
 
         <div class="list overflow-auto">
-            <h3 class="list-title">Tasks Design</h3>
-            <div class="kartu kartu-project">
-                <h1 class="text-center">Design &#x1F3A8;</h1>
+            <div>
+                <h3 class="list-title">Tasks Design</h3>
+                <div class="kartu kartu-project">
+                    <h1 class="text-center">Design &#x1F3A8;</h1>
+                </div>
             </div>
             <ul id="Design" class="list-items sortable_list connectedSortable">
+                @foreach (var task in Model)
+                {
+                    @if (task.Status == Status.Design)
+                    {
+                        <li class="shadow" onclick="showmodalProject(this.id)" id="@task.TaskId">
+                            <span class="text-truncate">@task.ModulName - @task.TaskName</span>
+                            <p><i class="fa fa-tasks"></i> @task.TaskName</p>
+                            <span class="date"><i class="fa fa-hourglass-half" aria-hidden="true"></i> @task.StartDate.ToShortDateString() - @task.Date.ToShortDateString() </span>
+                        </li>
+                    }
+                }
             </ul>
+            <div class="m-2 collapse hide" id="collapseDesign" style="">
+                <form id="insertTaskDesign">
+                    <input type="datetime" name="StartDate" value="@Dates" hidden />
+                    <input type="datetime" name="Date" value="@Dates" hidden />
+                    <input type="text" name="Status" value="1" hidden />
+                    <select name="ModulId" style="font-size: 14px" id="selectModul" class="custom-select">
+                    </select>
+
+                    <div class="card shadow form-group">
+                        <textarea name="TaskName" style="font-size: 14px" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter Task Name"></textarea>
+                    </div>
+
+                    <button onclick="AddTaskDesign()" style="font-size: 14px" type="button" class="btn btn-primary" data-toggle="collapse" data-target="#collapseTodo" aria-expanded="false" aria-controls="collapseExample">
+                        Add Task
+                    </button>
+                </form>
+            </div>
+            <button class="add-card-btn btn" data-toggle="collapse" data-target="#collapseDesign" aria-expanded="false" aria-controls="collapseExample">Add a card</button>
         </div>
 
         <div class="list overflow-auto">
-            <h3 class="list-title">Doing Tasks </h3>
-            <div class="kartu kartu-project">
-                <h1 class="text-center">Doing &#x1F4BB;</h1>
+            <div>
+                <h3 class="list-title">Doing Tasks </h3>
+                <div class="kartu kartu-project">
+                    <h1 class="text-center">Doing &#x1F4BB;</h1>
+                </div>
             </div>
             <ul id="Doing" class="list-items sortable_list connectedSortable">
+                @foreach (var task in Model)
+                {
+                    @if (task.Status == Status.Doing)
+                    {
+                        <li class="shadow" onclick="showmodalProject(this.id)" id="@task.TaskId">
+                            <span class="text-truncate">@task.ModulName - @task.TaskName</span>
+                            <p><i class="fa fa-tasks"></i> @task.TaskName</p>
+                            <span class="date"><i class="fa fa-hourglass-half" aria-hidden="true"></i> @task.StartDate.ToShortDateString() - @task.Date.ToShortDateString() </span>
+                        </li>
+                    }
+                }
             </ul>
+            <div class="m-2 collapse hide" id="collapseDoing" style="">
+                <form id="insertTaskDoing">
+                    <input type="datetime" name="StartDate" value="@Dates" hidden />
+                    <input type="datetime" name="Date" value="@Dates" hidden />
+                    <input type="text" name="Status" value="2" hidden />
+                    <select name="ModulId" style="font-size: 14px" id="selectModul" class="custom-select">
+                    </select>
+
+                    <div class="card shadow form-group">
+                        <textarea name="TaskName" style="font-size: 14px" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter Task Name"></textarea>
+                    </div>
+
+                    <button onclick="AddTaskDoing()" style="font-size: 14px" type="button" class="btn btn-primary" data-toggle="collapse" data-target="#collapseTodo" aria-expanded="false" aria-controls="collapseExample">
+                        Add Task
+                    </button>
+                </form>
+            </div>
+            <button class="add-card-btn btn" data-toggle="collapse" data-target="#collapseDoing" aria-expanded="false" aria-controls="collapseExample">Add a card</button>
         </div>
 
         <div class="list overflow-auto">
-            <h3 class="list-title">Code Review Task</h3>
-            <div class="kartu kartu-project">
-                <h1 class="text-center">Code Review &#x1F575;</h1>
+            <div>
+                <h3 class="list-title">Code Review Task</h3>
+                <div class="kartu kartu-project">
+                    <h1 class="text-center">Code Review &#x1F575;</h1>
+                </div>
             </div>
             <ul id="CodeReview" class="list-items sortable_list connectedSortable">
+                @foreach (var task in Model)
+                {
+                    @if (task.Status == Status.CodeReview)
+                    {
+                        <li class="shadow" onclick="showmodalProject(this.id)" id="@task.TaskId">
+                            <span class="text-truncate">@task.ModulName - @task.TaskName</span>
+                            <p><i class="fa fa-tasks"></i> @task.TaskName</p>
+                            <span class="date"><i class="fa fa-hourglass-half" aria-hidden="true"></i> @task.StartDate.ToShortDateString() - @task.Date.ToShortDateString() </span>
+                        </li>
+                    }
+                }
             </ul>
+            <div class="m-2 collapse hide" id="collapseCodeReview" style="">
+                <form id="insertTaskCodeReview">
+                    <input type="datetime" name="StartDate" value="@Dates" hidden />
+                    <input type="datetime" name="Date" value="@Dates" hidden />
+                    <input type="text" name="Status" value="3" hidden />
+                    <select name="ModulId" style="font-size: 14px" id="selectModul" class="custom-select">
+                    </select>
+
+                    <div class="card shadow form-group">
+                        <textarea name="TaskName" style="font-size: 14px" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter Task Name"></textarea>
+                    </div>
+
+                    <button onclick="AddTaskCodeReview()" style="font-size: 14px" type="button" class="btn btn-primary" data-toggle="collapse" data-target="#collapseTodo" aria-expanded="false" aria-controls="collapseExample">
+                        Add Task
+                    </button>
+                </form>
+            </div>
+            <button class="add-card-btn btn" data-toggle="collapse" data-target="#collapseCodeReview" aria-expanded="false" aria-controls="collapseExample">Add a card</button>
         </div>
 
         <div class="list overflow-auto">
-            <h3 class="list-title">Testing</h3>
-            <div class="kartu kartu-project">
-                <h1 class="text-center">Testing &#x1F3ED;</h1>
+            <div>
+                <h3 class="list-title">Testing</h3>
+                <div class="kartu kartu-project">
+                    <h1 class="text-center">Testing &#x1F3ED;</h1>
+                </div>
             </div>
             <ul id="Testing" class="list-items sortable_list connectedSortable">
+                @foreach (var task in Model)
+                {
+                    @if (task.Status == Status.Testing)
+                    {
+                        <li class="shadow" onclick="showmodalProject(this.id)" id="@task.TaskId">
+                            <span class="text-truncate">@task.ModulName - @task.TaskName</span>
+                            <p><i class="fa fa-tasks"></i> @task.TaskName</p>
+                            <span class="date"><i class="fa fa-hourglass-half" aria-hidden="true"></i> @task.StartDate.ToShortDateString() - @task.Date.ToShortDateString() </span>
+                        </li>
+                    }
+                }
             </ul>
+            <div class="m-2 collapse hide" id="collapseTesting" style="">
+                <form id="insertTaskTesting">
+                    <input type="datetime" name="StartDate" value="@Dates" hidden />
+                    <input type="datetime" name="Date" value="@Dates" hidden />
+                    <input type="text" name="Status" value="4" hidden />
+                    <select name="ModulId" style="font-size: 14px" id="selectModul" class="custom-select">
+                    </select>
+
+                    <div class="card shadow form-group">
+                        <textarea name="TaskName" style="font-size: 14px" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter Task Name"></textarea>
+                    </div>
+
+                    <button onclick="AddTaskTesting()" style="font-size: 14px" type="button" class="btn btn-primary" data-toggle="collapse" data-target="#collapseTodo" aria-expanded="false" aria-controls="collapseExample">
+                        Add Task
+                    </button>
+                </form>
+            </div>
+            <button class="add-card-btn btn" data-toggle="collapse" data-target="#collapseTesting" aria-expanded="false" aria-controls="collapseExample">Add a card</button>
         </div>
 
         <div class="list overflow-auto">
-            <h3 class="list-title">Done</h3>
-            <div class="kartu kartu-project">
-                <h1 class="text-center">Done &#x2714; &#x1F60a;</h1>
+            <div>
+                <h3 class="list-title">Done</h3>
+                <div class="kartu kartu-project">
+                    <h1 class="text-center">Done &#x2714; &#x1F60a;</h1>
+                </div>
             </div>
             <ul id="Done" class="list-items sortable_list connectedSortable">
+                @foreach (var task in Model)
+                {
+                    @if (task.Status == Status.Done)
+                    {
+                        <li class="shadow" onclick="showmodalProject(this.id)" id="@task.TaskId">
+                            <span class="text-truncate">@task.ModulName - @task.TaskName</span>
+                            <p><i class="fa fa-tasks"></i> @task.TaskName</p>
+                            <span class="date"><i class="fa fa-hourglass-half" aria-hidden="true"></i> @task.StartDate.ToShortDateString() - @task.Date.ToShortDateString() </span>
+                        </li>
+                    }
+                }
             </ul>
+            <div class="m-2 collapse hide" id="collapseDone" style="">
+                <form id="insertTaskDone">
+                    <input type="datetime" name="StartDate" value="@Dates" hidden />
+                    <input type="datetime" name="Date" value="@Dates" hidden />
+                    <input type="text" name="Status" value="5" hidden />
+                    <select name="ModulId" style="font-size: 14px" id="selectModul" class="custom-select">
+                    </select>
+
+                    <div class="card shadow form-group">
+                        <textarea name="TaskName" style="font-size: 14px" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter Task Name"></textarea>
+                    </div>
+
+                    <button onclick="AddTaskDone()" style="font-size: 14px" type="button" class="btn btn-primary" data-toggle="collapse" data-target="#collapseTodo" aria-expanded="false" aria-controls="collapseExample">
+                        Add Task
+                    </button>
+                </form>
+            </div>
+            <button class="add-card-btn btn" data-toggle="collapse" data-target="#collapseDone" aria-expanded="false" aria-controls="collapseExample">Add a card</button>
         </div>
 
     </section>
@@ -164,6 +457,12 @@
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
 
+    <!-- Momen JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
+    <!-- DateTime-->
+    <script src="~/build/jquery.datetimepicker.full.min.js"></script>
+    <!-- Semantic-->
     <!-- Bootstrap JS-->
     <script src="~/cooladmin/vendor/bootstrap-4.1/popper.min.js"></script>
     <script src="~/cooladmin/vendor/bootstrap-4.1/bootstrap.min.js"></script>
@@ -181,8 +480,8 @@
     <script src="~/cooladmin/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
     <script src="~/cooladmin/vendor/chartjs/Chart.bundle.min.js"></script>
     <script src="~/cooladmin/vendor/select2/select2.min.js"></script>
-    <!-- Momen JS-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <!-- Sweet Alert JS-->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Apex Chart -->
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <!-- Google Chart -->

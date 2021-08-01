@@ -3,10 +3,17 @@
 
 // Write your JavaScript code.
 $(document).ready(function () {
+    ready()
+})
+
+function ready() {
     var projectList = "";
     $.ajax({
         url: "https://localhost:44374/AsignProject/GetProjectView"
     }).done(result => {
+        result.sort(function (a, b) {
+            return new Date(b.projectId) - new Date(a.projectId);
+        });
         $.each(result, function (index, val) {
             start = new Date(val["startDate"]).toLocaleDateString();
             end = new Date(val["endDate"]).toLocaleDateString();
@@ -25,13 +32,28 @@ $(document).ready(function () {
                         </div>
                         `;
         $('#listProject').html(projectList);
-        
+
     }).fail(error => {
-       
+
     })
+}
 
-
-})
+function insertProject() {
+    var obj = $('#formInsertProject').serialize()
+    $.ajax({
+        url: "https://localhost:44374/AsignProject/InsertProject",
+        method: 'post',
+        data: obj
+    }).done(result => {
+        ready()
+        Swal.fire(
+            'Good job!',
+            'Project Has Been Added',
+            'success'
+        )
+        
+    }).fail(error => { })
+}
 
 function goProject(id) {
     window.location.href = 'https://localhost:44374/Dashboard/AssignTask/'+id;

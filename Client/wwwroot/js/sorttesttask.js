@@ -1,4 +1,6 @@
-﻿$(document).ready(function () {
+﻿
+
+$(document).ready(function () {
     $(".sortable_list").sortable({
         connectWith: ".connectedSortable",
         /*stop: function(event, ui) {
@@ -24,17 +26,13 @@
         $(".show-member").collapse('hide');
     });*/
 
-
-    //project
-    GetModul();
-
 });
 // Task
 
 function showmodal(id) {
     $('#mediumModal').modal('show')
     showLogTask(id);
-    detailTask(id);
+    detailTaskAccount(id);
 }
 
 function UpdateStatus(id, status) {
@@ -116,15 +114,14 @@ function detailTask(id) {
         $('#descriptionTask').text(result.description);
         status = enumStatus(result.status)
         $('#statusTask').text(status);
-        datemodal = new Date(result[0].startDate).toLocaleDateString() + " - " + new Date(result[0].date).toLocaleDateString()
+        datemodal = new Date(result.startDate).toLocaleDateString() + " - " + new Date(result.date).toLocaleDateString()
         $('#datemodal').text(datemodal);
-        if (result[0].nik == null) {
+        if (result.nik == null) {
             $('#membermodal').html("");
         } else {
             $.each(result, function (index, val) {
                 memberbody += `<div class="d-flex">
                                 <p style="font-size: 14px">${val.name}</p>
-                                <p id="${val.nik}" class="btn btn-danger ml-3" onclick="deleteMember(${val.taskId}, this.id)">X</p>
                             </div>`
             })
             $('#membermodal').html(memberbody);
@@ -409,15 +406,14 @@ function detailTaskAccount(id) {
             $.each(result, function (index, val) {
                 memberbody += `<div class="d-flex">
                                 <p style="font-size: 14px">${val.name}</p>
-                                <p id="${val.nik}" class="btn btn-danger ml-3" onclick="deleteMember(${val.taskId}, this.id)">X</p>
                             </div>`
             })
             $('#membermodal').html(memberbody);
         }
-        getMember(result)
+        //getMember(result)
     }).fail(error => { })
 }
-
+/*
 // Add Modul
 function AddModul() {
     obj = $('#insertModul').serialize();
@@ -555,7 +551,6 @@ function insertDate() {
         data: obj
     }).done(result => {
         detailTaskAccount(id)
-        location.reload();
     }).fail(error => { })
 }
 
@@ -605,5 +600,5 @@ function deleteMember(taskId, nik) {
     }).done(result => {
        detailTaskAccount(taskId)
     }).fail(error => { })
-}
+}*/
 

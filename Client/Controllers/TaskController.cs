@@ -77,12 +77,14 @@ namespace Client.Controllers
             return Json(result);
         }
 
+        [AllowAnonymous]
         public async Task<JsonResult> LogStatus(int id)
         {
             var result = await repository.LogStatus(id);
             return Json(result);
         }
 
+        [AllowAnonymous]
         public async Task<JsonResult> DetailTask(int id)
         {
             var result = await repository.DetailTask(id);

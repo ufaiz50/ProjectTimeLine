@@ -100,5 +100,21 @@ namespace ProjectTimeLine.Repositories.Data
             return data;
         }
 
+        public int DeleteMember(string NIK, int TaskModulId)
+        {
+            try
+            {
+                var find = myContext.AccountTasks.FirstOrDefault(x => x.NIK == NIK && x.TaskModulId == TaskModulId);
+                if (find == null) return 0;
+                myContext.Remove(find);
+                var delete = myContext.SaveChanges();
+                return delete;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
     }
 }
