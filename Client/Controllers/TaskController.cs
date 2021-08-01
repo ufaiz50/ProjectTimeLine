@@ -52,6 +52,7 @@ namespace Client.Controllers
             return Json(result);
         }
 
+        [AllowAnonymous]
         public async Task<JsonResult> GetJWT()
         {
             var result = await repository.GetJwt ();

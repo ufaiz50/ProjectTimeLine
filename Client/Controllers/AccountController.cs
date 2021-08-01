@@ -57,5 +57,12 @@ namespace Client.Controllers
             var result = await repository.UpdatePassword(updatePasswordVM);
             return result;
         }
+
+        [AllowAnonymous]
+        public async Task<string> ResetPassword(ResetPasswordVM resetPasswordVM)
+        {
+            var result = await repository.ResetPassword(resetPasswordVM);
+            return result;
+        }
     }
 }

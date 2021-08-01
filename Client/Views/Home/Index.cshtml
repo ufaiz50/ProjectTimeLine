@@ -192,22 +192,27 @@
             </div>
             <div class="modal-body">
                 <div class="login-form">
-                    <form action="login/auth" method="post" class="needs-validation login" novalidate>
+                    <form class="needs-validation login" novalidate>
+                        <div class="alert alert-danger" id="alertLogin" style="display:none" role="alert">
+                            Invalid Email or Password. Try Again!
+                        </div>
                         <div class="form-group">
                             <label>Email Address</label>
-                            <input class="form-control" type="email" name="Email" placeholder="Email" required>
+                            <input class="form-control" type="email" id="Email" name="Email" placeholder="Email" required>
                             <div class="invalid-feedback">
                                 Please input your email.
                             </div>
                         </div>
                         <div class="form-group">
                             <label>Password</label>
-                            <input pattern=".{8,}" class="form-control" type="password" name="Password" placeholder="Password" required>
+                            <input pattern=".{8,}" class="form-control" type="password" id="Password" name="Password" placeholder="Password" required>
                             <div class="invalid-feedback">
                                 Please input your password (min 8 character).
                             </div>
                         </div>
                         <button class="btn btn-primary w-100" type="submit">sign in</button>
+                        <hr />
+                        <button class="btn btn-link" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#resetpassword" type="button">Reset Password</button>
                     </form>
                 </div>
             </div>
@@ -216,7 +221,7 @@
 </div>
 
 <!-- Modal Registration -->
-<div class="modal fade bd-example-modal-lg"id="regis" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div class="modal fade bd-example-modal-lg" id="regis" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -231,7 +236,7 @@
             </div>
             <div class="modal-body">
                 <div class="login-form">
-                    <form action="/login/EmployeesView" method="post" class="needs-validation" novalidate>
+                    <form class="needs-validation regis" novalidate>
                         <div class="form-group">
                             <input class="form-control" type="text" name="NIK" id="inputNik" required hidden>
                         </div>
@@ -239,14 +244,14 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label>Full Name</label>
-                                    <input class="form-control" type="text" name="Name" placeholder="FullName" required>
+                                    <input class="form-control" type="text" id="nameReg" name="Name" placeholder="FullName" required>
                                     <div class="invalid-feedback">
                                         Please input name here.
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label>Birth Date</label>
-                                    <input class="form-control" type="date" name="BirthDate" placeholder="Birth Date" required>
+                                    <input class="form-control" type="date" id="BirthDate" name="BirthDate" placeholder="Birth Date" required>
                                     <div class="invalid-feedback">
                                         Please input your Birthdate.
                                     </div>
@@ -254,12 +259,12 @@
                                 <div class="">
                                     <label for="gender">Gender</label>
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" class="custom-control-input" id="gender" name="Gender" value="0" required>
-                                        <label class="custom-control-label" for="gender">Pria</label>
+                                        <input type="radio" class="custom-control-input" id="gender" name="gender" value="0" required>
+                                        <label class="custom-control-label" for="gender">Male</label>
                                     </div>
                                     <div class="custom-control custom-radio mb-3">
-                                        <input type="radio" class="custom-control-input" id="gender1" name="Gender" value="1" required>
-                                        <label class="custom-control-label" for="gender1">Wanita</label>
+                                        <input type="radio" class="custom-control-input" id="gender1" name="gender" value="1" required>
+                                        <label class="custom-control-label" for="gender1">Female</label>
                                         <div class="invalid-feedback">Please choose gender.</div>
                                     </div>
                                 </div>
@@ -267,28 +272,28 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label>Phone Number</label>
-                                    <input class="form-control" type="number" name="PhoneNumber" placeholder="Phone Number" required>
+                                    <input class="form-control" type="number" id="PhoneNumber" name="PhoneNumber" placeholder="Phone Number" required>
                                     <div class="invalid-feedback">
                                         Please provide a valid phone number.
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label>Address</label>
-                                    <input class="form-control" type="text" name="Address" placeholder="Address" required>
+                                    <input class="form-control" type="text" id="Address" name="Address" placeholder="Address" required>
                                     <div class="invalid-feedback">
                                         Please provide a valid Address.
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label>Email</label>
-                                    <input class="form-control" type="email" name="Email" placeholder="Email" required>
+                                    <input class="form-control" type="email" id="emailReg" name="Email" placeholder="Email" required>
                                     <div class="invalid-feedback">
                                         Please provide a valid phone Email.
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label>Password</label>
-                                    <input class="form-control" pattern=".{8,}" type="password" name="Password" placeholder="Password" required>
+                                    <input class="form-control" pattern=".{8,}" type="password" id="PasswordReg" name="Password" placeholder="Password" required>
                                     <div class="invalid-feedback">
                                         Please input your password (min 8 character).
                                     </div>
@@ -296,9 +301,36 @@
                             </div>
                         </div>
                         <button class="btn btn-primary w-100" type="submit">Submit</button>
-
                     </form>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal reset password -->
+<div class="modal fade" id="resetpassword" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Reset Password</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="EmailReset" class="needs-validation reset" novalidate>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input class="form-control" type="email" name="Email" placeholder="Email" required>
+                        <div class="invalid-feedback">
+                            Please input your email.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button id="btnreset" class="btn btn-primary form-control" type="submit" >Reset</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

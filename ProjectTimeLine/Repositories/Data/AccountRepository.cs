@@ -7,6 +7,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 
 namespace ProjectTimeLine.Repositories.Data
@@ -57,6 +59,60 @@ namespace ProjectTimeLine.Repositories.Data
             myContext.Entry(acc).State = EntityState.Modified;
             var update = myContext.SaveChanges();
             return update;
+        }
+
+        public int ResetPassword(ResetPasswordVM resetPasswordVM)
+        {
+            Guid guid = Guid.NewGuid();
+            string emailGuid = guid.ToString("N");
+
+            var account = new Account();
+
+            var email = myContext.Employees.FirstOrDefault(a => a.Email == resetPasswordVM.Email);
+            if (email != null)
+            {
+                account.NIK = email.NIK;
+                account.Password = Util.Hashing.HashPassword(emailGuid);
+                myContext.Entry(account).State = EntityState.Modified;
+                var insert = myContext.SaveChanges();
+
+                if (insert > 0)
+                {
+                    var fromAddress = new MailAddress("henrisuni05@gmail.com", "From Project Timeline");
+                    var toAddress = new MailAddress(resetPasswordVM.Email, $"To {resetPasswordVM.Email}");
+                    string fromPassword = "*********";
+                    string subject = "Reset Password";
+                    string body = "Hello " + email.Name + System.Environment.NewLine + "Ini password baru anda : " + emailGuid;
+
+                    var smtp = new SmtpClient
+                    {
+                        Host = "smtp.gmail.com",
+                        Port = 587,
+                        EnableSsl = true,
+                        DeliveryMethod = SmtpDeliveryMethod.Network,
+                        UseDefaultCredentials = false,
+                        Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
+                    };
+                    using (var message = new MailMessage(fromAddress, toAddress)
+                    {
+                        Subject = subject,
+                        Body = body
+                    })
+                    {
+                        smtp.Send(message);
+                    }
+                    return insert;
+
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            else
+            {
+                return 0;
+            }
         }
     }
 }

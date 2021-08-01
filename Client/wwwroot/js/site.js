@@ -1,4 +1,5 @@
 addmodul();
+addProject()
 
 $(document).ready(function () {
 
@@ -324,13 +325,29 @@ function updateModul() {
 
 function addmodul() {
     $.ajax({
-        url: "/modul/getmodulview"
+        url: "/modul/Getmodultable"
     }).done((result) => {
         text = "<option selected disabled value=\"\">Choose...</option>";
         $.each(result, function (key, val) {
-            text += `<option id="m${val.modulId}" value="${val.modulId}">${val.modulName}</option>`;
+            text += `<option id="m${val.modulId}" value="${val.modulId}">${val.modulName} (Project : ${val.name})</option>`;
         });
         $("#modultask").html(text);
+    }).fail((error) => {
+        console.log(error);
+    });
+}
+
+//===================add option Project========================================
+function addProject() {
+    $.ajax({
+        url: "/asignproject/GetProjectView"
+    }).done((result) => {
+        text = "<option selected disabled value=\"\">Choose...</option>";
+        $.each(result, function (key, val) {
+            text += `<option id="p${val.projectId}" value="${val.projectId}">${val.name}</option>`;
+        });
+        $("#ProjectId").html(text);
+        $("#ProjectId").selectpicker();
     }).fail((error) => {
         console.log(error);
     });
@@ -841,5 +858,3 @@ function formatDate(date) {
 
     return [day, month, year].join('/');
 }
-
-/* End Faiz*/

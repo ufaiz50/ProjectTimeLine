@@ -15,7 +15,6 @@ using System.Threading.Tasks;
 
 namespace ProjectTimeLine.Controllers
 {
-    /*[Authorize]*/
     [Route("api/[controller]")]
     [ApiController]
     public class AccountsController : BaseController<Account, AccountRepository, string>
@@ -98,6 +97,25 @@ namespace ProjectTimeLine.Controllers
             catch (Exception e)
             {
                 return BadRequest(new { status = HttpStatusCode.InternalServerError, result = e.Message, message = "terjadi exception" });
+            }
+        }
+
+        [HttpPost("Reset")]
+        public ActionResult Reset(ResetPasswordVM resetPasswordVM)
+        {
+            var insert = repository.ResetPassword(resetPasswordVM);
+            if (insert == 1)
+            {
+                return Ok(new { status = HttpStatusCode.OK, result = insert, message = "Password Baru telah di kirim" });
+            }
+            else
+            {
+                return BadRequest(new
+                {
+                    status = HttpStatusCode.BadRequest,
+                    result = insert,
+                    message = "reset password gagal"
+                });
             }
         }
     }

@@ -78,5 +78,19 @@ namespace Client.Repository.Data
             }
             return res;
         }
+
+        public async Task<string> ResetPassword(ResetPasswordVM resetPasswordVM)
+        {
+            var res = "";
+
+            StringContent content = new StringContent(JsonConvert.SerializeObject(resetPasswordVM), Encoding.UTF8, "application/json");
+            var result = await httpClient.PostAsync("accounts/reset", content);
+            if (result.IsSuccessStatusCode)
+            {
+                var apiResponse = await result.Content.ReadAsStringAsync();
+                res = apiResponse;
+            }
+            return res;
+        }
     }
 }

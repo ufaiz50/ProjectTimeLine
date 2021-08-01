@@ -60,16 +60,13 @@ namespace Client.Repository.Data
             return entities;
         }
 
-        public async Task<String> EmployeesView(RegisterVM register)
+        public async Task<JWTokenVM> EmployeesView(RegisterVM register)
         {
-            string apiResponse = null;
             StringContent content = new StringContent(JsonConvert.SerializeObject(register), Encoding.UTF8, "application/json");
             var result = await httpClient.PostAsync(request + "register", content);
-            if (result.IsSuccessStatusCode)
-            {
-                apiResponse = await result.Content.ReadAsStringAsync();
-            }
-            return apiResponse;
+            string apiResponse = await result.Content.ReadAsStringAsync();
+            JWTokenVM token = JsonConvert.DeserializeObject<JWTokenVM>(apiResponse);
+            return token;
         }
         
         public async Task<string> InsertEmployee(UserVM userDataVM)

@@ -37,11 +37,11 @@ namespace ProjectTimeLine.Controllers
                 }
                 else if (insert == 2)
                 {
-                    return BadRequest(new { status = HttpStatusCode.BadRequest, result = 0, message = "Email sudah terdafftar" });
+                    return BadRequest(new { status = HttpStatusCode.BadRequest, result = insert, message = "Email sudah terdaftar" });
                 }
                 else if (insert == 1)
                 {
-                    return BadRequest(new { status = HttpStatusCode.BadRequest, result = 0, message = "NIK sudah terdafftar" });
+                    return BadRequest(new { status = HttpStatusCode.BadRequest, result = insert, message = "NIK sudah terdaftar" });
                 }
                 else
                 {

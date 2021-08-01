@@ -22,58 +22,20 @@ namespace Client.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Auth(LoginVM login)
+        public async Task<JWTokenVM> Auth(LoginVM login)
         {
             var jWToken = await loginRepository.Auth(login);
-            if (jWToken == null)
-            {
-                return RedirectToAction("Index", "Home");
-            }
             HttpContext.Session.SetString("JWT", jWToken.Token);
             var tokenHandler = new JwtSecurityTokenHandler();
             JwtSecurityToken result = tokenHandler.ReadJwtToken(jWToken.Token);
-            return RedirectToAction("Index", "Dashboard");
+            return jWToken;
 
-           /* HttpContext.Session.SetString("role", loginRepository.JwtRole(jWToken.Token));
-            var role = HttpContext.Session.GetString("role");
-            if (role == "Admin")
-            {
-                return RedirectToAction("Admin", "Dashboard");
-            }
-            else if (role == "Manager")
-            {
-                return RedirectToAction("Manager", "Dashboard");
-            }
-            else if (role == "SA")
-            {
-                return RedirectToAction("Index", "Dashboard");
-            }
-            else if (role == "BA")
-            {
-                return RedirectToAction("Index", "Dashboard");
-            }
-            else if (role == "Developer")
-            {
-                return RedirectToAction("Index", "Dashboard");
-            }
-            else if (role == "QA")
-            {
-                return RedirectToAction("Index", "Dashboard");
-            }
-            else
-            {
-                return RedirectToAction("Index", "Dashboard");
-            }*/
         }
 
-        public async Task<IActionResult> EmployeesView(RegisterVM registerVm)
+        public async Task<JWTokenVM> EmployeesView(RegisterVM registerVm)
         {
             var message = await userdata.EmployeesView(registerVm);
-            if (message == null)
-            {
-                return RedirectToAction("Index", "Home");
-            }
-            return RedirectToAction("Index", "Home");
+            return message;
         }
 
         public async Task<JsonResult> GetEmployeeView()

@@ -39,13 +39,19 @@ namespace Client.Repository.Data
             StringContent content = new StringContent(JsonConvert.SerializeObject(login), Encoding.UTF8, "application/json");
             var result = await httpClient.PostAsync(request + "login", content);
 
-            if (result.IsSuccessStatusCode)
+            if (result.IsSuccessStatusCode == true)
             {
                 string apiResponse = await result.Content.ReadAsStringAsync();
                 token = JsonConvert.DeserializeObject<JWTokenVM>(apiResponse);
+                return token;
+            }
+            else
+            {
+                string apiResponse = await result.Content.ReadAsStringAsync();
+                token = JsonConvert.DeserializeObject<JWTokenVM>(apiResponse);
+                return token;
             }
 
-            return token;
         }
 
         public string JwtRole(string token)
