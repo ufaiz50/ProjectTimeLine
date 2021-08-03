@@ -752,7 +752,7 @@ function LatestTask() {
                                 <td>${val.taskName}</td>
                                 <td>${start}</td>
                                 <td>
-                                    <a href="/Task/Taskview/${val.nik}/?id=${val.projectId}" target=�_blank�>
+                                    <a href="/Task/Taskview/?NIK=${val.nik}&ProjectId=${val.projectId}" target=_blank>
                                     <i class="fa fa-share" aria-hidden="true"></i></a>
                                 </td>
                             </tr>`;
