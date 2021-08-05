@@ -1,4 +1,18 @@
-﻿$(document).ready(function () {
+﻿
+// Gant View
+$('button#GanttView').on('click', function () {
+    $('#ListKanban').attr('hidden', true);
+    $('#ganttchart').removeAttr('hidden', true);
+    apexChart()
+})
+
+// Kanban View
+$('button#KanbanView').on('click', function () {
+    $('#ListKanban').removeAttr('hidden', true);
+    $('#ganttchart').attr('hidden', true);
+})
+
+$(document).ready(function () {
     $(".sortable_list").sortable({
         connectWith: ".connectedSortable",
         /*stop: function(event, ui) {
@@ -23,6 +37,7 @@
     /*$(".search-member").focusout(function () {
         $(".show-member").collapse('hide');
     });*/
+
 
 
     //project
@@ -131,19 +146,6 @@ function detailTask(id) {
         }
     }).fail(error => { })
 }
-
-// Gant View
-$('button#GanttView').on('click', function () {
-    $('#ListKanban').attr('hidden', true);
-    $('#ganttchart').removeAttr('hidden', true);
-    apexChart()
-})
-
-// Kanban View
-$('button#KanbanView').on('click', function () {
-    $('#ListKanban').removeAttr('hidden', true);
-    $('#ganttchart').attr('hidden', true);
-})
 
 
 

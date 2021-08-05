@@ -40,11 +40,14 @@ Flexbox is used as a fallback so that browsers which don't support grid will sti
     box-sizing: border-box;
 }
 
-body{
+body {
     font-family: Arial, sans-serif;
     display: flex;
     flex-direction: column;
-    background-color: #0079bf;
+    overflow-y: hidden;
+    /*background-color:*/ /*#0079bf*/ /*rgb(0, 24, 72);*/
+    background: rgb(7,7,113);
+    background: linear-gradient(120deg, rgba(7,7,113,0.7483368347338936) 50%, rgba(187,0,173,0.7483368347338936) 100%);
 }
 
 /*.btn {
@@ -70,19 +73,23 @@ body{
     display: flex;
     align-items: center;
     padding: 0 0.8rem;
-    background-color: #0067a3;
+    /*background-color: #0067a3;*/
+    background-color: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px);
     box-shadow: 0 0.1rem 0.1rem rgba(0, 0, 0, 0.1);
 }
 
-.masthead .btn {
-    background-color: #4c94be;
-    border-radius: 0.3rem;
-    transition: background-color 150ms;
-}
+    .masthead .btn {
+        /*background-color: #4c94be;*/
+        background-color: rgba(255, 255, 255, .15);
+        border-radius: 0.3rem;
+        transition: background-color 150ms;
+    }
 
-.masthead .btn:hover {
-    background-color: #3385b5;
-}
+        .masthead .btn:hover {
+            background-color: rgba(255, 255, 255, .08);
+            color: white;
+        }
 
 .boards-menu {
     display: flex;
@@ -97,6 +104,10 @@ body{
     margin-right: 0.8rem;
     padding: 0.6rem 0.8rem;
 }
+    .boards-btn:hover {
+        background-color: rgba(255, 255, 255, .08);
+        color: white;
+    }
 
 .boards-btn-icon {
     font-size: 1.7rem;
@@ -133,7 +144,7 @@ body{
 
 .logo {
     flex: 1;
-    font-family: "Courgette", cursive;
+    font-family: Arial, sans-serif;
     font-size: 2.2rem;
     font-weight: 700;
     color: rgba(255, 255, 255, 0.5);
@@ -145,9 +156,9 @@ body{
     cursor: pointer;
 }
 
-.logo:hover {
-    color: rgba(255, 255, 255, 0.8);
-}
+    .logo:hover {
+        color: rgba(255, 255, 255, 0.8);
+    }
 
 .logo-icon {
     padding-right: 0.4rem;
@@ -165,9 +176,9 @@ body{
     margin-right: 0.8rem;
 }
 
-.user-settings-btn:last-of-type {
-    margin-right: 0;
-}
+    .user-settings-btn:last-of-type {
+        margin-right: 0;
+    }
 
 /* Board info bar */
 
@@ -185,13 +196,13 @@ body{
     display: flex;
 }
 
-.board-controls .btn {
-    margin-right: 1rem;
-}
+    .board-controls .btn {
+        margin-right: 1rem;
+    }
 
-.board-controls .btn:last-of-type {
-    margin-right: 0;
-}
+        .board-controls .btn:last-of-type {
+            margin-right: 0;
+        }
 
 .board-info-bar .btn {
     font-size: 1.4rem;
@@ -202,9 +213,9 @@ body{
     height: 3rem;
 }
 
-.board-info-bar .btn:hover {
-    background-color: #006aa8;
-}
+    .board-info-bar .btn:hover {
+        background-color: #006aa8;
+    }
 
 .private-btn-icon,
 .menu-btn-icon {
@@ -221,12 +232,16 @@ body{
 /* Lists */
 
 .lists-container::-webkit-scrollbar {
-    height: 2.4rem;
+    opacity: 0.5;
+    height: 1.4rem;
+    background-color: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px);
+    border-radius: 5px;
 }
 
 .lists-container::-webkit-scrollbar-thumb {
-    background-color: #66a3c7;
-    border: 0.8rem solid #0079bf;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 5px;
     border-top-width: 0;
 }
 
@@ -234,7 +249,7 @@ body{
     display: flex;
     align-items: start;
     padding: 0 0.8rem 0.8rem;
-    overflow-x: auto;
+    overflow-x: scroll;
     height: calc(100vh - 8.6rem);
 }
 
@@ -244,7 +259,7 @@ body{
     flex-direction: column;
     background-color: #e2e4e6;
     max-height: calc(100vh - 11.8rem);
-    border-radius: 0.3rem;
+    border-radius: 0.8rem;
     margin-right: 1rem;
 }
 
@@ -257,6 +272,7 @@ body{
     font-weight: 700;
     color: #333;
     padding: 1rem;
+    padding-bottom: 0;
 }
 
 .list-items {
@@ -268,36 +284,36 @@ body{
     overflow-y: auto;
 }
 
-.list-items::-webkit-scrollbar {
-    width: 1.6rem;
-}
+    .list-items::-webkit-scrollbar {
+        width: 1.6rem;
+    }
 
-.list-items::-webkit-scrollbar-thumb {
-    background-color: #c4c9cc;
-    border-right: 0.6rem solid #e2e4e6;
-}
+    .list-items::-webkit-scrollbar-thumb {
+        background-color: #c4c9cc;
+        border-right: 0.6rem solid #e2e4e6;
+    }
 
-.list-items li {
-    font-size: 1.4rem;
-    font-weight: 400;
-    line-height: 1.3;
-    background-color: #fff;
-    padding: 0.65rem 0.6rem;
-    color: #4d4d4d;
-    border-bottom: 0.1rem solid #ccc;
-    border-radius: 0.3rem;
-    margin-bottom: 0.6rem;
-    word-wrap: break-word;
-    cursor: pointer;
-}
+    .list-items li {
+        font-size: 1.4rem;
+        font-weight: 400;
+        line-height: 1.3;
+        background-color: #fff;
+        padding: 0.65rem 0.6rem;
+        color: #4d4d4d;
+        border-bottom: 0.1rem solid #ccc;
+        border-radius: 0.3rem;
+        margin-bottom: 0.6rem;
+        word-wrap: break-word;
+        cursor: pointer;
+    }
 
-.list-items li:last-of-type {
-    margin-bottom: 0;
-}
+        .list-items li:last-of-type {
+            margin-bottom: 0;
+        }
 
-.list-items li:hover {
-    background-color: #eee;
-}
+        .list-items li:hover {
+            background-color: #eee;
+        }
 
 .add-card-btn {
     display: block;
@@ -309,11 +325,11 @@ body{
     cursor: pointer;
 }
 
-.add-card-btn:hover {
-    background-color: #cdd2d4;
-    color: #4d4d4d;
-    text-decoration: underline;
-}
+    .add-card-btn:hover {
+        background-color: #cdd2d4;
+        color: #4d4d4d;
+        text-decoration: underline;
+    }
 
 .add-list-btn {
     flex: 0 0 27rem;
@@ -329,14 +345,14 @@ body{
     text-align: left;
 }
 
-.add-list-btn:hover {
-    background-color: #005485;
-}
+    .add-list-btn:hover {
+        background-color: #005485;
+    }
 
-.add-card-btn::after,
-.add-list-btn::after {
-    content: '...';
-}
+    .add-card-btn::after,
+    .add-list-btn::after {
+        content: '...';
+    }
 
 /*
 
@@ -347,62 +363,62 @@ Remove or comment-out the code block below to see how the browser will fall-back
 */
 
 @supports (display: grid) {
-body {
-    display: grid;
-    grid-template-rows: 4rem 3rem auto;
-    grid-row-gap: 0.8rem;
-}
+    body {
+        display: grid;
+        grid-template-rows: 4rem 3rem auto;
+        grid-row-gap: 0.8rem;
+    }
 
-.masthead {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    grid-column-gap: 2rem;
-}
+    .masthead {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        grid-column-gap: 2rem;
+    }
 
-.boards-menu {
-    display: grid;
-    grid-template-columns: 9rem 14rem 10rem;
-    grid-column-gap: 0.8rem;
-}
+    .boards-menu {
+        display: grid;
+        grid-template-columns: 9rem 14rem 10rem;
+        grid-column-gap: 0.8rem;
+    }
 
-.user-settings {
-    display: grid;
-    grid-template-columns: repeat(4, auto);
-    grid-column-gap: 0.8rem;
-}
+    .user-settings {
+        display: grid;
+        grid-template-columns: repeat(4, auto);
+        grid-column-gap: 0.8rem;
+    }
 
-.board-controls {
-    display: grid;
-    grid-auto-flow: column;
-    grid-column-gap: 1rem;
-}
+    .board-controls {
+        display: grid;
+        grid-auto-flow: column;
+        grid-column-gap: 1rem;
+    }
 
-.lists-container {
-    display: grid;
-    grid-auto-columns: 27rem;
-    grid-auto-flow: column;
-    grid-column-gap: 1rem;
-}
+    .lists-container {
+        display: grid;
+        grid-auto-columns: 27rem;
+        grid-auto-flow: column;
+        grid-column-gap: 1rem;
+    }
 
-.list {
-    display: grid;
-    grid-template-rows: auto minmax(auto, 1fr) auto;
-}
+    .list {
+        display: grid;
+        grid-template-rows: auto minmax(auto, 1fr) auto;
+    }
 
-.list-items {
-    display: grid;
-    grid-row-gap: 0.6rem;
-}
+    .list-items {
+        display: grid;
+        grid-row-gap: 0.6rem;
+    }
 
-.logo,
-.list,
-.list-items li,
-.boards-btn,
-.board-info-bar,
-.board-controls .btn,
-.user-settings-btn {
-    margin: 0;
-}
+        .logo,
+        .list,
+        .list-items li,
+        .boards-btn,
+        .board-info-bar,
+        .board-controls .btn,
+        .user-settings-btn {
+            margin: 0;
+        }
 }
 
 
@@ -419,28 +435,31 @@ body {
     background-position: center center;
 }
 
-.email{
+.email {
     display: block;
     font-size: 16px;
 }
-.email p{
-    font-weight: bold;
-}
-.email span{
-    font-size: 14px;
-    font-weight: normal;
-}
 
-button h3{
+    .email p {
+        font-weight: bold;
+    }
+
+    .email span {
+        font-size: 14px;
+        font-weight: normal;
+    }
+
+button h3 {
     font-size: 24px;
-    font-family: poppins, sans-serif;
+    font-family: Arial, sans-serif;
     margin: 0;
 }
-span{
+
+span {
     font-size: 14px
 }
 
-.card-body ul{
+.card-body ul {
     padding-left: 0;
     margin-left: 0;
 }
@@ -480,16 +499,17 @@ span{
     list-style: none;
 }
 
-.list ul li {
-    margin: 0 5px;
-    padding: 7px 10px;
-    float: left;
-}
+    .list ul li {
+        margin: 0 5px;
+        padding: 7px 10px;
+        float: left;
+    }
 
-ul li span{
+ul li span {
     font-size: 9px;
 }
-ul li p{
+
+ul li p {
     margin: 5px 0;
 }
 
@@ -497,11 +517,11 @@ ul li p{
     overflow: hidden;
 }
 
-.topnav input[type=text] {
-    padding: 3px;
-    border: 1px solid whitesmoke;
-    margin-top: 8px;
-    margin-right: 0px;
-    font-size: 14px;
-}
+    .topnav input[type=text] {
+        padding: 3px;
+        border: 1px solid whitesmoke;
+        margin-top: 8px;
+        margin-right: 0px;
+        font-size: 14px;
+    }
 /* Modal */

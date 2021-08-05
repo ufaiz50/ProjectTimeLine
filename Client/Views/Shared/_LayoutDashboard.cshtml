@@ -6,10 +6,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>@ViewData["Title"]</title>
-
     <!-- Title Page-->
     <title>Dashboard</title>
 
+    <link href="~/img/timeline.png" rel="icon">
     <!-- Fontfaces CSS-->
     <link href="~/cooladmin/css/font-face.css" rel="stylesheet" media="all">
     <link href="~/cooladmin/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
@@ -69,11 +69,11 @@
                                 <i class="fas fa-tachometer-alt"></i>Dashboard
                             </a>
                         </li>
-                        <li>
+                        @*<li>
                             <a href="@Url.Action("Index", "GanttChart")">
                                 <i class="fas fa-chart-bar"></i>Gantt Charts
                             </a>
-                        </li>
+                        </li>*@
                         @if (User.IsInRole("SA") || User.IsInRole("BA") || User.IsInRole("Developer") || User.IsInRole("QA"))
                         {
                             <li>
@@ -123,11 +123,11 @@
                                 <i class="fas fa-tachometer-alt"></i>Dashboard
                             </a>
                         </li>
-                        <li>
+                        @*<li>
                             <a href="@Url.Action("Index", "GanttChart")">
                                 <i class="fas fa-chart-bar"></i>Gantt Charts
                             </a>
-                        </li>
+                        </li>*@
                         @if (User.IsInRole("SA") || User.IsInRole("BA") || User.IsInRole("Developer") || User.IsInRole("QA"))
                         {
                             <li>

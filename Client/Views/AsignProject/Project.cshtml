@@ -17,6 +17,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@Name</title>
+    <link href="~/img/timeline.png" rel="icon">
     <!-- Fontfaces CSS-->
     <link href="~/cooladmin/css/font-face.css" rel="stylesheet" media="all">
     <link href="~/cooladmin/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
@@ -61,7 +62,7 @@
             <a class="boards-btn btn" href="https://localhost:44374/Dashboard/AssignTask/@Project"><i class="fa fa-table boards-btn-icon" aria-hidden="true"></i>Table</a>
         </div>
         <div class="logo trello">
-            <h1>MII</h1>
+            <h1 style="font-weight: bold">Project Timeline</h1>
         </div>
         <div></div>
 
@@ -196,10 +197,10 @@
     <!-- Board info bar -->
     <section class="board-info-bar">
         <div class="board-controls trello">
-            <h2>@Name</h2>
+            <h2 class="font-weight-bold">@Name</h2>
             <i class="far fa-star" aria-hidden="true"></i>
         </div>
-        <button style="font-size: 14px" type="button" class="btn btn-primary mb-1" data-toggle="modal" data-target="#AddModulModal">
+        <button style="font-size: 14px" type="button" class="boards-btn btn" data-toggle="modal" data-target="#AddModulModal">
             Add Modul
         </button>
         <div id="ProjectId" hidden>@Project</div>
@@ -207,7 +208,7 @@
     <!-- End of board info bar -->
     <!-- Lists container -->
     <section id="ListKanban" class="lists-container">
-        <div class="list trello">
+        <div class="list overflow-auto">
             <div>
                 <h3 class="list-title">Tasks To-Do</h3>
                 <div class="kartu kartu-project">
@@ -230,7 +231,7 @@
             <div class="m-2 collapse hide" id="collapseTodo" style="">
                 <form id="insertTask">
                     <input type="datetime" name="StartDate" value="@Dates" hidden />
-                    <input type="datetime" name="Date" value="@Dates" hidden/>
+                    <input type="datetime" name="Date" value="@Dates" hidden />
                     <select name="ModulId" style="font-size: 14px" id="selectModul" class="custom-select">
                     </select>
 
@@ -447,10 +448,15 @@
         </div>
 
     </section>
+    <br />
     <!-- End of lists container -->
     <!-- Gantt TimeLine -->
-    <div class="m-5 p-3 bg-white">
-        <div id="ganttchart"></div>
+    <!--<div id="ganttchart"--> @*class="m-5 p-3 bg-white"*@
+    <!-->
+        <div ></div>
+    </div>-->
+    <div>
+        <div id="ganttchart" class="m-5 p-3 bg-white" style="border-radius: 4px"></div>
     </div>
     <!-- END Gantt TimeLine -->
     <!-- Jquery JS-->

@@ -13,6 +13,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task</title>
+    <link href="~/img/timeline.png" rel="icon">
     <!-- Fontfaces CSS-->
     <link href="~/cooladmin/css/font-face.css" rel="stylesheet" media="all">
     <link href="~/cooladmin/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
@@ -54,7 +55,7 @@
             
         </div>
         <div class="logo trello">
-            <h1>MII</h1>
+            <h1 style="font-weight: bold">Project Timeline</h1>
         </div>
         <div></div>
 
@@ -118,7 +119,7 @@
     <section class="board-info-bar">
         <div class="board-controls trello">
 
-            <h2>@Model[0].Name</h2>
+            <h2 class="font-weight-bold">@Model[0].Name</h2>
             <i class="far fa-star" aria-hidden="true"></i>
         </div>
         <div id="NIK" hidden>@Model[0].NIK</div>
@@ -137,7 +138,7 @@
                 {
                     @if (task.Status == Status.ToDo)
                     {
-                        <li onclick="showmodal(this.id)" id="@task.TaskId">
+                        <li class="shadow" onclick="showmodal(this.id)" id="@task.TaskId">
                             <span class="text-truncate">@task.ModulName - @task.TaskName</span>
                             <p><i class="fa fa-tasks"></i> @task.TaskName</p>
                             <span class="date"><i class="fa fa-hourglass-half" aria-hidden="true"></i> @task.StartDate.ToShortDateString() - @task.Date.ToShortDateString() </span>
@@ -159,7 +160,7 @@
                     {
                         @if (task.Status == Status.Design)
                         {
-                            <li onclick="showmodal(this.id)" id="@task.TaskId">
+                            <li class="shadow" onclick="showmodal(this.id)" id="@task.TaskId">
                                 <span class="text-truncate">@task.ModulName - @task.TaskName</span>
                                 <p><i class="fa fa-tasks"></i> @task.TaskName</p>
                                 <span class="date"><i class="fa fa-hourglass-half" aria-hidden="true"></i> @task.StartDate.ToShortDateString() - @task.Date.ToShortDateString() </span>
@@ -182,7 +183,7 @@
                     {
                         @if (task.Status == Status.Doing)
                         {
-                            <li onclick="showmodal(this.id)" id="@task.TaskId">
+                            <li class="shadow" onclick="showmodal(this.id)" id="@task.TaskId">
                                 <span class="text-truncate">@task.ModulName - @task.TaskName</span>
                                 <p><i class="fa fa-tasks"></i> @task.TaskName</p>
                                 <span class="date"><i class="fa fa-hourglass-half" aria-hidden="true"></i> @task.StartDate.ToShortDateString() - @task.Date.ToShortDateString() </span>
@@ -205,7 +206,7 @@
                     {
                         @if (task.Status == Status.CodeReview)
                         {
-                            <li onclick="showmodal(this.id)" id="@task.TaskId">
+                            <li class="shadow" onclick="showmodal(this.id)" id="@task.TaskId">
                                 <span class="text-truncate">@task.ModulName - @task.TaskName</span>
                                 <p><i class="fa fa-tasks"></i> @task.TaskName</p>
                                 <span class="date"><i class="fa fa-hourglass-half" aria-hidden="true"></i> @task.StartDate.ToShortDateString() - @task.Date.ToShortDateString() </span>
@@ -228,7 +229,7 @@
                     {
                         @if (task.Status == Status.Testing)
                         {
-                            <li onclick="showmodal(this.id)" id="@task.TaskId">
+                            <li class="shadow" onclick="showmodal(this.id)" id="@task.TaskId">
                                 <span class="text-truncate">@task.ModulName - @task.TaskName</span>
                                 <p><i class="fa fa-tasks"></i> @task.TaskName</p>
                                 <span class="date"><i class="fa fa-hourglass-half" aria-hidden="true"></i> @task.StartDate.ToShortDateString() - @task.Date.ToShortDateString() </span>
@@ -249,7 +250,7 @@
                 {
                     @if (task.Status == Status.Done)
                     {
-                        <li onclick="showmodal(this.id)" id="@task.TaskId">
+                        <li class="shadow" onclick="showmodal(this.id)" id="@task.TaskId">
                             <span class="text-truncate">@task.ModulName - @task.TaskName</span>
                             <p><i class="fa fa-tasks"></i> @task.TaskName</p>
                             <span class="date"><i class="fa fa-hourglass-half" aria-hidden="true"></i> @task.StartDate.ToShortDateString() - @task.Date.ToShortDateString() </span>
@@ -262,8 +263,8 @@
     </section>
     <!-- End of lists container -->
     <!-- Gantt TimeLine -->
-    <div class="m-5 p-3 bg-white">
-        <div id="ganttchart"></div>
+    <div >
+        <div id="ganttchart" class="m-5 p-3 bg-white" style="border-radius: 4px"></div>
     </div>
     <!-- END Gantt TimeLine -->
     <!-- Jquery JS-->
